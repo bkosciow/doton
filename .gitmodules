@@ -1,0 +1,9 @@
+[submodule "charlcd"]
+	path = charlcd
+	url = git@bitbucket.org:kosci/charlcd.git
+[submodule "message_listener"]
+	path = message_listener
+	url = https://github.com/bkosciow/message_listener
+[submodule "python_message"]
+	path = python_message
+	url = https://github.com/bkosciow/python_iot-1
