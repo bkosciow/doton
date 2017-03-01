@@ -7,3 +7,12 @@
 [submodule "python_message"]
 	path = python_message
 	url = https://github.com/bkosciow/python_iot-1
+[submodule "esp_remote_lcd"]
+	path = esp_remote_lcd
+	url = https://github.com/bkosciow/esp_remote_lcd
+[submodule "proxy_lcd"]
+	path = proxy_lcd
+	url = https://github.com/bkosciow/proxy_lcd
+[submodule "ProxyLCDBundle"]
+	path = ProxyLCDBundle
+	url = https://github.com/bkosciow/ProxyLCDBundle
