@@ -236,3 +236,9 @@ class TFT(object):
         else:
             self._draw_diagonal_line(x1, y1, x2, y2)
 
+    def draw_rect(self, x1, y1, x2, y2):
+        """draw a rectangle"""
+        self.draw_line(x1, y1, x2, y1)
+        self.draw_line(x1, y2, x2, y2)
+        self.draw_line(x1, y1, x1, y2)
+        self.draw_line(x2, y1, x2, y2)
