@@ -16,7 +16,7 @@ for i in range(0, 11):
     s.draw_pixel(160 + i, 100)
 
 
-s.color = {'R': 200, 'G': 200, 'B': 200}
+s.color = {'R': 128, 'G': 128, 'B': 128}
 
 for i in range(1, 11):
     s.draw_line(0, i * 30, 239, i * 30)
@@ -46,5 +46,5 @@ s.draw_line(60, 270, 182, 241)
 s.color = {'R': 255, 'G': 255, 'B': 0}
 s.draw_line(182, 292, 60, 270)
 
-s.color = {'R': 0, 'G': 255, 'B': 255}
+s.color = {'R': 255, 'G': 255, 'B': 255}
 s.draw_rect(30,30, 210, 290)
