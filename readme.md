@@ -8,6 +8,9 @@ Attached projects:
 
 - python_message - lib for custom iot:1 protocol. Python implementation - [repo](https://github.com/bkosciow/python_iot-1)   
 
+- nodemcu_boilerplate - LUA scripts for NodeMCU that takes care of WiFi and gives few libraries (for char lcds, relay, 18b20). 
+It implement message_listener, handlers and iot:1    
+[repo](https://github.com/bkosciow/nodemcu_boilerplate) - [Articles](https://koscis.wordpress.com/tag/nodemcu-boilerplate/)
 
 - esp_remote_lcd - Remote LCD = NodeMCU + HD44780 accessible via WiFi. Uses [NodeMCU boilerplate](https://github.com/bkosciow/nodemcu_boilerplate) - 
 [repo](https://github.com/bkosciow/esp_remote_lcd) - [Articles](https://koscis.wordpress.com/tag/proxy-lcd/)

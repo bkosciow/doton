@@ -16,3 +16,6 @@
 [submodule "ProxyLCDBundle"]
 	path = ProxyLCDBundle
 	url = https://github.com/bkosciow/ProxyLCDBundle
+[submodule "nodemcu_boilerplate"]
+	path = nodemcu_boilerplate
+	url = https://github.com/bkosciow/nodemcu_boilerplate
