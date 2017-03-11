@@ -19,3 +19,8 @@ It implement message_listener, handlers and iot:1
 
 - ProxyLCDBundle - Symfony3 bundle that extends dump() and transmit content to proxy_lcd and to remote lcd
 [repo](https://github.com/bkosciow/ProxyLCDBundle) - [Articles](https://koscis.wordpress.com/tag/proxy-lcd/)
+
+
+-----------------------
+
+main.py + screen.py - proof of concept, TFT 2.4"
