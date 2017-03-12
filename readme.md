@@ -21,5 +21,6 @@ It implement message_listener, handlers and iot:1
 [repo](https://github.com/bkosciow/ProxyLCDBundle) - [Articles](https://koscis.wordpress.com/tag/proxy-lcd/)
 
 
+-----------------------
 
-
+main.py + screen.py - proof of concept, TFT 2.4"
