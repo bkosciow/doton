@@ -1,5 +1,6 @@
 import RPi.GPIO as GPIO
 import time
+import itertools
 
 
 class TFT(object):
@@ -162,3 +163,82 @@ class TFT(object):
         """draw one pixel"""
         self._set_area(x, y, x, y)
         self.data(self._color())
+
+    def _draw_vertical_line(self, x, y, length):
+        """draw vertical line"""
+        self._set_area(x, y, x, y + length)
+        for _ in itertools.repeat(None, length):
+            self.data(self._color())
+
+    def _draw_horizontal_line(self, x, y, length):
+        """draw horizontal line"""
+        self._set_area(x, y, x + length, y)
+        for _ in itertools.repeat(None, length):
+            self.data(self._color())
+
+    def _calculate_steps(self, length, step, required_length):
+        """calculate lineparts - helper"""
+        steps = [length for _ in range(0, step)]
+        if step * length < required_length:
+            for idx in range(0, required_length - step * length):
+                steps[idx] += 1
+
+        return steps
+
+    def _draw_diagonal_line(self, x1, y1, x2, y2):
+        """draw diagonal line"""
+        width = abs(x2 - x1)
+        height = abs(y2 - y1)
+        if width > height:
+            if x2 < x1:
+                x1, x2 = x2, x1
+                y1, y2 = y2, y1
+            offset_y = 1 if y2 > y1 else -1
+            offset_x = 1 if x2 > x1 else -1
+            horizontal = True
+            step = height
+            length = width / step
+            steps = self._calculate_steps(length, step, width)
+        else:
+            if y2 < y1:
+                x1, x2 = x2, x1
+                y1, y2 = y2, y1
+            offset_y = 1 if y2 > y1 else -1
+            offset_x = 1 if x2 > x1 else -1
+            horizontal = False
+            step = width
+            length = height / step
+            steps = self._calculate_steps(length, step, height)
+        dy = 0
+        dx = 0
+        for idx, step in enumerate(steps):
+            if horizontal:
+                self._draw_horizontal_line(
+                    x1 + dx,
+                    y1 + (idx * offset_y),
+                    step
+                )
+                dx += step * offset_x
+            else:
+                self._draw_vertical_line(
+                    x1 + (idx * offset_x),
+                    y1 + dy,
+                    step
+                )
+                dy += step * offset_y
+
+    def draw_line(self, x1, y1, x2, y2):
+        """draw a line"""
+        if x1 == x2:
+            self._draw_vertical_line(x1, min(y1, y2), abs(y2 - y1))
+        elif y1 == y2:
+            self._draw_horizontal_line(min(x1, x2), y1, abs(x2 - x1))
+        else:
+            self._draw_diagonal_line(x1, y1, x2, y2)
+
+    def draw_rect(self, x1, y1, x2, y2):
+        """draw a rectangle"""
+        self.draw_line(x1, y1, x2, y1)
+        self.draw_line(x1, y2, x2, y2)
+        self.draw_line(x1, y1, x1, y2)
+        self.draw_line(x2, y1, x2, y2)
