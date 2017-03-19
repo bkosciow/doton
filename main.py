@@ -24,17 +24,16 @@ s.fill_rect(230, 310, 190, 270)
 s.bcolor = {'R': 255, 'G': 255, 'B': 0}
 s.fill_rect(10, 310, 50, 270)
 
-#s.bcolor = {'R': 0, 'G': 0, 'B': 255}
-
-#s.fill_rect(0, 0, 240, 320)
-
-
-# s.draw_circle(120, 160, 100)
-# s.draw_circle(70, 120, 20)
-# s.draw_circle(170, 120, 20)
+s.draw_circle(120, 160, 100)
+s.draw_circle(70, 120, 20)
+s.draw_circle(170, 120, 20)
 
 s.bcolor = {'R': 250, 'G': 0, 'B': 255}
-s.draw_arc(120, 160, 100, 50, 360)
+s.draw_arc(120, 160, 70, 20, 160)
+
+s.draw_line(120, 150, 115, 180)
+s.draw_line(120, 150, 125, 180)
+s.draw_line(115, 180, 125, 180)
 
 # for i in range(0, 11):
 #     s.draw_pixel(100 + i, 100)
