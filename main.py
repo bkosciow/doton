@@ -8,7 +8,6 @@ LED = 6
 GPIO.setup(LED, GPIO.OUT)
 GPIO.output(LED, 1)
 
-
 s = TFT()
 s.init()
 
