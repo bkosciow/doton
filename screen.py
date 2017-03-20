@@ -215,16 +215,16 @@ class TFT(object):
         for idx, step in enumerate(steps):
             if horizontal:
                 self._draw_horizontal_line(
-                    x1 + dx,
-                    y1 + (idx * offset_y),
-                    step
+                    int(x1 + dx),
+                    int(y1 + (idx * offset_y)),
+                    int(step)
                 )
                 dx += step * offset_x
             else:
                 self._draw_vertical_line(
-                    x1 + (idx * offset_x),
-                    y1 + dy,
-                    step
+                    int(x1 + (idx * offset_x)),
+                    int(y1 + dy),
+                    int(step)
                 )
                 dy += step * offset_y
 
