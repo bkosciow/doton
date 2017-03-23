@@ -1,7 +1,17 @@
 One repo to rule them all. Doton project for Get Noticed! / Daj się poznać.
 ===
+## Files
 
-Attached projects:
+
+### main.py + screen.py - proof of concept, TFT 2.4"
+![smile](https://koscis.files.wordpress.com/2017/03/img_20170315_214646.jpg?w=320)
+
+### nju.py - poc for NJU6450
+
+![heart](https://koscis.files.wordpress.com/2017/03/img_20170318_130058.jpg?w=300&h=131)
+
+
+## Attached projects:
 - CharLCD - lib for char lcds on hd44780 - [repo](https://bitbucket.org/kosci/charlcd) - [Articles](https://koscis.wordpress.com/category/charlcd/)
 
 - message_listener - handler for worker nodes. python implementation - [repo](https://github.com/bkosciow/message_listener) 
@@ -21,6 +31,3 @@ It implement message_listener, handlers and iot:1
 [repo](https://github.com/bkosciow/ProxyLCDBundle) - [Articles](https://koscis.wordpress.com/tag/proxy-lcd/)
 
 
------------------------
-
-main.py + screen.py - proof of concept, TFT 2.4"
