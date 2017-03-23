@@ -70,18 +70,18 @@ class Gfx(object):
             self.cmd(0x00 | x, 0)
         else:
             self.cmd(0xB8 | y, 1)
-            self.cmd(0x00 | (x - self.width/2), 1)
+            self.cmd(0x00 | (x - self.width//2), 1)
 
     def draw_pixels(self, x, y, c=0xff):
         """draw a pixel /line"""
-        self.set_xy(x, y/8)
+        self.set_xy(x, y//8)
         if x < self.width/2:
             self.data(c, 0)
         else:
             self.data(c, 1)
 
     def fill(self, c=0):
-        for j in range(0, self.height/8):
+        for j in range(0, self.height//8):
             for i in range(0, self.width):
                 self.set_xy(i, j)
                 if i < self.width/2:
@@ -92,7 +92,7 @@ class Gfx(object):
 g = Gfx(122, 32)
 g.init()
 g.fill(0)
-g.fill(255)
+# g.fill(255)
 
 g.draw_pixels(2, 0, 128)
 g.draw_pixels(3, 0, 128)
