@@ -1,6 +1,7 @@
 import RPi.GPIO as GPIO
 import time
 import itertools
+import math
 
 
 class TFT(object):
@@ -214,16 +215,16 @@ class TFT(object):
         for idx, step in enumerate(steps):
             if horizontal:
                 self._draw_horizontal_line(
-                    x1 + dx,
-                    y1 + (idx * offset_y),
-                    step
+                    int(x1 + dx),
+                    int(y1 + (idx * offset_y)),
+                    int(step)
                 )
                 dx += step * offset_x
             else:
                 self._draw_vertical_line(
-                    x1 + (idx * offset_x),
-                    y1 + dy,
-                    step
+                    int(x1 + (idx * offset_x)),
+                    int(y1 + dy),
+                    int(step)
                 )
                 dy += step * offset_y
 
@@ -242,3 +243,72 @@ class TFT(object):
         self.draw_line(x1, y2, x2, y2)
         self.draw_line(x1, y1, x1, y2)
         self.draw_line(x2, y1, x2, y2)
+
+    def fill_rect(self, x1, y1, x2, y2):
+        """fill an area"""
+        size = abs(x2 - x1) * abs(y2 - y1)
+        self._set_area(
+            min(x1, x2),
+            min(y1, y2),
+            max(x1, x2),
+            max(y1, y2)
+        )
+        GPIO.output(self.pins['RS'], 1)
+        color = self._bcolor()
+        for _ in range(0, size):
+            self.send(color)
+
+    def draw_circle(self, x, y, radius):
+        """draw a circle"""
+        err = 0
+        offset_x = radius
+        offset_y = 0
+        while offset_x >= offset_y:
+            self.draw_pixel(x + offset_x, y + offset_y)
+            self.draw_pixel(x + offset_y, y + offset_x)
+            self.draw_pixel(x - offset_y, y + offset_x)
+            self.draw_pixel(x - offset_x, y + offset_y)
+            self.draw_pixel(x - offset_x, y - offset_y)
+            self.draw_pixel(x - offset_y, y - offset_x)
+            self.draw_pixel(x + offset_y, y - offset_x)
+            self.draw_pixel(x + offset_x, y - offset_y)
+            if err <= 0:
+                offset_y += 1
+                err += 2*offset_y + 1
+            else:
+                offset_x -= 1
+                err -= 2*offset_x + 1
+
+    def draw_arc(self, x, y, radius, start, end):
+        """draw an arc"""
+        start = start * math.pi / 180
+        end = end * math.pi / 180
+
+        err = 0
+        offset_x = radius
+        offset_y = 0
+        while offset_x >= offset_y:
+            if start <= math.atan2(offset_y, offset_x) <= end:
+                self.draw_pixel(x + offset_x, y + offset_y)
+            if start <= math.atan2(offset_x, offset_y) <= end:
+                self.draw_pixel(x + offset_y, y + offset_x)
+            if start <= math.atan2(offset_x, -offset_y) <= end:
+                self.draw_pixel(x - offset_y, y + offset_x)
+            if start <= math.atan2(offset_y, -offset_x) <= end:
+                self.draw_pixel(x - offset_x, y + offset_y)
+
+            if start <= math.atan2(-offset_y, -offset_x) + 2*math.pi <= end:
+                self.draw_pixel(x - offset_x, y - offset_y)
+            if start <= math.atan2(-offset_x, -offset_y) + 2*math.pi <= end:
+                self.draw_pixel(x - offset_y, y - offset_x)
+            if start <= math.atan2(-offset_x, offset_y) + 2*math.pi <= end:
+                self.draw_pixel(x + offset_y, y - offset_x)
+            if start <= math.atan2(-offset_y, offset_x) + 2*math.pi <= end:
+                self.draw_pixel(x + offset_x, y - offset_y)
+
+            if err <= 0:
+                offset_y += 1
+                err += 2*offset_y + 1
+            else:
+                offset_x -= 1
+                err -= 2*offset_x + 1
