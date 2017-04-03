@@ -19,3 +19,9 @@
 [submodule "nodemcu_boilerplate"]
 	path = nodemcu_boilerplate
 	url = https://github.com/bkosciow/nodemcu_boilerplate
+[submodule "node_one"]
+	path = node_one
+	url = https://github.com/bkosciow/nodemcu_Node_One
+[submodule "lcdmanager"]
+	path = lcdmanager
+	url = https://bitbucket.org/kosci/lcdmanager
