@@ -1,7 +1,9 @@
 One repo to rule them all. Doton project for Get Noticed! / Daj się poznać.
 ===
-## Files
+## module char_control_node
+Displays data from Node One on HD44780. [https://koscis.wordpress.com/2017/04/03/node-one-a-multi-purpose-node/](https://koscis.wordpress.com/2017/04/03/node-one-a-multi-purpose-node/)
 
+## Files
 
 ### main.py + screen.py - proof of concept, TFT 2.4"
 ![smile](https://koscis.files.wordpress.com/2017/03/img_20170315_214646.jpg?w=320)
@@ -30,4 +32,7 @@ It implement message_listener, handlers and iot:1
 - ProxyLCDBundle - Symfony3 bundle that extends dump() and transmit content to proxy_lcd and to remote lcd
 [repo](https://github.com/bkosciow/ProxyLCDBundle) - [Articles](https://koscis.wordpress.com/tag/proxy-lcd/)
 
+- lcdmanager - simple window manager for CharLCD module [repo](https://bitbucket.org/kosci/lcdmanager) - [Articles](https://koscis.wordpress.com/category/screens/lcd-screens/lcd-manager/)
+ 
+ 
 
