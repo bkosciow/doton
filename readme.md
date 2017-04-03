@@ -3,6 +3,8 @@ One repo to rule them all. Doton project for Get Noticed! / Daj się poznać.
 ## module char_control_node
 Displays data from Node One on HD44780. [https://koscis.wordpress.com/2017/04/03/node-one-a-multi-purpose-node/](https://koscis.wordpress.com/2017/04/03/node-one-a-multi-purpose-node/)
 
+![nodeone](https://koscis.files.wordpress.com/2017/04/sensor_lcd.jpg?w=620)
+
 ## Files
 
 ### main.py + screen.py - proof of concept, TFT 2.4"
