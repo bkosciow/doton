@@ -14,6 +14,9 @@ Displays data from Node One on HD44780. [https://koscis.wordpress.com/2017/04/03
 
 ![heart](https://koscis.files.wordpress.com/2017/03/img_20170318_130058.jpg?w=300&h=131)
 
+### oled.py - poc for SSH1306
+
+![heart](https://koscis.files.wordpress.com/2017/03/img_20170322_205114.jpg?w=300)
 
 ## Attached projects:
 - CharLCD - lib for char lcds on hd44780 - [repo](https://bitbucket.org/kosci/charlcd) - [Articles](https://koscis.wordpress.com/category/charlcd/)
