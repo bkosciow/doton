@@ -44,7 +44,7 @@ class Oled(object):
         self.cmd(0xff)
         self.cmd(0xa1)  # a0/a1 set segment re-map 127 to 0   a0:0 to seg127
         self.cmd(0xc8)  # c8/c0 set com(N-1)to com0  c0:com0 to com(N-1)
-        self.cmd(0xa7)  # set normal display, a6 - normal, a7 - inverted
+        self.cmd(0xa6)  # set normal display, a6 - normal, a7 - inverted
 
         self.cmd(0xa8)  # set multiplex ratio(16to63)
         self.cmd(0x3f)  # 1/64 duty
@@ -99,6 +99,7 @@ class Oled(object):
 o = Oled(128, 64)
 o.init()
 o.fill(0)
+
 # o.fill(random.randint(0, 255))
 
 o.draw_pixels(2, 0, 128)
