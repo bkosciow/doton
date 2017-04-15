@@ -7,9 +7,8 @@ from driver.chip import Chip
 class SSD1306(Page, Chip):
     """Class for an LCD with SSD306 chip"""
     def __init__(self, width, height, driver):
-        super().__init__()
-        self.width = width
-        self.height = height
+        Page.__init__(self)
+        Chip.__init__(self, width, height)
         self.driver = driver
         self.options = {
             'auto_flush': True,

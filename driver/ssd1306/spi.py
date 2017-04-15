@@ -14,6 +14,7 @@ class SPI(Driver):
         self.spi = None
 
     def init(self):
+        """init sequence"""
         for pin in self.pins:
             GPIO.setup(self.pins[pin], GPIO.OUT)
             GPIO.output(self.pins[pin], 0)
@@ -25,6 +26,7 @@ class SPI(Driver):
         self.spi = spi
 
     def reset(self):
+        """reset device"""
         GPIO.output(self.pins['RST'], 1)
         time.sleep(0.025)
         GPIO.output(self.pins['RST'], 0)
@@ -32,11 +34,13 @@ class SPI(Driver):
         GPIO.output(self.pins['RST'], 1)
         time.sleep(0.025)
 
-    def cmd(self, data):
+    def cmd(self, data, enable=None):
+        """send command to device"""
         GPIO.output(self.pins['DC'], 0)
         self.spi.xfer2([data])
 
-    def data(self, data):
+    def data(self, data, enable=None):
+        """send data to device"""
         GPIO.output(self.pins['DC'], 1)
         self.spi.xfer2([data])
         GPIO.output(self.pins['DC'], 0)

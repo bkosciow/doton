@@ -2,6 +2,20 @@ import abc
 
 
 class Chip(metaclass=abc.ABCMeta):
+    def __init__(self, width, height):
+        self._width = width
+        self._height = height
+
+    @property
+    def width(self):
+        """get width"""
+        return self._width
+
+    @property
+    def height(self):
+        """get height"""
+        return self._height
+
     @abc.abstractmethod
     def init(self):
         """init a chipset"""

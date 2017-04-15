@@ -13,11 +13,11 @@ class Driver(metaclass=abc.ABCMeta):
         pass
 
     @abc.abstractmethod
-    def cmd(self, data):
+    def cmd(self, data, enable):
         """sends command to device"""
         pass
 
     @abc.abstractmethod
-    def data(self, data):
+    def data(self, data, enable):
         """sends data to device"""
         pass
