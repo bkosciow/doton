@@ -5,13 +5,28 @@ from driver.chip import Chip
 
 
 class SSD1306(Page, Chip):
+    """Class for an LCD with SSD306 chip"""
     def __init__(self, width, height, driver):
         super().__init__()
         self.width = width
         self.height = height
         self.driver = driver
+        self.options = {
+            'auto_flush': True,
+        }
+
+    @property
+    def auto_flush(self):
+        """get auto_flush"""
+        return self.options['auto_flush']
+
+    @auto_flush.setter
+    def auto_flush(self, value):
+        """set auto_flush"""
+        self.options['auto_flush'] = bool(value)
 
     def init(self):
+        """inits a device"""
         self.driver.init()
         super().init()
         self.driver.reset()
@@ -51,36 +66,26 @@ class SSD1306(Page, Chip):
         self.driver.cmd(0x14)  # enable charge pump
         self.driver.cmd(0xaf)  # turn on panel
 
-    # def draw_pixel(self, x, y):
-    #     """draw a pixel at x,y"""
-    #     pass
-    #
-    # def draw_line(self, x1, y1, x2, y2):
-    #     """draw a line from point x1,y1 to x2,y2"""
-    #     pass
-    #
-    # def draw_rect(self, x1, y1, x2, y2):
-    #     """draw a rectangle"""
-    #     pass
-    #
-    # def draw_circle(self, x, y, r):
-    #     """draw a circle"""
-    #     pass
-    #
-    # def draw_arc(self, x, y, radius, start, end):
-    #     """draw an arc"""
-    #     pass
-    #
-    # def fill_rect(self, x1, y1, x2, y2):
-    #     """draw a filled rectangle"""
-    #     pass
-    # def set_area(self, x1, y1, x2, y2):
-    #     self.driver.cmd(0x22)
-    #     self.driver.cmd(0xb0 + y1)
-    #     self.driver.cmd(0xb0 + y2)
-    #     self.driver.cmd(0x21)
-    #     self.driver.cmd(x1)
-    #     self.driver.cmd(x2)
+    def flush(self, force=None):
+        """flush buffer to device
+        :force - boolean|None"""
+        if force is None:
+            force = self.options['auto_flush']
+
+        if force:
+            for j in range(0, self.height//8):
+                self.set_area(0, j, self.width-1, j+1)
+                for i in range(0, self.width):
+                    self.driver.data(self.get_page_value(i, j))
+
+    def set_area(self, x1, y1, x2, y2):
+        """set area to work on"""
+        self.driver.cmd(0x22)
+        self.driver.cmd(0xb0 + y1)
+        self.driver.cmd(0xb0 + y2)
+        self.driver.cmd(0x21)
+        self.driver.cmd(x1)
+        self.driver.cmd(x2)
     #
     # def fill(self, c=0xff):
     #     for j in range(0, self.height//8):
@@ -88,8 +93,3 @@ class SSD1306(Page, Chip):
     #         for i in range(0, self.width):
     #             self.driver.data(c)
     #
-    # def draw_pixels(self, x, y, c=0xff):
-    #     """draw a pixel /line"""
-    #     j = y//8
-    #     self.set_area(x, j, x+1, j+1)
-    #     self.driver.data(c)

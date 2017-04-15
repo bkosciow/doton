@@ -1,14 +1,34 @@
 from driver.ssd1306.spi import SPI
 from driver.ssd1306.ssd1306 import SSD1306
+import random
+
+
+def hole(x, y):
+    o.draw_pixel(x+1, y)
+    o.draw_pixel(x+2, y)
+    o.draw_pixel(x+3, y)
+    o.draw_pixel(x+1, y + 4)
+    o.draw_pixel(x+2, y + 4)
+    o.draw_pixel(x+3, y + 4)
+    o.draw_pixel(x, y + 1)
+    o.draw_pixel(x+4, y + 1)
+    o.draw_pixel(x, y + 2)
+    o.draw_pixel(x+4, y + 2)
+    o.draw_pixel(x, y + 3)
+    o.draw_pixel(x+4, y + 3)
 
 drv = SPI()
 o = SSD1306(128, 64, drv)
 
 o.init()
-o.draw_pixel(5, 0)
-o.draw_pixel(6, 1)
-o.draw_pixel(7, 2)
-o.draw_pixel(5, 3)
+o.auto_flush = False
+for _ in range(0, 50):
+    hole(random.randint(2,120), random.randint(2,56))
+hole(10, 10)
+hole(15, 13)
+hole(18, 23)
+hole(40, 10)
+o.flush(True)
 # o.fill(0)
 #
 # o.fill(random.randint(0, 255))
