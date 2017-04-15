@@ -1,13 +1,13 @@
+import abc
 
 
-class Page(object):
+class Page(metaclass=abc.ABCMeta):
     """Page drawing algorithm"""
     def __init__(self):
         self.buffer = []
 
     def init(self):
         """init page"""
-        #self.buffer = [[0] * (self.height // 8) for x in range(self.width)]
         self.buffer = [[0] * (self.height // 8) for x in range(self.width)]
 
     def draw_pixel(self, x, y):
@@ -38,3 +38,8 @@ class Page(object):
     def get_page_value(self, i, j):
         """returns value"""
         return self.buffer[i][j]
+
+    @abc.abstractmethod
+    def flush(self, force=None):
+        """flush buffer to the screen"""
+        pass
