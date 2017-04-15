@@ -2,9 +2,10 @@ import abc
 
 
 class Chip(metaclass=abc.ABCMeta):
-    def __init__(self, width, height):
+    def __init__(self, width, height, driver):
         self._width = width
         self._height = height
+        self.driver = driver
 
     @property
     def width(self):

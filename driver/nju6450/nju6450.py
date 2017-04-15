@@ -8,9 +8,7 @@ class NJU6450(Page, Chip):
     """Class for an LCD with NJU6450 chip"""
     def __init__(self, width, height, driver):
         Page.__init__(self)
-        Chip.__init__(self, width, height)
-
-        self.driver = driver
+        Chip.__init__(self, width, height, driver)
         self.options = {
             'auto_flush': True,
         }
