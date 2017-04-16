@@ -6,27 +6,15 @@ from driver.chip import Chip
 
 class SSD1306(Page, Chip):
     """Class for an LCD with SSD306 chip"""
-    def __init__(self, width, height, driver):
+    def __init__(self, width, height, driver, auto_flush=True):
         Page.__init__(self)
-        Chip.__init__(self, width, height, driver)
-        self.options = {
-            'auto_flush': True,
-        }
-
-    @property
-    def auto_flush(self):
-        """get auto_flush"""
-        return self.options['auto_flush']
-
-    @auto_flush.setter
-    def auto_flush(self, value):
-        """set auto_flush"""
-        self.options['auto_flush'] = bool(value)
+        Chip.__init__(self, width, height, driver, auto_flush)
 
     def init(self):
         """inits a device"""
         self.driver.init()
-        super().init()
+        Page.init(self)
+        Chip.init(self)
         self.driver.reset()
         self.driver.cmd(0xae)  # turn off panel
         self.driver.cmd(0x00)  # set low column address

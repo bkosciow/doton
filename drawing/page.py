@@ -4,7 +4,6 @@ import abc
 class Page(metaclass=abc.ABCMeta):
     """Page drawing algorithm"""
     def __init__(self):
-        print('page init')
         self.buffer = []
 
     def init(self):

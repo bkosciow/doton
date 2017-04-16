@@ -6,27 +6,15 @@ from driver.chip import Chip
 
 class NJU6450(Page, Chip):
     """Class for an LCD with NJU6450 chip"""
-    def __init__(self, width, height, driver):
+    def __init__(self, width, height, driver, auto_flush=True):
         Page.__init__(self)
-        Chip.__init__(self, width, height, driver)
-        self.options = {
-            'auto_flush': True,
-        }
-
-    @property
-    def auto_flush(self):
-        """get auto_flush"""
-        return self.options['auto_flush']
-
-    @auto_flush.setter
-    def auto_flush(self, value):
-        """set auto_flush"""
-        self.options['auto_flush'] = bool(value)
+        Chip.__init__(self, width, height, driver, auto_flush)
 
     def init(self):
         """initialize display"""
         self.driver.init()
-        super().init()
+        Page.init(self)
+        Chip.init(self)
         self.driver.reset()
 
         init_sequence = [0xae, 0xa4, 0xa9, 0xe2, 0xa0, 0xaf]
