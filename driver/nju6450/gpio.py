@@ -17,7 +17,8 @@ class GPIO(Driver):
             'D4': 16,
             'D5': 20,
             'D6': 26,
-            'D7': 19
+            'D7': 19,
+            'RST': 5,
         }
 
         self.data_pins = [
@@ -32,6 +33,12 @@ class GPIO(Driver):
 
     def reset(self):
         """resets a device"""
+        RPi.GPIO.output(self.pins['RST'], 1)
+        time.sleep(0.025)
+        RPi.GPIO.output(self.pins['RST'], 0)
+        time.sleep(0.025)
+        RPi.GPIO.output(self.pins['RST'], 1)
+        time.sleep(0.025)
         RPi.GPIO.output(self.pins['A0'], 0)
         RPi.GPIO.output(self.pins['E1'], 1)
         RPi.GPIO.output(self.pins['E2'], 1)
