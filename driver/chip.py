@@ -2,6 +2,33 @@ import abc
 
 
 class Chip(metaclass=abc.ABCMeta):
+    def __init__(self, width, height, driver, auto_flush):
+        self.options = {}
+        self._width = width
+        self._height = height
+        self.driver = driver
+        self.options['auto_flush'] = auto_flush
+
+    @property
+    def width(self):
+        """get width"""
+        return self._width
+
+    @property
+    def height(self):
+        """get height"""
+        return self._height
+
+    @property
+    def auto_flush(self):
+        """get auto_flush"""
+        return self.options['auto_flush']
+
+    @auto_flush.setter
+    def auto_flush(self, value):
+        """set auto_flush"""
+        self.options['auto_flush'] = bool(value)
+
     @abc.abstractmethod
     def init(self):
         """init a chipset"""
