@@ -1,4 +1,5 @@
 import abc
+import math
 
 
 class Page(metaclass=abc.ABCMeta):
@@ -29,11 +30,11 @@ class Page(metaclass=abc.ABCMeta):
         width = abs(x2 - x1)
         height = abs(y2 - y1)
         if x1 == x2:
-            steps = [height-2]
+            steps = [height]
             horizontal = False
             offset_x = offset_y = 0
         elif y1 == y2:
-            steps = [width-1]
+            steps = [width]
             horizontal = True
             offset_x = offset_y = 0
         elif width > height:
@@ -77,23 +78,96 @@ class Page(metaclass=abc.ABCMeta):
 
     def draw_rect(self, x1, y1, x2, y2):
         """draw a rectangle"""
-        pass
+        self.draw_line(x1, y1, x2, y1)
+        self.draw_line(x1, y2, x2, y2)
+        self.draw_line(x1, y1, x1, y2)
+        self.draw_line(x2, y1, x2, y2)
 
-    def draw_circle(self, x, y, r):
+    def draw_circle(self, x, y, radius):
         """draw a circle"""
-        pass
+        err = 0
+        offset_x = radius
+        offset_y = 0
+        while offset_x >= offset_y:
+            self.draw_pixel(x + offset_x, y + offset_y)
+            self.draw_pixel(x + offset_y, y + offset_x)
+            self.draw_pixel(x - offset_y, y + offset_x)
+            self.draw_pixel(x - offset_x, y + offset_y)
+            self.draw_pixel(x - offset_x, y - offset_y)
+            self.draw_pixel(x - offset_y, y - offset_x)
+            self.draw_pixel(x + offset_y, y - offset_x)
+            self.draw_pixel(x + offset_x, y - offset_y)
+            if err <= 0:
+                offset_y += 1
+                err += 2*offset_y + 1
+            else:
+                offset_x -= 1
+                err -= 2*offset_x + 1
 
     def draw_arc(self, x, y, radius, start, end):
         """draw an arc"""
-        pass
+        start = start * math.pi / 180
+        end = end * math.pi / 180
+
+        err = 0
+        offset_x = radius
+        offset_y = 0
+        while offset_x >= offset_y:
+            if start <= math.atan2(offset_y, offset_x) <= end:
+                self.draw_pixel(x + offset_x, y + offset_y)
+            if start <= math.atan2(offset_x, offset_y) <= end:
+                self.draw_pixel(x + offset_y, y + offset_x)
+            if start <= math.atan2(offset_x, -offset_y) <= end:
+                self.draw_pixel(x - offset_y, y + offset_x)
+            if start <= math.atan2(offset_y, -offset_x) <= end:
+                self.draw_pixel(x - offset_x, y + offset_y)
+
+            if start <= math.atan2(-offset_y, -offset_x) + 2*math.pi <= end:
+                self.draw_pixel(x - offset_x, y - offset_y)
+            if start <= math.atan2(-offset_x, -offset_y) + 2*math.pi <= end:
+                self.draw_pixel(x - offset_y, y - offset_x)
+            if start <= math.atan2(-offset_x, offset_y) + 2*math.pi <= end:
+                self.draw_pixel(x + offset_y, y - offset_x)
+            if start <= math.atan2(-offset_y, offset_x) + 2*math.pi <= end:
+                self.draw_pixel(x + offset_x, y - offset_y)
+
+            if err <= 0:
+                offset_y += 1
+                err += 2*offset_y + 1
+            else:
+                offset_x -= 1
+                err -= 2*offset_x + 1
 
     def fill_rect(self, x1, y1, x2, y2):
         """draw a filled rectangle"""
-        pass
+        if y2 < y1:
+            y1, y2 = y2, y1
+        if x2 < x1:
+            x1, x2 = x2, x1
+        start_page = y1 // 8
+        start_bit = y1 % 8
+        end_page = y2 // 8
+        end_bit = y2 % 8
+        rows = []
+        first_page = int(('0' * start_bit).rjust(8, '1'), 2)
+        last_page = int('1' * (end_bit+1), 2)
+        if start_page != end_page:
+            rows.append(first_page)
+            for _ in range(end_page - start_page - 1):
+                rows.append(255)
+            rows.append(last_page)
+        else:
+            rows.append(first_page & last_page)
 
-    def get_page_value(self, i, j):
+        page = start_page
+        for v in rows:
+            for x in range(x2-x1+1):
+                self.buffer[x1+x][page] |= v
+            page += 1
+
+    def get_page_value(self, column, page):
         """returns value"""
-        return self.buffer[i][j]
+        return self.buffer[column][page]
 
     @abc.abstractmethod
     def flush(self, force=None):
