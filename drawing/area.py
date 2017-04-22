@@ -1,21 +1,45 @@
 import abc
 from drawing.pixel import Pixel
+import itertools
 
 
-class Page(Pixel, metaclass=abc.ABCMeta):
+class Area(Pixel, metaclass=abc.ABCMeta):
     """Page drawing algorithm"""
     def __init__(self):
         Pixel.__init__(self)
-        self.buffer = []
 
     def init(self):
-        """init page"""
-        self.buffer = [[0] * (self.height // 8) for x in range(self.width)]
+        pass
 
     def draw_pixel(self, x, y):
-        """draw a pixel at x,y"""
-        self.buffer[x][y//8] |= 1 << (y % 8)
-        self.flush()
+        """draw one pixel"""
+        self._set_area(x, y, x, y)
+        self.driver.data(self._converted_color(), None)
+
+    def _set_area(self, x1, y1, x2, y2):
+        """select area to work with"""
+        self.driver.cmd_data(0x0020, x1)
+        self.driver.cmd_data(0x0021, y1)
+        self.driver.cmd_data(0x0050, x1)
+        self.driver.cmd_data(0x0052, y1)
+        self.driver.cmd_data(0x0051, x2)
+        self.driver.cmd_data(0x0053, y2)
+        self.driver.cmd(0x0022, None)
+
+
+    def _draw_vertical_line(self, x, y, length):
+        """draw vertical line"""
+        self._set_area(x, y, x, y + length)
+        color = self._converted_color()
+        for _ in itertools.repeat(None, length):
+            self.driver.data(color, None)
+
+    def _draw_horizontal_line(self, x, y, length):
+        """draw horizontal line"""
+        self._set_area(x, y, x + length, y)
+        color = self._converted_color()
+        for _ in itertools.repeat(None, length):
+            self.driver.data(color, None)
 
     def _calculate_steps(self, length, step, required_length):
         """calculate lineparts - helper"""
@@ -59,56 +83,34 @@ class Page(Pixel, metaclass=abc.ABCMeta):
             step = width
             length = height / step
             steps = self._calculate_steps(length, step, height)
+
         dy = 0
         dx = 0
         for idx, step in enumerate(steps):
             if horizontal:
-                for appendix in range(int(step)+1):
-                    self.draw_pixel(
-                        int(x1 + dx + appendix),
-                        int(y1 + (idx * offset_y))
-                    )
+                self._draw_horizontal_line(
+                    int(x1 + dx),
+                    int(y1 + (idx * offset_y)),
+                    int(step)
+                )
                 dx += step * offset_x
             else:
-                for appendix in range(int(step)+1):
-                    self.draw_pixel(
-                        int(x1 + (idx * offset_x)),
-                        int(y1 + dy + appendix)
-                    )
+                self._draw_vertical_line(
+                    int(x1 + (idx * offset_x)),
+                    int(y1 + dy),
+                    int(step)
+                )
                 dy += step * offset_y
 
     def fill_rect(self, x1, y1, x2, y2):
-        """draw a filled rectangle"""
-        if y2 < y1:
-            y1, y2 = y2, y1
-        if x2 < x1:
-            x1, x2 = x2, x1
-        start_page = y1 // 8
-        start_bit = y1 % 8
-        end_page = y2 // 8
-        end_bit = y2 % 8
-        rows = []
-        first_page = int(('0' * start_bit).rjust(8, '1'), 2)
-        last_page = int('1' * (end_bit+1), 2)
-        if start_page != end_page:
-            rows.append(first_page)
-            for _ in range(end_page - start_page - 1):
-                rows.append(255)
-            rows.append(last_page)
-        else:
-            rows.append(first_page & last_page)
-
-        page = start_page
-        for v in rows:
-            for x in range(x2-x1+1):
-                self.buffer[x1+x][page] |= v
-            page += 1
-
-    def get_page_value(self, column, page):
-        """returns value"""
-        return self.buffer[column][page]
-
-    @abc.abstractmethod
-    def flush(self, force=None):
-        """flush buffer to the screen"""
-        pass
+        """fill an area"""
+        size = abs(x2 - x1) * abs(y2 - y1)
+        self._set_area(
+            min(x1, x2),
+            min(y1, y2),
+            max(x1, x2)-1,
+            max(y1, y2)-1
+        )
+        color = self._converted_background_color()
+        for _ in range(0, size):
+            self.driver.data(color, None)

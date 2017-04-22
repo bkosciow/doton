@@ -7,8 +7,8 @@ from driver.chip import Chip
 class SSD1306(Page, Chip):
     """Class for an LCD with SSD306 chip"""
     def __init__(self, width, height, driver, auto_flush=True):
-        Page.__init__(self)
         Chip.__init__(self, width, height, driver, auto_flush)
+        Page.__init__(self)
 
     def init(self):
         """inits a device"""
@@ -52,6 +52,14 @@ class SSD1306(Page, Chip):
         self.driver.cmd(0x14)  # enable charge pump
         self.driver.cmd(0xaf)  # turn on panel
 
+    def _converted_background_color(self):
+        """convert RGB background to available color"""
+        return 1
+
+    def _converted_color(self):
+        """convert RGB color to available color"""
+        return 1
+
     def flush(self, force=None):
         """flush buffer to device
         :force - boolean|None"""
@@ -72,10 +80,3 @@ class SSD1306(Page, Chip):
         self.driver.cmd(0x21)
         self.driver.cmd(x1)
         self.driver.cmd(x2)
-    #
-    # def fill(self, c=0xff):
-    #     for j in range(0, self.height//8):
-    #         self.set_area(0, j, self.width-1, j+1)
-    #         for i in range(0, self.width):
-    #             self.driver.data(c)
-    #
