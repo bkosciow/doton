@@ -19,6 +19,36 @@ class Chip(metaclass=abc.ABCMeta):
         """get height"""
         return self._height
 
+    @abc.abstractmethod
+    def _converted_background_color(self):
+        """convert RGB background to available color"""
+        pass
+
+    @abc.abstractmethod
+    def _converted_color(self):
+        """convert RGB color to available color"""
+        pass
+
+    @property
+    def color(self):
+        return self.options['color']
+
+    @color.setter
+    def color(self, rgb):
+        self.options['color'] = {
+            'R': rgb[0], 'G': rgb[1], 'B': rgb[2]
+        }
+
+    @property
+    def background_color(self):
+        return self.options['background_color']
+
+    @background_color.setter
+    def background_color(self, rgb):
+        self.options['background_color'] = {
+            'R': rgb[0], 'G': rgb[1], 'B': rgb[2]
+        }
+
     @property
     def auto_flush(self):
         """get auto_flush"""

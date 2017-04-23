@@ -7,8 +7,8 @@ from driver.chip import Chip
 class NJU6450(Page, Chip):
     """Class for an LCD with NJU6450 chip"""
     def __init__(self, width, height, driver, auto_flush=True):
-        Page.__init__(self)
         Chip.__init__(self, width, height, driver, auto_flush)
+        Page.__init__(self)
 
     def init(self):
         """initialize display"""
@@ -31,6 +31,13 @@ class NJU6450(Page, Chip):
             self.driver.cmd(0xB8 | y, 1)
             self.driver.cmd(0x00 | (x - self.width//2), 1)
 
+    def _converted_background_color(self):
+        """convert RGB background to available color"""
+        return 1
+
+    def _converted_color(self):
+        """convert RGB color to available color"""
+        return 1
 
     def flush(self, force=None):
         """flush buffer to device
@@ -46,4 +53,3 @@ class NJU6450(Page, Chip):
                         self.driver.data(self.get_page_value(i, j), 0)
                     else:
                         self.driver.data(self.get_page_value(i, j), 1)
-                    #self.driver.data(self.get_page_value(i, j))
