@@ -103,12 +103,12 @@ class Area(Pixel):
 
     def fill_rect(self, x1, y1, x2, y2):
         """fill an area"""
-        size = abs(x2 - x1) * abs(y2 - y1)
+        size = (abs(x2 - x1) + 1) * (abs(y2 - y1) + 1)
         self._set_area(
             min(x1, x2),
             min(y1, y2),
-            max(x1, x2)-1,
-            max(y1, y2)-1
+            max(x1, x2),
+            max(y1, y2)
         )
         color = self._converted_background_color()
         for _ in range(0, size):
