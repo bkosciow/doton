@@ -1,9 +1,8 @@
-import abc
 from drawing.pixel import Pixel
 import itertools
 
 
-class Area(Pixel, metaclass=abc.ABCMeta):
+class Area(Pixel):
     """Page drawing algorithm"""
     def __init__(self):
         Pixel.__init__(self)

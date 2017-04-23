@@ -37,18 +37,21 @@ o.init()
 #
 # draw_net(o)
 
-o.color = (10, 230, 20)
+o.color = (10, 230, 200)
 o.draw_circle(60, 15, 15)
+o.color = (0, 250, 20)
 o.draw_circle(53, 10, 3)
 o.draw_circle(67, 10, 3)
+o.color = (250, 150, 20)
 o.draw_arc(60, 15, 10, 45, 135)
+o.color = (10, 230, 200)
 o.draw_line(60, 12, 57, 17)
 o.draw_line(60, 12, 63, 17)
 o.draw_arc(60, 15, 3, 45, 135)
 
-o.background_color = (20, 120, 120)
+o.background_color = (200, 0, 120)
 o.fill_rect(2, 2, 42, 29)
-
+o.background_color = (20, 200, 120)
 o.fill_rect(119, 2, 109, 12)
 o.fill_rect(119, 17, 109, 19)
 
