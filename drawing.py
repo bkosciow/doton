@@ -1,11 +1,11 @@
 import RPi.GPIO
 RPi.GPIO.setmode(RPi.GPIO.BCM)
-from driver.nju6450.gpio import GPIO
-from driver.nju6450.nju6450 import NJU6450
-from driver.ssd1306.spi import SPI
-from driver.ssd1306.ssd1306 import SSD1306
-from driver.ili9325.gpio import GPIO as ILIGPIO
-from driver.ili9325.ili9325 import ILI9325
+from gfxlcd.driver.nju6450.gpio import GPIO
+from gfxlcd.driver.nju6450.nju6450 import NJU6450
+from gfxlcd.driver.ssd1306.spi import SPI
+from gfxlcd.driver.ssd1306.ssd1306 import SSD1306
+from gfxlcd.driver.ili9325.gpio import GPIO as ILIGPIO
+from gfxlcd.driver.ili9325.ili9325 import ILI9325
 
 import random
 
