@@ -25,3 +25,6 @@
 [submodule "lcdmanager"]
 	path = lcdmanager
 	url = https://bitbucket.org/kosci/lcdmanager
+[submodule "gfxlcd"]
+	path = gfxlcd
+	url = https://github.com/bkosciow/gfxlcd

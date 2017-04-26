@@ -7,18 +7,15 @@ Displays data from Node One on HD44780. [https://koscis.wordpress.com/2017/04/03
 
 ## Files
 
-### main.py + screen.py - proof of concept, TFT 2.4"
-![smile](https://koscis.files.wordpress.com/2017/03/img_20170315_214646.jpg?w=320)
-
-### nju.py - poc for NJU6450
-
-![heart](https://koscis.files.wordpress.com/2017/03/img_20170318_130058.jpg?w=300&h=131)
-
-### oled.py - poc for SSH1306
-
-![heart](https://koscis.files.wordpress.com/2017/03/img_20170322_205114.jpg?w=300)
 
 ## Attached projects:
+- GfxLCD - lib for graphical LCDs on ili9325, ssd1306 and nju6450. Made for Doton project - [repo](https://github.com/bkosciow/gfxlcd) - [Articles](https://koscis.wordpress.com/category/screens/lcd-screens/gfxlcd/)
+
+![heart](https://koscis.files.wordpress.com/2017/03/img_20170322_205114.jpg?w=200)
+![both](https://koscis.files.wordpress.com/2017/04/img_20170420_215316.jpg?w=620)
+
+![main](https://koscis.files.wordpress.com/2017/04/img_20170423_155356.jpg?w=300)
+
 - CharLCD - lib for char lcds on hd44780 - [repo](https://bitbucket.org/kosci/charlcd) - [Articles](https://koscis.wordpress.com/category/charlcd/)
 
 - message_listener - handler for worker nodes. python implementation - [repo](https://github.com/bkosciow/message_listener) 
