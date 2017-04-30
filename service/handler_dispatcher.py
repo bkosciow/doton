@@ -22,7 +22,7 @@ class HandlerDispatcher(object):
             })
 
     def set_light_data(self, node, light):
-        """get data from light dtector"""
+        """get data from light detector"""
         if node in self.widgets:
             self.widgets[node].change_values({
                 'light': light

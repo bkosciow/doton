@@ -5,9 +5,9 @@ from view.nodeone_widget import NodeOneWidget
 from assets.font import digital_numbers
 from message_listener.server import Server
 from iot_message.message import Message
-from sensors.DHTHandler import DHTHandler
-from sensors.PIRHandler import PIRHandler
-from sensors.LightHandler import LightHandler
+from handler.DHTHandler import DHTHandler
+from handler.PIRHandler import PIRHandler
+from handler.LightHandler import LightHandler
 from service.handler_dispatcher import HandlerDispatcher
 
 GPIO.setmode(GPIO.BCM)
