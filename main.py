@@ -1,9 +1,18 @@
 import RPi.GPIO as GPIO
 from gfxlcd.driver.ili9325.gpio import GPIO as ILIGPIO
 from gfxlcd.driver.ili9325.ili9325 import ILI9325
-import time
+from view.nodeone_widget import NodeOneWidget
+from assets.font import digital_numbers
+from message_listener.server import Server
+from iot_message.message import Message
+from sensors.DHTHandler import DHTHandler
+from sensors.PIRHandler import PIRHandler
+from sensors.LightHandler import LightHandler
+from service.handler_dispatcher import HandlerDispacher
+
 GPIO.setmode(GPIO.BCM)
 
+msg = Message('control-node')
 
 LED = 6
 GPIO.setup(LED, GPIO.OUT)
@@ -12,25 +21,28 @@ GPIO.output(LED, 1)
 lcd_tft = ILI9325(240, 320, ILIGPIO())
 lcd_tft.init()
 
-lcd_tft.background_color = (255, 0, 0)
-lcd_tft.fill_rect(10, 10, 50, 50)
+font = digital_numbers.DigitalNumbers()
 
-lcd_tft.background_color = (0, 255, 0)
-lcd_tft.fill_rect(230, 50, 190, 10)
+WIDGETS = {
+    'node-kitchen': NodeOneWidget(0, 0, lcd_tft, font),
+    'node-my-room': NodeOneWidget(125, 0, lcd_tft, font),
+    #'weather': Widget(0, 108, lcd_tft),
+}
 
-lcd_tft.background_color = (0, 0, 255)
-lcd_tft.fill_rect(230, 310, 190, 270)
+WIDGETS['node-kitchen'].colours['background'] = (0, 0, 255)
+WIDGETS['node-my-room'].colours['background'] = (0, 255, 255)
+for sensor in WIDGETS:
+    WIDGETS[sensor].draw_widget()
 
-lcd_tft.background_color = (255, 255, 0)
-lcd_tft.fill_rect(10, 310, 50, 270)
+dispatcher = HandlerDispacher(WIDGETS)
+svr = Server(msg)
+svr.add_handler('dht11', DHTHandler(dispatcher))
+svr.add_handler('pir', PIRHandler(dispatcher))
+svr.add_handler('light', LightHandler(dispatcher))
+svr.start()
 
-lcd_tft.draw_circle(120, 160, 100)
-lcd_tft.draw_circle(70, 120, 20)
-lcd_tft.draw_circle(170, 120, 20)
+while True:
+    for sensor in WIDGETS:
+        WIDGETS[sensor].draw_values()
 
-lcd_tft.background_color = (250, 0, 255)
-lcd_tft.draw_arc(120, 160, 70, 20, 160)
-
-lcd_tft.draw_line(120, 150, 115, 180)
-lcd_tft.draw_line(120, 150, 125, 180)
-lcd_tft.draw_line(115, 180, 125, 180)
+svr.join()
