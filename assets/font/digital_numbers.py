@@ -27,12 +27,10 @@ class DigitalNumbers(object):
         return self.loaded_resources[item]
 
     def load_resource(self, number):
-        """create reference to single nubber"""
+        """create reference to single number"""
         area = (self.offsets[number], 0, self.offsets[number] + 24, 42)
         self.loaded_resources[number] = self.resource.crop(area)
 
     def get_transparency(self):
         """get font transparency"""
         return ((1, 1, 1), (9, 9, 9))
-
-

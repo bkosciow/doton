@@ -10,7 +10,8 @@ class NodeOneWidget(object):
         self.font = font
         self.colours = {
             'background': (255, 250, 0),
-            'digit_background': (0, 0, 0)
+            'digit_background': (0, 0, 0),
+            'border': (244, 244, 244)
         }
         self.temperature = {
             'current': 0,
@@ -44,6 +45,10 @@ class NodeOneWidget(object):
 
         self.lcd.fill_rect(self.x+40, self.y+55, self.x+60, self.y+95)
         self.lcd.fill_rect(self.x+67, self.y+55, self.x+89, self.y+95)
+
+        self.lcd.color = self.colours['border']
+        self.lcd.draw_rect(self.x, self.y, self.x + 115, self.y + 103)
+
         self.draw_values(True)
 
     def draw_values(self, force=False):
