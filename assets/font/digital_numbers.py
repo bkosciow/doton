@@ -1,3 +1,4 @@
+"""Font for numbers"""
 from PIL import Image
 
 

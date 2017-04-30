@@ -1,8 +1,9 @@
+"""Widget for Node One sensor. Displas data from it in form of tile"""
 from PIL import Image
 
 
 class NodeOneWidget(object):
-
+    """Class NodeOneWidget"""
     def __init__(self, x, y, lcd, font):
         self.x = x
         self.y = y
@@ -35,7 +36,7 @@ class NodeOneWidget(object):
         }
 
     def draw_widget(self):
-        """draw widget"""
+        """draw a widget"""
         self.lcd.background_color = self.colours['background']
         self.lcd.fill_rect(self.x, self.y, self.x + 115, self.y + 103)
 

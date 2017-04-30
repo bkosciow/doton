@@ -8,7 +8,7 @@ from iot_message.message import Message
 from sensors.DHTHandler import DHTHandler
 from sensors.PIRHandler import PIRHandler
 from sensors.LightHandler import LightHandler
-from service.handler_dispatcher import HandlerDispacher
+from service.handler_dispatcher import HandlerDispatcher
 
 GPIO.setmode(GPIO.BCM)
 
@@ -34,7 +34,7 @@ WIDGETS['node-my-room'].colours['background'] = (0, 255, 255)
 for sensor in WIDGETS:
     WIDGETS[sensor].draw_widget()
 
-dispatcher = HandlerDispacher(WIDGETS)
+dispatcher = HandlerDispatcher(WIDGETS)
 svr = Server(msg)
 svr.add_handler('dht11', DHTHandler(dispatcher))
 svr.add_handler('pir', PIRHandler(dispatcher))
