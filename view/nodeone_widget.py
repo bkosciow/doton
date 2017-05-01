@@ -33,6 +33,7 @@ class NodeOneWidget(Widget):
             'movement': Image.open('assets/image/movement.png'),
             'light': Image.open('assets/image/lightbulb.png'),
             'temperature': Image.open('assets/image/thermometer.png'),
+            'humidity': Image.open('assets/image/humidity.png')
         }
 
     def draw_widget(self):
@@ -43,12 +44,13 @@ class NodeOneWidget(Widget):
         self.lcd.background_color = self.colours['digit_background']
         self.lcd.fill_rect(self.pos_x+40, self.pos_y+5, self.pos_x+62, self.pos_y+46)
         self.lcd.fill_rect(self.pos_x+67, self.pos_y+5, self.pos_x+89, self.pos_y+46)
-
         self.lcd.fill_rect(self.pos_x+40, self.pos_y+55, self.pos_x+60, self.pos_y+95)
         self.lcd.fill_rect(self.pos_x+67, self.pos_y+55, self.pos_x+89, self.pos_y+95)
 
         self.lcd.transparency_color = (0, 0, 0)
         self.lcd.draw_image(self.pos_x + 95, self.pos_y + 8, self.icon['temperature'])
+
+        self.lcd.draw_image(self.pos_x + 95, self.pos_y + 58, self.icon['humidity'])
 
         self.lcd.color = self.colours['border']
         self.lcd.draw_rect(self.pos_x, self.pos_y, self.pos_x + 115, self.pos_y + 103)

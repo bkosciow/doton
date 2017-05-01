@@ -30,15 +30,15 @@ FONTS = {
 
 WIDGETS = {
     'node-kitchen': NodeOneWidget(0, 0, lcd_tft, FONTS['24x42']),
-    'node-my-room': NodeOneWidget(125, 0, lcd_tft, FONTS['24x42']),
+    'node-my-room': NodeOneWidget(124, 0, lcd_tft, FONTS['24x42']),
     'openweather': OpenweatherWidget(
-        ((0, 108), (125, 108)),
+        ((0, 108), (124, 108)),
         lcd_tft,
         FONTS
     )
 }
 
-WIDGETS['node-kitchen'].colours['background'] = (0, 0, 255)
+# WIDGETS['node-kitchen'].colours['background'] = (0, 0, 255)
 # WIDGETS['node-my-room'].colours['background'] = (0, 255, 255)
 for sensor in WIDGETS:
     WIDGETS[sensor].draw_widget()
