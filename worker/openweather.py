@@ -4,8 +4,8 @@ from service.openweather import Openweather
 class OpenweatherWorker(object):
     def __init__(self, apikey):
         self.cities = {
-            3103402: 'Bielsko-Biała',
-            2946447: 'Bonn'
+            3103402: 'Bielsko-Biała'
+            #2946447: 'Bonn'
         }
         self.handler = Openweather(self.cities, apikey)
  
