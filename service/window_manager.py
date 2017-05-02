@@ -4,9 +4,10 @@ import time
 
 class WindowManager(threading.Thread):
     """Window Manager"""
-    def __init__(self):
+    def __init__(self, lcd):
         threading.Thread.__init__(self)
         self.widgets = {}
+        self.lcd = lcd
         self.work = True
 
     def add_widget(self, name, widget, page=0):
@@ -20,10 +21,10 @@ class WindowManager(threading.Thread):
     def run(self):
         """main loop - drawing"""
         for widget in self.widgets:
-            self.widgets[widget].draw_widget()
+            self.widgets[widget].draw_widget(self.lcd)
         while self.work:
             for widget in self.widgets:
-                self.widgets[widget].draw_values()
+                self.widgets[widget].draw_values(self.lcd)
             time.sleep(0.025)
 
     def stop(self):

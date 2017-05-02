@@ -18,7 +18,7 @@ from service.window_manager import WindowManager
 GPIO.setmode(GPIO.BCM)
 
 msg = Message('control-node')
-window_manager = WindowManager()
+
 
 LED = 6
 GPIO.setup(LED, GPIO.OUT)
@@ -26,19 +26,19 @@ GPIO.output(LED, 1)
 
 lcd_tft = ILI9325(240, 320, ILIGPIO())
 lcd_tft.init()
+window_manager = WindowManager(lcd_tft)
 
 FONTS = {
     '24x42': numbers_24x42.Numbers(),
     '15x28': numbers_15x28.Numbers()
 }
 
-window_manager.add_widget('node-kitchen', NodeOneWidget([(0, 0)], lcd_tft, FONTS['24x42']))
-window_manager.add_widget('node-my-room', NodeOneWidget([(1, 0)], lcd_tft, FONTS['24x42']))
+window_manager.add_widget('node-kitchen', NodeOneWidget([(0, 0)], FONTS['24x42']))
+window_manager.add_widget('node-my-room', NodeOneWidget([(1, 0)], FONTS['24x42']))
 window_manager.add_widget(
     'openweather',
     OpenweatherWidget(
         [(0, 106), (134, 106)],
-        lcd_tft,
         FONTS
     )
 )

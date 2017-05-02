@@ -5,8 +5,8 @@ from PIL import Image
 
 class OpenweatherWidget(Widget):
     """Openweathermap widget"""
-    def __init__(self, coords, lcd, fonts):
-        super().__init__(coords, lcd)
+    def __init__(self, coords, fonts):
+        super().__init__(coords)
         self.current_widget_pos = coords[0]
         self.forecast_widget_pos = coords[1]
         self.fonts = fonts
@@ -30,58 +30,58 @@ class OpenweatherWidget(Widget):
         }
         self.initialized = False
 
-    def draw_widget(self):
+    def draw_widget(self, lcd):
         """draw a tiles"""
-        self._draw_widget('current', self.current_widget_pos[0], self.current_widget_pos[1])
-        self._draw_widget('forecast', self.forecast_widget_pos[0], self.forecast_widget_pos[1])
-        self.draw_values(True)
+        self._draw_widget(lcd, 'current', self.current_widget_pos[0], self.current_widget_pos[1])
+        self._draw_widget(lcd, 'forecast', self.forecast_widget_pos[0], self.forecast_widget_pos[1])
+        self.draw_values(lcd, True)
         self.initialized = True
 
-    def _draw_widget(self, widget_type, pos_x, pos_y):
+    def _draw_widget(self, lcd, widget_type, pos_x, pos_y):
         """draw a tile"""
-        self.lcd.background_color = self.colours['background_'+widget_type]
-        self.lcd.fill_rect(pos_x, pos_y, pos_x + 105, pos_y + 105)
-        self.lcd.transparency_color = (0, 0, 0)
-        self.lcd.draw_image(pos_x + 92, pos_y + 7, self.icon['temperature'])
-        self.lcd.color = self.colours['border']
-        self.lcd.draw_rect(pos_x, pos_y, pos_x + 105, pos_y + 105)
+        lcd.background_color = self.colours['background_'+widget_type]
+        lcd.fill_rect(pos_x, pos_y, pos_x + 105, pos_y + 105)
+        lcd.transparency_color = (0, 0, 0)
+        lcd.draw_image(pos_x + 92, pos_y + 7, self.icon['temperature'])
+        lcd.color = self.colours['border']
+        lcd.draw_rect(pos_x, pos_y, pos_x + 105, pos_y + 105)
 
-    def draw_values(self, force=False):
+    def draw_values(self, lcd, force=False):
         """draw values"""
-        self._draw_values('current', self.current_widget_pos[0], self.current_widget_pos[1], force)
-        self._draw_values('forecast', self.forecast_widget_pos[0], self.forecast_widget_pos[1], force)
+        self._draw_values(lcd, 'current', self.current_widget_pos[0], self.current_widget_pos[1], force)
+        self._draw_values(lcd, 'forecast', self.forecast_widget_pos[0], self.forecast_widget_pos[1], force)
 
-    def _draw_values(self, widget_type, pos_x, pos_y, force=False):
+    def _draw_values(self, lcd, widget_type, pos_x, pos_y, force=False):
         """draw current values"""
         if widget_type == 'current':
             current = self._get_value(widget_type, 'current', 'temperature_current')
             previous = self._get_value(widget_type, 'previous', 'temperature_current')
             if force or previous is None or current != previous:
                 self.draw_number(
-                    pos_x+50, pos_y+5, self.fonts['15x28'], current, previous, 20
+                    lcd, pos_x+50, pos_y+5, self.fonts['15x28'], current, previous, 20
                 )
         else:
             current = self._get_value(widget_type, 'current', 'temperature_max')
             previous = self._get_value(widget_type, 'previous', 'temperature_max')
             if force or previous is None or current != previous:
                 self.draw_number(
-                    pos_x+50, pos_y+5, self.fonts['15x28'], current, previous, 20
+                    lcd, pos_x+50, pos_y+5, self.fonts['15x28'], current, previous, 20
                 )
 
         current = self._get_value(widget_type, 'current', 'wind_speed')
         previous = self._get_value(widget_type, 'previous', 'wind_speed')
         if force or previous is None or current != previous:
             self.draw_number(
-                pos_x+45, pos_y+39, self.fonts['15x28'], current, previous, 20
+                lcd, pos_x+45, pos_y+39, self.fonts['15x28'], current, previous, 20
             )
 
         current = self._degree_to_direction(self.current_weather['current']['wind_deg'])
         previous = None if self.current_weather['previous'] is None else self._degree_to_direction(self.current_weather['previous']['wind_deg'])
         if force or previous is None or current != previous:
-            self.lcd.background_color = self.colours['background_'+widget_type]
-            self.lcd.fill_rect(pos_x+84, pos_y+44, pos_x+99, pos_y+65)
-            self.lcd.transparency_color = ((255, 255, 255), (0, 0, 0))
-            self.lcd.draw_image(
+            lcd.background_color = self.colours['background_'+widget_type]
+            lcd.fill_rect(pos_x+84, pos_y+44, pos_x+99, pos_y+65)
+            lcd.transparency_color = ((255, 255, 255), (0, 0, 0))
+            lcd.draw_image(
                 pos_x + 84,
                 pos_y + 44,
                 self.icon['compass'].rotate(-1 * self.current_weather['current']['wind_deg'])
@@ -91,7 +91,7 @@ class OpenweatherWidget(Widget):
         previous = self._get_value(widget_type, 'previous', 'pressure', 4)
         if force or previous is None or current != previous:
             self.draw_number(
-                pos_x+25, pos_y+72, self.fonts['15x28'], current, previous, 20
+                lcd, pos_x+25, pos_y+72, self.fonts['15x28'], current, previous, 20
             )
 
     def _get_value(self, widget_type, key, value, precision=2):
