@@ -19,7 +19,6 @@ GPIO.setmode(GPIO.BCM)
 
 msg = Message('control-node')
 
-
 LED = 6
 GPIO.setup(LED, GPIO.OUT)
 GPIO.output(LED, 1)
@@ -38,13 +37,11 @@ window_manager.add_widget('node-my-room', NodeOneWidget([(1, 0)], FONTS['24x42']
 window_manager.add_widget(
     'openweather',
     OpenweatherWidget(
-        [(0, 106), (134, 106)],
+        [(0, 1), (1, 1)],
         FONTS
     )
 )
-
 window_manager.set_widget_color('node-my-room', 'background', (0, 255, 255))
-
 window_manager.start()
 
 dispatcher = HandlerDispatcher(window_manager.widgets)
@@ -68,7 +65,6 @@ except:
 finally:
     workerHandler.stop()
     window_manager.stop()
-
-window_manager.join()
-workerHandler.join()
-svr.join()
+    window_manager.join()
+    workerHandler.join()
+    svr.join()

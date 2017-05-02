@@ -1,4 +1,3 @@
-import math
 from view.widget import Widget
 from PIL import Image
 
@@ -7,8 +6,6 @@ class OpenweatherWidget(Widget):
     """Openweathermap widget"""
     def __init__(self, coords, fonts):
         super().__init__(coords)
-        self.current_widget_pos = coords[0]
-        self.forecast_widget_pos = coords[1]
         self.fonts = fonts
         self.colours = {
             'background_current': (127, 127, 0),
@@ -32,8 +29,8 @@ class OpenweatherWidget(Widget):
 
     def draw_widget(self, lcd):
         """draw a tiles"""
-        self._draw_widget(lcd, 'current', self.current_widget_pos[0], self.current_widget_pos[1])
-        self._draw_widget(lcd, 'forecast', self.forecast_widget_pos[0], self.forecast_widget_pos[1])
+        self._draw_widget(lcd, 'current', self.coords[0][0], self.coords[0][1])
+        self._draw_widget(lcd, 'forecast', self.coords[1][0], self.coords[1][1])
         self.draw_values(lcd, True)
         self.initialized = True
 
@@ -48,8 +45,8 @@ class OpenweatherWidget(Widget):
 
     def draw_values(self, lcd, force=False):
         """draw values"""
-        self._draw_values(lcd, 'current', self.current_widget_pos[0], self.current_widget_pos[1], force)
-        self._draw_values(lcd, 'forecast', self.forecast_widget_pos[0], self.forecast_widget_pos[1], force)
+        self._draw_values(lcd, 'current', self.coords[0][0], self.coords[0][1], force)
+        self._draw_values(lcd, 'forecast', self.coords[1][0], self.coords[1][1], force)
 
     def _draw_values(self, lcd, widget_type, pos_x, pos_y, force=False):
         """draw current values"""
