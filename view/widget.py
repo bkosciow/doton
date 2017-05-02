@@ -11,7 +11,7 @@ class Widget(metaclass=abc.ABCMeta):
 
     @abc.abstractmethod
     def draw_widget(self):
-        """draw a widget"""
+        """draw a tile"""
         pass
 
     @abc.abstractmethod
@@ -23,3 +23,14 @@ class Widget(metaclass=abc.ABCMeta):
     def change_values(self, values):
         """change a value, values is a dict [name] = value"""
         pass
+
+    def draw_number(self, pos_x, pos_y, font, current, previous, spacing=30):
+        """draw a number"""
+        self.lcd.transparency_color = font.get_transparency()
+        for idx in range(0, len(current)):
+            if previous is None or current[idx] != previous[idx]:
+                self.lcd.draw_image(
+                    pos_x + (idx * spacing),
+                    pos_y,
+                    font.get(int(current[idx]))
+                )

@@ -1,14 +1,16 @@
 from service.openweather import Openweather
- 
- 
-class OpenweatherWorker(object):
-    def __init__(self, apikey):
+from worker.worker import Worker
+
+
+class OpenweatherWorker(Worker):
+    """Openweather worker"""
+    def __init__(self, apikey, widget):
         self.cities = {
-            3103402: 'Bielsko-Biała',
-            2946447: 'Bonn'
+            3103402: 'Bielsko-Biała'
         }
+        self.widget = widget
         self.handler = Openweather(self.cities, apikey)
- 
+
     def start(self):
         """start worker"""
         self.handler.start()
@@ -26,3 +28,10 @@ class OpenweatherWorker(object):
     def forecast(self, city_id=None, forecast_date=None):
         """return forecast"""
         return self.handler.forecast(city_id, forecast_date)
+
+    def execute(self):
+        """executes worker"""
+        self.widget.change_values({
+            'current': self.weather(),
+            'forecast': self.forecast()
+        })
