@@ -1,4 +1,5 @@
 import RPi.GPIO as GPIO
+import time
 from gfxlcd.driver.ili9325.gpio import GPIO as ILIGPIO
 from gfxlcd.driver.ili9325.ili9325 import ILI9325
 from view.nodeone_widget import NodeOneWidget
@@ -11,6 +12,8 @@ from handler.DHTHandler import DHTHandler
 from handler.PIRHandler import PIRHandler
 from handler.LightHandler import LightHandler
 from service.handler_dispatcher import HandlerDispatcher
+from service.worker_handler import Handler as WorkerHandler
+from worker.openweather import OpenweatherWorker
 
 GPIO.setmode(GPIO.BCM)
 
@@ -39,19 +42,33 @@ WIDGETS = {
 }
 
 # WIDGETS['node-kitchen'].colours['background'] = (0, 0, 255)
-# WIDGETS['node-my-room'].colours['background'] = (0, 255, 255)
+WIDGETS['node-my-room'].colours['background'] = (0, 255, 255)
+
 for sensor in WIDGETS:
     WIDGETS[sensor].draw_widget()
-#
-# dispatcher = HandlerDispatcher(WIDGETS)
-# svr = Server(msg)
-# svr.add_handler('dht11', DHTHandler(dispatcher))
-# svr.add_handler('pir', PIRHandler(dispatcher))
-# svr.add_handler('light', LightHandler(dispatcher))
-# svr.start()
-#
-# while True:
-#     for sensor in WIDGETS:
-#         WIDGETS[sensor].draw_values()
-#
-# svr.join()
+
+dispatcher = HandlerDispatcher(WIDGETS)
+svr = Server(msg)
+svr.add_handler('dht11', DHTHandler(dispatcher))
+svr.add_handler('pir', PIRHandler(dispatcher))
+svr.add_handler('light', LightHandler(dispatcher))
+svr.start()
+
+workerHandler = WorkerHandler()
+workerHandler.add('openweather', OpenweatherWorker('f84b3bdc96fa56451de722087658bffb', WIDGETS['openweather']), 5)
+workerHandler.start()
+
+try:
+    while True:
+        for sensor in WIDGETS:
+            WIDGETS[sensor].draw_values()
+        time.sleep(0.025)
+except KeyboardInterrupt:
+    print("closing...")
+except:
+    raise
+finally:
+    workerHandler.stop()
+
+workerHandler.join()
+svr.join()

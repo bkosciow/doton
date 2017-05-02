@@ -17,11 +17,11 @@ class OpenweatherWidget(Widget):
             'border': (244, 244, 244)
         }
         self.current_weather = {
-            'current': {'pressure': 1018, 'temperature_current': 11.56, 'humidity': 70, 'wind_speed': 9.3, 'clouds': 75, 'weather_id': 803, 'update': 1493631000, 'wind_deg': 70, 'weather': 'broken clouds'},
+            'current': {'pressure': 0, 'temperature_current': 0, 'humidity': 0, 'wind_speed': 0, 'clouds': 0, 'weather_id': 0, 'update': 0, 'wind_deg': 0, 'weather': ''},
             'previous': None
         }
         self.forecast_weather = {
-            'current': {'pressure': 975.42, 'clouds': 24, 'temperature_max': 17.09, 'wind_speed': 1.86, 'wind_deg': 82, 'temperature_min': 3.52, 'weather_id': 501, 'humidity': 72, 'weather': 'moderate rain'},
+            'current': {'pressure': 0, 'clouds': 0, 'temperature_max': 0, 'wind_speed': 0, 'wind_deg': 0, 'temperature_min': 0, 'weather_id': 0, 'humidity': 0, 'weather': ''},
             'previous': None
         }
         self.icon = {
@@ -76,6 +76,8 @@ class OpenweatherWidget(Widget):
         current = self._degree_to_direction(self.current_weather['current']['wind_deg'])
         previous = None if self.current_weather['previous'] is None else self._degree_to_direction(self.current_weather['previous']['wind_deg'])
         if force or previous is None or current != previous:
+            self.lcd.background_color = self.colours['background_'+widget_type]
+            self.lcd.fill_rect(pos_x+92, pos_y+44, pos_x+113, pos_y+65)
             self.lcd.transparency_color = ((255, 255, 255), (0, 0, 0))
             self.lcd.draw_image(
                 pos_x + 92,
@@ -133,4 +135,10 @@ class OpenweatherWidget(Widget):
             return 'NNW'
 
     def change_values(self, values):
-        pass
+        if 'current' in values:
+            self.current_weather['previous'] = self.current_weather['current']
+            self.current_weather['current'] = values['current']
+
+        if 'forecast' in values:
+            self.forecast_weather['previous'] = self.forecast_weather['current']
+            self.forecast_weather['current'] = values['forecast']
