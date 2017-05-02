@@ -25,7 +25,8 @@ GPIO.output(LED, 1)
 
 lcd_tft = ILI9325(240, 320, ILIGPIO())
 lcd_tft.init()
-
+lcd_tft.background_color = (0, 0, 0)
+lcd_tft.fill_rect(0, 0, 240, 320)
 FONTS = {
     '24x42': numbers_24x42.Numbers(),
     '15x28': numbers_15x28.Numbers()

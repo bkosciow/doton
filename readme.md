@@ -4,9 +4,13 @@ One repo to rule them all. Doton project for Get Noticed! / Daj się poznać.
 Doton project is a control Node for IoT devices. It works on Raspberry Pi and uses ILI9328 compatible display to show
 information in a form of widget/tile.
 
-Currently, it has one kind of widget. A widget to display data from the [Node One](https://koscis.wordpress.com/2017/04/03/node-one-a-multi-purpose-node/).
+Weather and Node One widget:
 
-![screen](https://koscis.files.wordpress.com/2017/04/img_20170430_152606.jpg)
+![screen](https://koscis.files.wordpress.com/2017/05/img_20170502_143440.jpg?w=400)
+
+A widget to display data from the [Node One](https://koscis.wordpress.com/2017/04/03/node-one-a-multi-purpose-node/).
+
+![screen](https://koscis.files.wordpress.com/2017/04/img_20170430_152606.jpg?w=400)
 
 
 ## module char_control_node
