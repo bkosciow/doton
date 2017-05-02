@@ -4,9 +4,8 @@ import abc
 
 class Widget(metaclass=abc.ABCMeta):
     """Widget abstract"""
-    def __init__(self, pos_x, pos_y, lcd):
-        self.pos_x = pos_x
-        self.pos_y = pos_y
+    def __init__(self, coords, lcd):
+        self.coords = coords
         self.lcd = lcd
 
     @abc.abstractmethod

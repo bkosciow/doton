@@ -6,9 +6,9 @@ from PIL import Image
 class OpenweatherWidget(Widget):
     """Openweathermap widget"""
     def __init__(self, coords, lcd, fonts):
+        super().__init__(coords, lcd)
         self.current_widget_pos = coords[0]
         self.forecast_widget_pos = coords[1]
-        self.lcd = lcd
         self.fonts = fonts
         self.colours = {
             'background_current': (127, 127, 0),
@@ -28,12 +28,14 @@ class OpenweatherWidget(Widget):
             'temperature': Image.open('assets/image/thermometer.png'),
             'compass': Image.open('assets/image/compass.png')
         }
+        self.initialized = False
 
     def draw_widget(self):
         """draw a tiles"""
         self._draw_widget('current', self.current_widget_pos[0], self.current_widget_pos[1])
         self._draw_widget('forecast', self.forecast_widget_pos[0], self.forecast_widget_pos[1])
         self.draw_values(True)
+        self.initialized = True
 
     def _draw_widget(self, widget_type, pos_x, pos_y):
         """draw a tile"""
@@ -135,6 +137,8 @@ class OpenweatherWidget(Widget):
             return 'NNW'
 
     def change_values(self, values):
+        if not self.initialized:
+            return
         if 'current' in values:
             self.current_weather['previous'] = self.current_weather['current']
             self.current_weather['current'] = values['current']
