@@ -25,8 +25,25 @@ GPIO.output(LED, 1)
 
 lcd_tft = ILI9325(240, 320, ILIGPIO())
 lcd_tft.init()
-lcd_tft.background_color = (0, 0, 0)
-lcd_tft.fill_rect(0, 0, 240, 320)
+# lcd_tft.background_color = (0, 0, 0)
+# lcd_tft.fill_rect(0, 0, 240, 320)
+#
+# lcd_tft.color = (255, 0, 0)
+#
+# lcd_tft.draw_rect(0, 0, 105, 105)
+# lcd_tft.draw_rect(239-105, 0, 239, 105)
+#
+# y=106
+# lcd_tft.draw_rect(0, y, 105, y+105)
+# lcd_tft.draw_rect(239-105, y, 239, y+105)
+#
+# lcd_tft.draw_rect(0, 319-105, 105, 319)
+# lcd_tft.draw_rect(239-105, 319-105, 239, 319)
+#
+# lcd_tft.background_color = (0, 255, 0)
+# lcd_tft.fill_rect(90, 0, 150, 50)
+# lcd_tft.fill_rect(90, 269, 150, 319)
+
 FONTS = {
     '24x42': numbers_24x42.Numbers(),
     '15x28': numbers_15x28.Numbers()
@@ -34,9 +51,9 @@ FONTS = {
 
 WIDGETS = {
     'node-kitchen': NodeOneWidget(0, 0, lcd_tft, FONTS['24x42']),
-    'node-my-room': NodeOneWidget(124, 0, lcd_tft, FONTS['24x42']),
+    'node-my-room': NodeOneWidget(134, 0, lcd_tft, FONTS['24x42']),
     'openweather': OpenweatherWidget(
-        ((0, 108), (124, 108)),
+        ((0, 106), (134, 106)),
         lcd_tft,
         FONTS
     )
