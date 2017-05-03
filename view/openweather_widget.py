@@ -46,7 +46,13 @@ class OpenweatherWidget(Widget):
             'cloud_empty': Image.open('assets/image/cloud_empty.png'),
             'cloud_full': Image.open('assets/image/cloud_full.png'),
             'drop_empty': Image.open('assets/image/drop_empty.png'),
-            'drop_full': Image.open('assets/image/drop_full.png')
+            'drop_full': Image.open('assets/image/drop_full.png'),
+            200: None, 201: None, 202: None, 210: None, 211: None,
+            212: None, 221: None, 230: None, 231: None, 232: None,
+            300: None, 301: None, 302: None, 310: None, 311: None,
+            312: None, 313: None, 314: None, 321: None, 500: None,
+            501: None, 502: None, 503: None, 504: None, 511: None,
+            520: None, 521: None, 522: None, 531: None
         }
         self.initialized = False
 
@@ -55,6 +61,7 @@ class OpenweatherWidget(Widget):
         self._draw_widget(lcd, 'current', coords[0][0], coords[0][1])
         self._draw_widget(lcd, 'forecast', coords[1][0], coords[1][1])
         self.draw_values(lcd, coords, True)
+
         self.initialized = True
 
     def _draw_widget(self, lcd, widget_type, pos_x, pos_y):
@@ -67,6 +74,9 @@ class OpenweatherWidget(Widget):
         lcd.draw_image(pos_x + 1, pos_y + 50, self.icon['cloud_empty'])
         lcd.color = self.colours['border']
         lcd.draw_rect(pos_x, pos_y, pos_x + 105, pos_y + 105)
+
+        # lcd.draw_rect(pos_x+2, pos_y+2, pos_x+42, pos_y+42)
+        lcd.draw_image(pos_x+2, pos_y+3, self._get_weather_icon(200))
 
     def draw_values(self, lcd, coords, force=False):
         """draw values"""
@@ -213,3 +223,10 @@ class OpenweatherWidget(Widget):
         if 'forecast' in values:
             self.forecast_weather['previous'] = self.forecast_weather['current']
             self.forecast_weather['current'] = values['forecast']
+
+    def _get_weather_icon(self, status):
+        """load weather icon when needed"""
+        if self.icon[status] is None:
+            self.icon[status] = Image.open('assets/image/openweather/'+str(status)+".png")
+
+        return self.icon[status]
