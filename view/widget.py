@@ -4,16 +4,13 @@ import abc
 
 class Widget(metaclass=abc.ABCMeta):
     """Widget abstract"""
-    def __init__(self, coords):
-        self.coords = coords
-
     @abc.abstractmethod
-    def draw_widget(self, lcd):
+    def draw_widget(self, lcd, coords):
         """draw a tile"""
         pass
 
     @abc.abstractmethod
-    def draw_values(self, lcd, force=False):
+    def draw_values(self, lcd, coords, force=False):
         """draw a changed values. With force must redraw all values"""
         pass
 

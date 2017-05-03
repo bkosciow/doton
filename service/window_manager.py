@@ -2,6 +2,13 @@ import threading
 import time
 
 
+class WidgetHolder(object):
+    """Widget Holder"""
+    def __init__(self, coords, widget):
+        self.coords = coords
+        self.widget = widget
+
+
 class WindowManager(threading.Thread):
     """Window Manager"""
     def __init__(self, lcd):
@@ -10,21 +17,21 @@ class WindowManager(threading.Thread):
         self.lcd = lcd
         self.work = True
 
-    def add_widget(self, name, widget, page=0):
+    def add_widget(self, name, coordinates, widget, page=0):
         """add widget to grid, calculate (x,y)"""
         position = []
-        for coords in widget.coords:
+        for coords in coordinates:
             position.append((coords[0]*134, coords[1]*106))
-        widget.coords = position
-        self.widgets[name] = widget
+
+        self.widgets[name] = WidgetHolder(position, widget)
 
     def run(self):
         """main loop - drawing"""
-        for widget in self.widgets:
-            self.widgets[widget].draw_widget(self.lcd)
+        for holder in self.widgets:
+            self.widgets[holder].widget.draw_widget(self.lcd, self.widgets[holder].coords)
         while self.work:
-            for widget in self.widgets:
-                self.widgets[widget].draw_values(self.lcd)
+            for holder in self.widgets:
+                self.widgets[holder].widget.draw_values(self.lcd, self.widgets[holder].coords)
             time.sleep(0.025)
 
     def stop(self):
@@ -33,8 +40,16 @@ class WindowManager(threading.Thread):
 
     def set_widget_color(self, name, key, value):
         """change colour"""
-        self.widgets[name].colours[key] = value
+        self.widgets[name].widget.colours[key] = value
 
     def get_widget(self, name):
         """get widget by name"""
-        return self.widgets[name]
+        return self.widgets[name].widget
+
+    def get_widgets(self):
+        """returns widgets dictionary"""
+        widgets = {}
+        for hanlder in self.widgets:
+            widgets[hanlder] = self.widgets[hanlder].widget
+
+        return widgets

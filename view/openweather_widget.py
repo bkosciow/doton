@@ -4,8 +4,7 @@ from PIL import Image
 
 class OpenweatherWidget(Widget):
     """Openweathermap widget"""
-    def __init__(self, coords, fonts):
-        super().__init__(coords)
+    def __init__(self, fonts):
         self.fonts = fonts
         self.colours = {
             'background_current': (127, 127, 0),
@@ -27,11 +26,11 @@ class OpenweatherWidget(Widget):
         }
         self.initialized = False
 
-    def draw_widget(self, lcd):
+    def draw_widget(self, lcd, coords):
         """draw a tiles"""
-        self._draw_widget(lcd, 'current', self.coords[0][0], self.coords[0][1])
-        self._draw_widget(lcd, 'forecast', self.coords[1][0], self.coords[1][1])
-        self.draw_values(lcd, True)
+        self._draw_widget(lcd, 'current', coords[0][0], coords[0][1])
+        self._draw_widget(lcd, 'forecast', coords[1][0], coords[1][1])
+        self.draw_values(lcd, coords, True)
         self.initialized = True
 
     def _draw_widget(self, lcd, widget_type, pos_x, pos_y):
@@ -43,10 +42,10 @@ class OpenweatherWidget(Widget):
         lcd.color = self.colours['border']
         lcd.draw_rect(pos_x, pos_y, pos_x + 105, pos_y + 105)
 
-    def draw_values(self, lcd, force=False):
+    def draw_values(self, lcd, coords, force=False):
         """draw values"""
-        self._draw_values(lcd, 'current', self.coords[0][0], self.coords[0][1], force)
-        self._draw_values(lcd, 'forecast', self.coords[1][0], self.coords[1][1], force)
+        self._draw_values(lcd, 'current', coords[0][0], coords[0][1], force)
+        self._draw_values(lcd, 'forecast', coords[1][0], coords[1][1], force)
 
     def _draw_values(self, lcd, widget_type, pos_x, pos_y, force=False):
         """draw current values"""

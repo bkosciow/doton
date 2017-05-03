@@ -32,19 +32,13 @@ FONTS = {
     '15x28': numbers_15x28.Numbers()
 }
 
-window_manager.add_widget('node-kitchen', NodeOneWidget([(0, 0)], FONTS['24x42']))
-window_manager.add_widget('node-my-room', NodeOneWidget([(1, 0)], FONTS['24x42']))
-window_manager.add_widget(
-    'openweather',
-    OpenweatherWidget(
-        [(0, 1), (1, 1)],
-        FONTS
-    )
-)
+window_manager.add_widget('node-kitchen', [(0, 0)], NodeOneWidget(FONTS['24x42']))
+window_manager.add_widget('node-my-room', [(1, 0)], NodeOneWidget(FONTS['24x42']))
+window_manager.add_widget('openweather', [(0, 1), (1, 1)], OpenweatherWidget(FONTS))
 window_manager.set_widget_color('node-my-room', 'background', (0, 255, 255))
 window_manager.start()
 
-dispatcher = HandlerDispatcher(window_manager.widgets)
+dispatcher = HandlerDispatcher(window_manager.get_widgets())
 svr = Server(msg)
 svr.add_handler('dht11', DHTHandler(dispatcher))
 svr.add_handler('pir', PIRHandler(dispatcher))

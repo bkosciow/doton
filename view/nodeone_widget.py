@@ -5,8 +5,7 @@ from PIL import Image
 
 class NodeOneWidget(Widget):
     """Class NodeOneWidget"""
-    def __init__(self, coords, font):
-        super().__init__(coords)
+    def __init__(self, font):
         self.font = font
         self.colours = {
             'background': (255, 250, 0),
@@ -37,9 +36,9 @@ class NodeOneWidget(Widget):
         }
         self.initialized = False
 
-    def draw_widget(self, lcd):
+    def draw_widget(self, lcd, coords):
         """draw a tile"""
-        pos_x, pos_y = self.coords[0]
+        pos_x, pos_y = coords[0]
         lcd.background_color = self.colours['background']
         lcd.fill_rect(pos_x, pos_y, pos_x + 105, pos_y + 105)
 
@@ -56,12 +55,12 @@ class NodeOneWidget(Widget):
         lcd.color = self.colours['border']
         lcd.draw_rect(pos_x, pos_y, pos_x + 105, pos_y + 105)
 
-        self.draw_values(lcd, True)
+        self.draw_values(lcd, coords, True)
         self.initialized = True
 
-    def draw_values(self, lcd, force=False):
+    def draw_values(self, lcd, coords, force=False):
         """draw values"""
-        pos_x, pos_y = self.coords[0]
+        pos_x, pos_y = coords[0]
         lcd.transparency_color = self.font.get_transparency()
         current = str(self.temperature['current']).rjust(2, '0')
         previous = None if self.temperature['previous'] is None else str(self.temperature['previous']).rjust(2, '0')
