@@ -15,7 +15,11 @@ class Openweather(threading.Thread):
         threading.Thread.__init__(self)
         self.cities = cities
         self.work = True
-        self.tick = {'sleep': 10, 'weather_counter': 6*10, 'forecast_counter': 6*60}
+        self.tick = {
+            'sleep': 10,
+            'weather_counter': 6*10,
+            'forecast_counter': 6*60
+        }
         self.tick['_wcounter'] = self.tick['weather_counter'] + 1
         self.tick['_fcounter'] = self.tick['forecast_counter'] + 1
 
@@ -33,13 +37,21 @@ class Openweather(threading.Thread):
             'weather': ''
         }
         self.current_weather_raw = {i: "" for i in cities}
-        self.current_weather = {i: self.weather_row_stub.copy() for i in cities}
+        self.current_weather = {
+            i: self.weather_row_stub.copy() for i in cities
+        }
 
         self.forecast_weather_raw = {i: {} for i in cities}
         self.forecast_weather = {i: {} for i in cities}
 
-        self.url_current = "http://api.openweathermap.org/data/2.5/weather?id=%CITY_ID%&units=metric&mode=json&APPID="+apikey
-        self.url_forecast = "http://api.openweathermap.org/data/2.5/forecast/daily?id=%CITY_ID%&mode=json&units=metric&cnt=4&APPID="+apikey
+        self.url_current = (
+            "http://api.openweathermap.org/data/2.5/weather?"
+            "id=%CITY_ID%&units=metric&mode=json&APPID="+apikey
+        )
+        self.url_forecast = (
+            "http://api.openweathermap.org/data/2.5/forecast/"
+            "daily?id=%CITY_ID%&mode=json&units=metric&cnt=4&APPID="+apikey
+        )
 
     def run(self):
         """main loop, reads data from openweather server"""
@@ -61,7 +73,8 @@ class Openweather(threading.Thread):
                     json_data = self._fetch_data(url)
                     if json_data:
                         for row in json_data['list']:
-                            date = (datetime.datetime.fromtimestamp(int(row['dt']))).strftime("%Y-%m-%d")
+                            date = (datetime.datetime.fromtimestamp(int(row['dt'])))\
+                                .strftime("%Y-%m-%d")
                             self.forecast_weather_raw[city_id][date] = row
                             self.forecast_weather[city_id][date] = self._decode_forecast(row)
                         self.tick['_fcounter'] = 0
@@ -93,9 +106,11 @@ class Openweather(threading.Thread):
         if not city_id:
             city_id = list(self.cities.keys())[0]
         if date is None:
-            date = time.strftime("%Y-%m-%d", time.localtime(time.time() + 24*3600))
+            date = time.strftime(
+                "%Y-%m-%d", time.localtime(time.time() + 24*3600)
+            )
 
-        if not date in self.forecast_weather[city_id]:
+        if date not in self.forecast_weather[city_id]:
             return self.weather_row_stub
 
         return self.forecast_weather[city_id][date]
@@ -103,16 +118,28 @@ class Openweather(threading.Thread):
     def _fetch_data(self, url):
         """fetch json data from server"""
         try:
-            request = urllib.request.Request(url, None, {'User-Agent': 'RaspberryPI / Doton'})
+            request = urllib.request.Request(
+                url, None, {'User-Agent': 'RaspberryPI / Doton'}
+            )
             response = urllib.request.urlopen(request)
             data = response.read()
             json_data = json.loads(data.decode())
         except urllib.error.URLError as e:
             json_data = None
-            print(time.strftime("%Y-%m-%d %H:%M:%S"), "error fetching from url", url, "\nreason", e.reason)
+            print(
+                time.strftime("%Y-%m-%d %H:%M:%S"),
+                "error fetching from url",
+                url,
+                "\nreason", e.reason
+            )
         except socket.timeout as e:
             json_data = None
-            print(time.strftime("%Y-%m-%d %H:%M:%S"), "time out error from url", url, "\nreason", e.reason)
+            print(
+                time.strftime("%Y-%m-%d %H:%M:%S"),
+                "time out error from url",
+                url,
+                "\nreason", e.strerror
+            )
         except ValueError as e:
             json_data = None
             print("Decode failed")

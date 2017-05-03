@@ -7,7 +7,7 @@ class HandlerDispatcher(object):
         self.widgets = widgets
 
     def set_dht_data(self, node, temp, humi):
-        """get data from DHT11 sensor"""
+        """get gdata from DHT11 sensor"""
         if node in self.widgets:
             self.widgets[node].change_values({
                 'temp': temp,
