@@ -16,7 +16,7 @@ class OpenweatherWidget(Widget):
             'current': {
                 'pressure': 0,
                 'temperature_current': 0,
-                'humidity': 0,
+                'humidity': 80,
                 'wind_speed': 0,
                 'clouds': 0,
                 'weather_id': 0,
@@ -29,20 +29,24 @@ class OpenweatherWidget(Widget):
         self.forecast_weather = {
             'current': {
                 'pressure': 0,
-                'clouds': 0,
+                'clouds': 100,
                 'temperature_max': 0,
                 'wind_speed': 0,
                 'wind_deg': 0,
                 'temperature_min': 0,
                 'weather_id': 0,
-                'humidity': 0,
+                'humidity': 25,
                 'weather': ''
             },
             'previous': None
         }
         self.icon = {
             'temperature': Image.open('assets/image/thermometer.png'),
-            'compass': Image.open('assets/image/compass.png')
+            'compass': Image.open('assets/image/compass.png'),
+            'cloud_empty': Image.open('assets/image/cloud_empty.png'),
+            'cloud_full': Image.open('assets/image/cloud_full.png'),
+            'drop_empty': Image.open('assets/image/drop_empty.png'),
+            'drop_full': Image.open('assets/image/drop_full.png')
         }
         self.initialized = False
 
@@ -59,6 +63,8 @@ class OpenweatherWidget(Widget):
         lcd.fill_rect(pos_x, pos_y, pos_x + 105, pos_y + 105)
         lcd.transparency_color = (0, 0, 0)
         lcd.draw_image(pos_x + 92, pos_y + 7, self.icon['temperature'])
+        lcd.transparency_color = (255, 255, 255)
+        lcd.draw_image(pos_x + 1, pos_y + 50, self.icon['cloud_empty'])
         lcd.color = self.colours['border']
         lcd.draw_rect(pos_x, pos_y, pos_x + 105, pos_y + 105)
 
@@ -114,11 +120,35 @@ class OpenweatherWidget(Widget):
             lcd.fill_rect(pos_x+84, pos_y+44, pos_x+99, pos_y+65)
             lcd.transparency_color = ((255, 255, 255), (0, 0, 0))
             lcd.draw_image(
-                pos_x + 84,
-                pos_y + 44,
+                pos_x + 84, pos_y + 44,
                 self.icon['compass'].rotate(
                     -1 * self.current_weather['current']['wind_deg']
                 )
+            )
+
+        current = self._get_value(widget_type, 'current', 'clouds', 2)
+        previous = self._get_value(widget_type, 'previous', 'clouds', 2)
+        if force or previous is None or current != previous:
+            lcd.transparency_color = (255, 255, 255)
+            lcd.draw_image(pos_x + 1, pos_y + 49, self.icon['cloud_empty'])
+            width, height = self.icon['cloud_full'].size
+            new_width = round(width * int(current) / 100)
+            lcd.draw_image(
+                pos_x + 1, pos_y + 49,
+                self.icon['cloud_full'].crop((0, 0, new_width, height))
+            )
+
+        current = self._get_value(widget_type, 'current', 'humidity', 2)
+        previous = self._get_value(widget_type, 'previous', 'humidity', 2)
+        if force or previous is None or current != previous:
+            lcd.transparency_color = (255, 255, 255)
+            lcd.draw_image(pos_x + 3, pos_y + 74, self.icon['drop_empty'])
+            width, height = self.icon['drop_full'].size
+            new_height = height - round(height * int(current) / 100)
+
+            lcd.draw_image(
+                pos_x + 3, pos_y + 74 + new_height,
+                self.icon['drop_full'].crop((0, new_height, width, height))
             )
 
         current = self._get_value(widget_type, 'current', 'pressure', 4)
