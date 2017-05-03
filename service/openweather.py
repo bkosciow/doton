@@ -44,10 +44,14 @@ class Openweather(threading.Thread):
         self.forecast_weather_raw = {i: {} for i in cities}
         self.forecast_weather = {i: {} for i in cities}
 
-        self.url_current = ("http://api.openweathermap.org/data/2.5/weather?"
-            "id=%CITY_ID%&units=metric&mode=json&APPID="+apikey)
-        self.url_forecast = ("http://api.openweathermap.org/data/2.5/forecast/"
-            "daily?id=%CITY_ID%&mode=json&units=metric&cnt=4&APPID="+apikey)
+        self.url_current = (
+            "http://api.openweathermap.org/data/2.5/weather?"
+            "id=%CITY_ID%&units=metric&mode=json&APPID="+apikey
+        )
+        self.url_forecast = (
+            "http://api.openweathermap.org/data/2.5/forecast/"
+            "daily?id=%CITY_ID%&mode=json&units=metric&cnt=4&APPID="+apikey
+        )
 
     def run(self):
         """main loop, reads data from openweather server"""
