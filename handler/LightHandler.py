@@ -1,5 +1,6 @@
 """Handler for light sensor"""
-from message_listener.abstract.handler_interface import Handler as HandlerInterface
+from message_listener.abstract.handler_interface import \
+    Handler as HandlerInterface
 
 
 class LightHandler(HandlerInterface):

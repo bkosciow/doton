@@ -1,5 +1,6 @@
 """Handler for DHT11"""
-from message_listener.abstract.handler_interface import Handler as HandlerInterface
+from message_listener.abstract.handler_interface import \
+    Handler as HandlerInterface
 
 
 class DHTHandler(HandlerInterface):

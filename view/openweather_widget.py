@@ -78,7 +78,8 @@ class OpenweatherWidget(Widget):
             )
             if force or previous is None or current != previous:
                 self.draw_number(
-                    lcd, pos_x+50, pos_y+5, self.fonts['15x28'], current, previous, 20
+                    lcd, pos_x+50, pos_y+5, self.fonts['15x28'],
+                    current, previous, 20
                 )
         else:
             current = self._get_value(
@@ -89,21 +90,25 @@ class OpenweatherWidget(Widget):
             )
             if force or previous is None or current != previous:
                 self.draw_number(
-                    lcd, pos_x+50, pos_y+5, self.fonts['15x28'], current, previous, 20
+                    lcd, pos_x+50, pos_y+5, self.fonts['15x28'],
+                    current, previous, 20
                 )
 
         current = self._get_value(widget_type, 'current', 'wind_speed')
         previous = self._get_value(widget_type, 'previous', 'wind_speed')
         if force or previous is None or current != previous:
             self.draw_number(
-                lcd, pos_x+45, pos_y+39, self.fonts['15x28'], current, previous, 20
+                lcd, pos_x+45, pos_y+39, self.fonts['15x28'],
+                current, previous, 20
             )
 
         current = self._degree_to_direction(
             self.current_weather['current']['wind_deg']
         )
         previous = None if self.current_weather['previous'] is None \
-            else self._degree_to_direction(self.current_weather['previous']['wind_deg'])
+            else self._degree_to_direction(
+            self.current_weather['previous']['wind_deg']
+        )
         if force or previous is None or current != previous:
             lcd.background_color = self.colours['background_'+widget_type]
             lcd.fill_rect(pos_x+84, pos_y+44, pos_x+99, pos_y+65)
@@ -120,7 +125,8 @@ class OpenweatherWidget(Widget):
         previous = self._get_value(widget_type, 'previous', 'pressure', 4)
         if force or previous is None or current != previous:
             self.draw_number(
-                lcd, pos_x+25, pos_y+72, self.fonts['15x28'], current, previous, 20
+                lcd, pos_x+25, pos_y+72, self.fonts['15x28'],
+                current, previous, 20
             )
 
     def _get_value(self, widget_type, key, value, precision=2):
