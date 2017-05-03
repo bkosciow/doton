@@ -63,14 +63,20 @@ class NodeOneWidget(Widget):
         pos_x, pos_y = coords[0]
         lcd.transparency_color = self.font.get_transparency()
         current = str(self.temperature['current']).rjust(2, '0')
-        previous = None if self.temperature['previous'] is None else str(self.temperature['previous']).rjust(2, '0')
+        previous = None if self.temperature['previous'] is None \
+            else str(self.temperature['previous']).rjust(2, '0')
         if force or current != previous:
-            self.draw_number(lcd, pos_x + 35, pos_y + 5, self.font, current, previous, 27)
+            self.draw_number(
+                lcd, pos_x + 35, pos_y + 5, self.font, current, previous, 27
+            )
 
         current = str(self.humidity['current']).rjust(2, '0')
-        previous = None if self.humidity['previous'] is None else str(self.humidity['previous']).rjust(2, '0')
+        previous = None if self.humidity['previous'] is None \
+            else str(self.humidity['previous']).rjust(2, '0')
         if force or current != previous:
-            self.draw_number(lcd, pos_x + 35, pos_y + 55, self.font, current, previous, 27)
+            self.draw_number(
+                lcd, pos_x + 35, pos_y + 55, self.font, current, previous, 27
+            )
 
         if force or self.light['current'] != self.light['previous']:
             if self.light['current']:

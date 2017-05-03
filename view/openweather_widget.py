@@ -13,11 +13,31 @@ class OpenweatherWidget(Widget):
             'border': (244, 244, 244)
         }
         self.current_weather = {
-            'current': {'pressure': 0, 'temperature_current': 0, 'humidity': 0, 'wind_speed': 0, 'clouds': 0, 'weather_id': 0, 'update': 0, 'wind_deg': 0, 'weather': ''},
+            'current': {
+                'pressure': 0,
+                'temperature_current': 0,
+                'humidity': 0,
+                'wind_speed': 0,
+                'clouds': 0,
+                'weather_id': 0,
+                'update': 0,
+                'wind_deg': 0,
+                'weather': ''
+            },
             'previous': None
         }
         self.forecast_weather = {
-            'current': {'pressure': 0, 'clouds': 0, 'temperature_max': 0, 'wind_speed': 0, 'wind_deg': 0, 'temperature_min': 0, 'weather_id': 0, 'humidity': 0, 'weather': ''},
+            'current': {
+                'pressure': 0,
+                'clouds': 0,
+                'temperature_max': 0,
+                'wind_speed': 0,
+                'wind_deg': 0,
+                'temperature_min': 0,
+                'weather_id': 0,
+                'humidity': 0,
+                'weather': ''
+            },
             'previous': None
         }
         self.icon = {
@@ -50,15 +70,23 @@ class OpenweatherWidget(Widget):
     def _draw_values(self, lcd, widget_type, pos_x, pos_y, force=False):
         """draw current values"""
         if widget_type == 'current':
-            current = self._get_value(widget_type, 'current', 'temperature_current')
-            previous = self._get_value(widget_type, 'previous', 'temperature_current')
+            current = self._get_value(
+                widget_type, 'current', 'temperature_current'
+            )
+            previous = self._get_value(
+                widget_type, 'previous', 'temperature_current'
+            )
             if force or previous is None or current != previous:
                 self.draw_number(
                     lcd, pos_x+50, pos_y+5, self.fonts['15x28'], current, previous, 20
                 )
         else:
-            current = self._get_value(widget_type, 'current', 'temperature_max')
-            previous = self._get_value(widget_type, 'previous', 'temperature_max')
+            current = self._get_value(
+                widget_type, 'current', 'temperature_max'
+            )
+            previous = self._get_value(
+                widget_type, 'previous', 'temperature_max'
+            )
             if force or previous is None or current != previous:
                 self.draw_number(
                     lcd, pos_x+50, pos_y+5, self.fonts['15x28'], current, previous, 20
@@ -71,8 +99,11 @@ class OpenweatherWidget(Widget):
                 lcd, pos_x+45, pos_y+39, self.fonts['15x28'], current, previous, 20
             )
 
-        current = self._degree_to_direction(self.current_weather['current']['wind_deg'])
-        previous = None if self.current_weather['previous'] is None else self._degree_to_direction(self.current_weather['previous']['wind_deg'])
+        current = self._degree_to_direction(
+            self.current_weather['current']['wind_deg']
+        )
+        previous = None if self.current_weather['previous'] is None \
+            else self._degree_to_direction(self.current_weather['previous']['wind_deg'])
         if force or previous is None or current != previous:
             lcd.background_color = self.colours['background_'+widget_type]
             lcd.fill_rect(pos_x+84, pos_y+44, pos_x+99, pos_y+65)
@@ -80,7 +111,9 @@ class OpenweatherWidget(Widget):
             lcd.draw_image(
                 pos_x + 84,
                 pos_y + 44,
-                self.icon['compass'].rotate(-1 * self.current_weather['current']['wind_deg'])
+                self.icon['compass'].rotate(
+                    -1 * self.current_weather['current']['wind_deg']
+                )
             )
 
         current = self._get_value(widget_type, 'current', 'pressure', 4)
@@ -93,9 +126,11 @@ class OpenweatherWidget(Widget):
     def _get_value(self, widget_type, key, value, precision=2):
         """get value"""
         if widget_type == 'current':
-            return None if self.current_weather[key] is None else str(round(self.current_weather[key][value])).rjust(precision, '0')
+            return None if self.current_weather[key] is None \
+                else str(round(self.current_weather[key][value])).rjust(precision, '0')
         elif widget_type == 'forecast':
-            return None if self.forecast_weather[key] is None else str(round(self.forecast_weather[key][value])).rjust(precision, '0')
+            return None if self.forecast_weather[key] is None \
+                else str(round(self.forecast_weather[key][value])).rjust(precision, '0')
 
     def _degree_to_direction(self, degree):
         """degree to direction"""

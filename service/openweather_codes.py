@@ -10,7 +10,7 @@ CODES = {
     230: 'thunderstorm with light drizzle',
     231: 'thunderstorm with drizzle',
     232: 'thunderstorm with heavy drizzle',
- 
+
     300: 'light intensity drizzle',
     301: 'drizzle',
     302: 'heavy intensity drizzle',
@@ -20,7 +20,7 @@ CODES = {
     313: 'shower rain and drizzle',
     314: 'heavy shower rain and drizzle',
     321: 'shower drizzle',
- 
+
     500: 'light rain',
     501: 'moderate rain',
     502: 'heavy intensity rain',
@@ -31,7 +31,7 @@ CODES = {
     521: 'shower rain',
     522: 'heavy intensity shower rain',
     531: 'ragged shower rain',
- 
+
     600: 'light snow',
     601: 'snow',
     602: 'heavy snow',
@@ -42,7 +42,7 @@ CODES = {
     620: 'light shower snow',
     621: 'shower snow',
     622: 'heavy shower snow',
- 
+
     701: 'mist',
     711: 'smoke',
     721: 'haze',
@@ -53,7 +53,7 @@ CODES = {
     762: 'VOLCANIC ASH',
     771: 'SQUALLS',
     781: 'TORNADO ',
- 
+
     800: 'sky is clear',
     801: 'few clouds',
     802: 'scattered clouds',

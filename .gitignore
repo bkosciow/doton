@@ -16,3 +16,4 @@ sdist/
 .python-version
 __pycache__/
 .tox
+config.ini

@@ -15,9 +15,12 @@ from service.handler_dispatcher import HandlerDispatcher
 from service.worker_handler import Handler as WorkerHandler
 from worker.openweather import OpenweatherWorker
 from service.window_manager import WindowManager
+from service.config import Config
 GPIO.setmode(GPIO.BCM)
 
-msg = Message('control-node')
+config = Config()
+
+msg = Message(config.get('node_name'))
 
 LED = 6
 GPIO.setup(LED, GPIO.OUT)
@@ -46,7 +49,7 @@ svr.add_handler('light', LightHandler(dispatcher))
 svr.start()
 
 workerHandler = WorkerHandler()
-workerHandler.add('openweather', OpenweatherWorker('f84b3bdc96fa56451de722087658bffb', window_manager.get_widget('openweather')), 5)
+workerHandler.add('openweather', OpenweatherWorker(config.get('openweather_apikey'), window_manager.get_widget('openweather')), 5)
 workerHandler.start()
 
 try:

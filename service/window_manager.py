@@ -37,10 +37,14 @@ class WindowManager(threading.Thread):
         """main loop - drawing"""
         widgets = self.pages[self.active_page].widgets
         for holder in widgets:
-            widgets[holder].widget.draw_widget(self.lcd, widgets[holder].coords)
+            widgets[holder].widget.draw_widget(
+                self.lcd, widgets[holder].coords
+            )
         while self.work:
             for holder in widgets:
-                widgets[holder].widget.draw_values(self.lcd, widgets[holder].coords)
+                widgets[holder].widget.draw_values(
+                    self.lcd, widgets[holder].coords
+                )
             time.sleep(0.025)
 
     def stop(self):

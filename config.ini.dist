@@ -1,0 +1,3 @@
+[general]
+node_name=control-node
+openweather_apikey=xxx

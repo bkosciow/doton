@@ -15,7 +15,11 @@ class Openweather(threading.Thread):
         threading.Thread.__init__(self)
         self.cities = cities
         self.work = True
-        self.tick = {'sleep': 10, 'weather_counter': 6*10, 'forecast_counter': 6*60}
+        self.tick = {
+            'sleep': 10,
+            'weather_counter': 6*10,
+            'forecast_counter': 6*60
+        }
         self.tick['_wcounter'] = self.tick['weather_counter'] + 1
         self.tick['_fcounter'] = self.tick['forecast_counter'] + 1
 
@@ -33,7 +37,9 @@ class Openweather(threading.Thread):
             'weather': ''
         }
         self.current_weather_raw = {i: "" for i in cities}
-        self.current_weather = {i: self.weather_row_stub.copy() for i in cities}
+        self.current_weather = {
+            i: self.weather_row_stub.copy() for i in cities
+        }
 
         self.forecast_weather_raw = {i: {} for i in cities}
         self.forecast_weather = {i: {} for i in cities}
@@ -103,16 +109,28 @@ class Openweather(threading.Thread):
     def _fetch_data(self, url):
         """fetch json data from server"""
         try:
-            request = urllib.request.Request(url, None, {'User-Agent': 'RaspberryPI / Doton'})
+            request = urllib.request.Request(
+                url, None, {'User-Agent': 'RaspberryPI / Doton'}
+            )
             response = urllib.request.urlopen(request)
             data = response.read()
             json_data = json.loads(data.decode())
         except urllib.error.URLError as e:
             json_data = None
-            print(time.strftime("%Y-%m-%d %H:%M:%S"), "error fetching from url", url, "\nreason", e.reason)
+            print(
+                time.strftime("%Y-%m-%d %H:%M:%S"),
+                "error fetching from url",
+                url,
+                "\nreason", e.reason
+            )
         except socket.timeout as e:
             json_data = None
-            print(time.strftime("%Y-%m-%d %H:%M:%S"), "time out error from url", url, "\nreason", e.reason)
+            print(
+                time.strftime("%Y-%m-%d %H:%M:%S"),
+                "time out error from url",
+                url,
+                "\nreason", e.reason
+            )
         except ValueError as e:
             json_data = None
             print("Decode failed")
