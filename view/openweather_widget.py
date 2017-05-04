@@ -175,6 +175,8 @@ class OpenweatherWidget(Widget):
         if previous is not None:
             previous = int(previous)
         if current != 0 and (force or previous is None or current != previous):
+            lcd.background_color = self.colours['background_'+widget_type]
+            lcd.fill_rect(pos_x+2, pos_y+3, pos_x+42, pos_y+43)
             lcd.transparency_color = (255, 255, 255)
             lcd.draw_image(pos_x+2, pos_y+3, self._get_weather_icon(current))
 
