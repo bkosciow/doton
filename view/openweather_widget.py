@@ -52,7 +52,9 @@ class OpenweatherWidget(Widget):
             300: None, 301: None, 302: None, 310: None, 311: None,
             312: None, 313: None, 314: None, 321: None, 500: None,
             501: None, 502: None, 503: None, 504: None, 511: None,
-            520: None, 521: None, 522: None, 531: None
+            520: None, 521: None, 522: None, 531: None, 600: None,
+            601: None, 602: None, 611: None, 612: None, 615: None,
+            616: None, 620: None, 621: None, 622: None
         }
         self.initialized = False
 
