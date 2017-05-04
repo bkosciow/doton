@@ -60,6 +60,8 @@ class NodeOneWidget(Widget):
 
     def draw_values(self, lcd, coords, force=False):
         """draw values"""
+        if not self.initialized:
+            return
         pos_x, pos_y = coords[0]
         lcd.transparency_color = self.font.get_transparency()
         current = str(self.temperature['current']).rjust(2, '0')

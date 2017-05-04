@@ -4,6 +4,10 @@ One repo to rule them all. Doton project for Get Noticed! / Daj się poznać.
 Doton project is a control Node for IoT devices. It works on Raspberry Pi and uses ILI9328 compatible display to show
 information in a form of widget/tile.
 
+Improved weather widget:
+
+![screen](https://koscis.files.wordpress.com/2017/05/img_20170504_134436.jpg?w=400)
+
 Weather and Node One widget:
 
 ![screen](https://koscis.files.wordpress.com/2017/05/img_20170502_143440.jpg?w=400)
@@ -24,11 +28,11 @@ assets - images and fonts
 
 handler - handlers for DHT11, PIR and light sensor
 
-service - Dispatcher
+service - Dispatcher, Window Manager, Worker Handler, Openweather, Config
 
-view - widgets
+view - NodeOne, Openweather
 
-worker -
+worker - Openweather 
 
 
 ## Attached projects:
@@ -58,6 +62,10 @@ It implement message_listener, handlers and iot:1
 [repo](https://github.com/bkosciow/ProxyLCDBundle) - [Articles](https://koscis.wordpress.com/tag/proxy-lcd/)
 
 - lcdmanager - simple window manager for CharLCD module [repo](https://bitbucket.org/kosci/lcdmanager) - [Articles](https://koscis.wordpress.com/category/screens/lcd-screens/lcd-manager/)
+ 
+### Credits
+
+Weather icons made by [Freepik](http://www.flaticon.com/authors/freepik) and [Linector](http://www.flaticon.com/authors/linector) from [www.flaticon.com](http://www.flaticon.com)
  
  
 
