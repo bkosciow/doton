@@ -16,7 +16,7 @@ class OpenweatherWidget(Widget):
             'current': {
                 'pressure': 0,
                 'temperature_current': 0,
-                'humidity': 80,
+                'humidity': 0,
                 'wind_speed': 0,
                 'clouds': 0,
                 'weather_id': 0,
@@ -29,13 +29,13 @@ class OpenweatherWidget(Widget):
         self.forecast_weather = {
             'current': {
                 'pressure': 0,
-                'clouds': 100,
+                'clouds': 0,
                 'temperature_max': 0,
                 'wind_speed': 0,
                 'wind_deg': 0,
                 'temperature_min': 0,
                 'weather_id': 0,
-                'humidity': 25,
+                'humidity': 0,
                 'weather': ''
             },
             'previous': None
@@ -54,7 +54,10 @@ class OpenweatherWidget(Widget):
             501: None, 502: None, 503: None, 504: None, 511: None,
             520: None, 521: None, 522: None, 531: None, 600: None,
             601: None, 602: None, 611: None, 612: None, 615: None,
-            616: None, 620: None, 621: None, 622: None
+            616: None, 620: None, 621: None, 622: None, 701: None,
+            711: None, 721: None, 731: None, 741: None, 751: None,
+            761: None, 762: None, 771: None, 781: None, 800: None,
+            801: None, 802: None, 803: None, 804: None
         }
         self.initialized = False
 
@@ -63,7 +66,6 @@ class OpenweatherWidget(Widget):
         self._draw_widget(lcd, 'current', coords[0][0], coords[0][1])
         self._draw_widget(lcd, 'forecast', coords[1][0], coords[1][1])
         self.draw_values(lcd, coords, True)
-
         self.initialized = True
 
     def _draw_widget(self, lcd, widget_type, pos_x, pos_y):
@@ -73,12 +75,8 @@ class OpenweatherWidget(Widget):
         lcd.transparency_color = (0, 0, 0)
         lcd.draw_image(pos_x + 92, pos_y + 7, self.icon['temperature'])
         lcd.transparency_color = (255, 255, 255)
-        lcd.draw_image(pos_x + 1, pos_y + 50, self.icon['cloud_empty'])
         lcd.color = self.colours['border']
         lcd.draw_rect(pos_x, pos_y, pos_x + 105, pos_y + 105)
-
-        # lcd.draw_rect(pos_x+2, pos_y+2, pos_x+42, pos_y+42)
-        lcd.draw_image(pos_x+2, pos_y+3, self._get_weather_icon(200))
 
     def draw_values(self, lcd, coords, force=False):
         """draw values"""
@@ -121,11 +119,10 @@ class OpenweatherWidget(Widget):
             )
 
         current = self._degree_to_direction(
-            self.current_weather['current']['wind_deg']
+            widget_type, 'current', 'wind_deg'
         )
-        previous = None if self.current_weather['previous'] is None \
-            else self._degree_to_direction(
-            self.current_weather['previous']['wind_deg']
+        previous = self._degree_to_direction(
+            widget_type, 'previous', 'wind_deg'
         )
         if force or previous is None or current != previous:
             lcd.background_color = self.colours['background_'+widget_type]
@@ -134,7 +131,7 @@ class OpenweatherWidget(Widget):
             lcd.draw_image(
                 pos_x + 84, pos_y + 44,
                 self.icon['compass'].rotate(
-                    -1 * self.current_weather['current']['wind_deg']
+                    -1 * self._wind_degree(widget_type)
                 )
             )
 
@@ -142,11 +139,11 @@ class OpenweatherWidget(Widget):
         previous = self._get_value(widget_type, 'previous', 'clouds', 2)
         if force or previous is None or current != previous:
             lcd.transparency_color = (255, 255, 255)
-            lcd.draw_image(pos_x + 1, pos_y + 49, self.icon['cloud_empty'])
+            lcd.draw_image(pos_x + 1, pos_y + 47, self.icon['cloud_empty'])
             width, height = self.icon['cloud_full'].size
             new_width = round(width * int(current) / 100)
             lcd.draw_image(
-                pos_x + 1, pos_y + 49,
+                pos_x + 1, pos_y + 47,
                 self.icon['cloud_full'].crop((0, 0, new_width, height))
             )
 
@@ -171,6 +168,16 @@ class OpenweatherWidget(Widget):
                 current, previous, 20
             )
 
+        current = self._get_value(widget_type, 'current', 'weather_id', 3)
+        previous = self._get_value(widget_type, 'previous', 'weather_id', 3)
+        if current is not None:
+            current = int(current)
+        if previous is not None:
+            previous = int(previous)
+        if current != 0 and (force or previous is None or current != previous):
+            lcd.transparency_color = (255, 255, 255)
+            lcd.draw_image(pos_x+2, pos_y+3, self._get_weather_icon(current))
+
     def _get_value(self, widget_type, key, value, precision=2):
         """get value"""
         if widget_type == 'current':
@@ -180,8 +187,24 @@ class OpenweatherWidget(Widget):
             return None if self.forecast_weather[key] is None \
                 else str(round(self.forecast_weather[key][value])).rjust(precision, '0')
 
-    def _degree_to_direction(self, degree):
+    def _wind_degree(self, widget_type):
+        """return wind degree value"""
+        if widget_type == 'current':
+            return self.current_weather['current']['wind_deg']
+        else:
+            return self.forecast_weather['current']['wind_deg']
+
+    def _degree_to_direction(self, widget_type, key, value):
         """degree to direction"""
+        degree = 0
+        if widget_type == 'current':
+            degree = 0 if self.current_weather[key] is None \
+                else round(self.current_weather[key][value])
+
+        if widget_type == 'forecast':
+            degree = 0 if self.forecast_weather[key] is None \
+                else round(self.forecast_weather[key][value])
+
         if 348.75 <= degree or degree < 11.25:
             return 'N'
         elif 11.25 <= degree < 33.75:

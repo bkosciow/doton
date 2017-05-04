@@ -52,7 +52,7 @@ CODES = {
     761: 'dust',
     762: 'VOLCANIC ASH',
     771: 'SQUALLS',
-    781: 'TORNADO ',
+    781: 'TORNADO',
 
     800: 'sky is clear',
     801: 'few clouds',
