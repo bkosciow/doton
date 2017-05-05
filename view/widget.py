@@ -29,3 +29,11 @@ class Widget(metaclass=abc.ABCMeta):
                     pos_y,
                     font.get(int(new[idx]))
                 )
+
+
+class Clickable(metaclass=abc.ABCMeta):
+    """Interface for clickable widget"""
+    @abc.abstractmethod
+    def action(self, name, index, pos_x, pos_y):
+        """action for touch"""
+        return

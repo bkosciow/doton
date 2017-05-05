@@ -1,6 +1,7 @@
 """Window Manager"""
 import threading
 import time
+from view.widget import Clickable
 
 
 class WidgetHolder(object):
@@ -67,3 +68,20 @@ class WindowManager(threading.Thread):
             return_widgets[hanlder] = widgets[hanlder].widget
 
         return return_widgets
+
+    def click(self, point):
+        """execute widget action"""
+        pos_x, pos_y = point
+        holders = self.pages[self.active_page].widgets
+        found = (None, None)
+        for name in holders:
+            idx = 0
+            if isinstance(holders[name].widget, Clickable):
+                for coords in holders[name].coords:
+                    if coords[0] < pos_x < coords[0] + 134 and coords[1] < pos_y < coords[1] + 106:
+                        found = (name, idx, pos_x - coords[0], pos_y - coords[1])
+                        break
+                    idx += 1
+
+        if all(val is not None for val in found):
+            self.pages[self.active_page].widgets[found[0]].widget.action(*found)
