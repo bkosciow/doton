@@ -16,7 +16,7 @@ class RelayWidget(Widget, Clickable):
         self.target_node = target_node
         self.channels = channels
         self.current = [0 for _ in range(0, channels)]
-        self.previous = [0 for _ in range(0, channels)]
+        self.screen = [0 for _ in range(0, channels)]
         self.icon = {
             1: Image.open('assets/image/switch_on.png'),
             0: Image.open('assets/image/switch_off.png'),
@@ -44,16 +44,18 @@ class RelayWidget(Widget, Clickable):
         """draw values"""
         lcd.transparency_color = (255, 255, 255)
         idx = 0
+        current = self.current.copy()
         for pos_x, pos_y in coords:
-            if force or self.current[idx] != self.previous[idx]:
-                lcd.draw_image(pos_x + 13, pos_y + 13, self.icon[self.current[idx]])
+            if force or current[idx] != self.screen[idx]:
+                lcd.draw_image(pos_x + 13, pos_y + 13, self.icon[current[idx]])
             idx += 1
+        self.screen = current.copy()
 
     def change_values(self, values):
         """change values"""
-        if 'toggle' in values:
-            self.previous[values['toggle'][0]] = self.current[values['toggle'][0]]
-            self.current[values['toggle'][0]] = values['toggle'][1]
+        if 'states' in values:
+            for idx in values['states']:
+                self.current[idx] = values['states'][idx]
 
     def action(self, name, index, pos_x, pos_y):
         """toggle a relay"""
@@ -67,4 +69,4 @@ class RelayWidget(Widget, Clickable):
         })
         message = json.dumps(message)
         self.socket.sendto(message.encode(), self.address)
-        self.change_values({'toggle': [index, enabled ^ 1]})
+        # self.change_values({'toggle': [index, enabled ^ 1]})

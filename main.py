@@ -14,6 +14,7 @@ from iot_message.message import Message
 from handler.DHTHandler import DHTHandler
 from handler.PIRHandler import PIRHandler
 from handler.LightHandler import LightHandler
+from handler.RelayHandler import RelayHandler
 from service.handler_dispatcher import HandlerDispatcher
 from service.worker_handler import Handler as WorkerHandler
 from worker.openweather import OpenweatherWorker
@@ -61,6 +62,7 @@ svr = Server(msg)
 svr.add_handler('dht11', DHTHandler(dispatcher))
 svr.add_handler('pir', PIRHandler(dispatcher))
 svr.add_handler('light', LightHandler(dispatcher))
+svr.add_handler('relay', RelayHandler(dispatcher))
 svr.start()
 
 workerHandler = WorkerHandler()
