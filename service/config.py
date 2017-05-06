@@ -9,6 +9,6 @@ class Config(object):
         self.config = ConfigParser()
         self.config.read(file)
 
-    def get(self, key):
+    def get(self, key, default=None):
         """returns value for key"""
-        return self.config.get('general', key)
+        return self.config.get('general', key) if self.config.get('general', key) else default

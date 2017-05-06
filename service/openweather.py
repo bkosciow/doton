@@ -153,7 +153,7 @@ class Openweather(threading.Thread):
             'humidity': self.current_weather_raw[city_id]['main']['humidity'],
             'pressure': self.current_weather_raw[city_id]['main']['pressure'],
             'wind_speed': self.current_weather_raw[city_id]['wind']['speed'],
-            'wind_deg': self.current_weather_raw[city_id]['wind']['deg'],
+            'wind_deg': self.current_weather_raw[city_id]['wind']['deg'] if 'deg' in self.current_weather_raw[city_id]['wind'] else 0,
             'weather_id': self.current_weather_raw[city_id]['weather'][0]['id'],
             'weather': CODES[self.current_weather_raw[city_id]['weather'][0]['id']],
             'clouds': self.current_weather_raw[city_id]['clouds']['all'],

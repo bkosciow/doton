@@ -1,3 +1,5 @@
 [general]
+ip=
+port=5053
 node_name=control-node
 openweather_apikey=xxx

@@ -27,3 +27,10 @@ class HandlerDispatcher(object):
             self.widgets[node].change_values({
                 'light': light
             })
+
+    def set_relay_states(self, node, states):
+        """get data from relay"""
+        if node in self.widgets:
+            self.widgets[node].change_values({
+                'states': states
+            })

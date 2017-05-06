@@ -1,3 +1,4 @@
+import copy
 from view.widget import Widget
 from PIL import Image
 
@@ -24,7 +25,7 @@ class OpenweatherWidget(Widget):
                 'wind_deg': 0,
                 'weather': ''
             },
-            'previous': None
+            'screen': None
         }
         self.forecast_weather = {
             'current': {
@@ -38,7 +39,7 @@ class OpenweatherWidget(Widget):
                 'humidity': 0,
                 'weather': ''
             },
-            'previous': None
+            'screen': None
         }
         self.icon = {
             'temperature': Image.open('assets/image/thermometer.png'),
@@ -85,46 +86,61 @@ class OpenweatherWidget(Widget):
 
     def _draw_values(self, lcd, widget_type, pos_x, pos_y, force=False):
         """draw current values"""
+        current = {
+            'wind_speed': self._get_value(widget_type, 'current', 'wind_speed'),
+            'wind_deg': self._degree_to_direction(
+                widget_type, 'current', 'wind_deg'
+            ),
+            'clouds': self._get_value(widget_type, 'current', 'clouds', 2),
+            'humidity': self._get_value(widget_type, 'current', 'humidity', 2),
+            'pressure': self._get_value(widget_type, 'current', 'pressure', 4),
+            'weather_id': self._get_value(widget_type, 'current', 'weather_id', 3),
+        }
+        screen = {
+            'wind_speed': self._get_value(widget_type, 'screen', 'wind_speed'),
+            'wind_deg': self._degree_to_direction(
+                widget_type, 'screen', 'wind_deg'
+            ),
+            'clouds': self._get_value(widget_type, 'screen', 'clouds', 2),
+            'humidity': self._get_value(widget_type, 'screen', 'humidity', 2),
+            'pressure': self._get_value(widget_type, 'screen', 'pressure', 4),
+            'weather_id': self._get_value(widget_type, 'screen', 'weather_id', 3)
+        }
         if widget_type == 'current':
-            current = self._get_value(
+            current['temperature_current'] = self._get_value(
                 widget_type, 'current', 'temperature_current'
             )
-            previous = self._get_value(
-                widget_type, 'previous', 'temperature_current'
+            screen['temperature_current'] = self._get_value(
+                widget_type, 'screen', 'temperature_current'
             )
-            if force or previous is None or current != previous:
-                self.draw_number(
-                    lcd, pos_x+50, pos_y+5, self.fonts['15x28'],
-                    current, previous, 20
-                )
         else:
-            current = self._get_value(
+            current['temperature_max'] = self._get_value(
                 widget_type, 'current', 'temperature_max'
             )
-            previous = self._get_value(
-                widget_type, 'previous', 'temperature_max'
+            screen['temperature_max'] = self._get_value(
+                widget_type, 'screen', 'temperature_max'
             )
-            if force or previous is None or current != previous:
+
+        if widget_type == 'current':
+            if force or screen['temperature_current'] is None or current['temperature_current'] != screen['temperature_current']:
                 self.draw_number(
                     lcd, pos_x+50, pos_y+5, self.fonts['15x28'],
-                    current, previous, 20
+                    current['temperature_current'], screen['temperature_current'], 20
+                )
+        else:
+            if force or screen['temperature_max'] is None or current['temperature_max'] != screen['temperature_max']:
+                self.draw_number(
+                    lcd, pos_x+50, pos_y+5, self.fonts['15x28'],
+                    current['temperature_max'], screen['temperature_max'], 20
                 )
 
-        current = self._get_value(widget_type, 'current', 'wind_speed')
-        previous = self._get_value(widget_type, 'previous', 'wind_speed')
-        if force or previous is None or current != previous:
+        if force or screen['wind_speed'] is None or current['wind_speed'] != screen['wind_speed']:
             self.draw_number(
                 lcd, pos_x+45, pos_y+39, self.fonts['15x28'],
-                current, previous, 20
+                current['wind_speed'], screen['wind_speed'], 20
             )
 
-        current = self._degree_to_direction(
-            widget_type, 'current', 'wind_deg'
-        )
-        previous = self._degree_to_direction(
-            widget_type, 'previous', 'wind_deg'
-        )
-        if force or previous is None or current != previous:
+        if force or screen['wind_deg'] is None or current['wind_deg'] != screen['wind_deg']:
             lcd.background_color = self.colours['background_'+widget_type]
             lcd.fill_rect(pos_x+84, pos_y+44, pos_x+99, pos_y+65)
             lcd.transparency_color = ((255, 255, 255), (0, 0, 0))
@@ -135,50 +151,50 @@ class OpenweatherWidget(Widget):
                 )
             )
 
-        current = self._get_value(widget_type, 'current', 'clouds', 2)
-        previous = self._get_value(widget_type, 'previous', 'clouds', 2)
-        if force or previous is None or current != previous:
-            lcd.transparency_color = (255, 255, 255)
-            lcd.draw_image(pos_x + 1, pos_y + 47, self.icon['cloud_empty'])
+        if force or screen['clouds'] is None or current['clouds'] != screen['clouds']:
             width, height = self.icon['cloud_full'].size
-            new_width = round(width * int(current) / 100)
+            lcd.background_color = self.colours['background_'+widget_type]
+            lcd.fill_rect(pos_x+1, pos_y+47, pos_x+1+width, pos_y+47+height)
+            lcd.transparency_color = (255, 255, 255)
+            lcd.draw_image(pos_x+1, pos_y+47, self.icon['cloud_empty'])
+            new_width = round(width * int(current['clouds']) / 100)
             lcd.draw_image(
-                pos_x + 1, pos_y + 47,
+                pos_x+1, pos_y+47,
                 self.icon['cloud_full'].crop((0, 0, new_width, height))
             )
 
-        current = self._get_value(widget_type, 'current', 'humidity', 2)
-        previous = self._get_value(widget_type, 'previous', 'humidity', 2)
-        if force or previous is None or current != previous:
+        if force or screen['humidity'] is None or current['humidity'] != screen['humidity']:
+            width, height = self.icon['drop_full'].size
+            lcd.background_color = self.colours['background_'+widget_type]
+            lcd.fill_rect(pos_x+3, pos_y+74, pos_x+3+width, pos_y+74+height)
             lcd.transparency_color = (255, 255, 255)
             lcd.draw_image(pos_x + 3, pos_y + 74, self.icon['drop_empty'])
-            width, height = self.icon['drop_full'].size
-            new_height = height - round(height * int(current) / 100)
-
+            new_height = height - round(height * int(current['humidity']) / 100)
             lcd.draw_image(
                 pos_x + 3, pos_y + 74 + new_height,
                 self.icon['drop_full'].crop((0, new_height, width, height))
             )
 
-        current = self._get_value(widget_type, 'current', 'pressure', 4)
-        previous = self._get_value(widget_type, 'previous', 'pressure', 4)
-        if force or previous is None or current != previous:
+        if force or screen['pressure'] is None or current['pressure'] != screen['pressure']:
             self.draw_number(
                 lcd, pos_x+25, pos_y+72, self.fonts['15x28'],
-                current, previous, 20
+                current['pressure'], screen['pressure'], 20
             )
 
-        current = self._get_value(widget_type, 'current', 'weather_id', 3)
-        previous = self._get_value(widget_type, 'previous', 'weather_id', 3)
-        if current is not None:
-            current = int(current)
-        if previous is not None:
-            previous = int(previous)
-        if current != 0 and (force or previous is None or current != previous):
+        if current['weather_id'] is not None:
+            current['weather_id'] = int(current['weather_id'])
+        if screen['weather_id'] is not None:
+            screen['weather_id'] = int(screen['weather_id'])
+        if current['weather_id'] != 0 and (force or screen['weather_id'] is None or current['weather_id'] != screen['weather_id']):
             lcd.background_color = self.colours['background_'+widget_type]
             lcd.fill_rect(pos_x+2, pos_y+3, pos_x+42, pos_y+43)
             lcd.transparency_color = (255, 255, 255)
-            lcd.draw_image(pos_x+2, pos_y+3, self._get_weather_icon(current))
+            lcd.draw_image(pos_x+2, pos_y+3, self._get_weather_icon(current['weather_id']))
+
+        if widget_type == 'current':
+            self.current_weather['screen'] = self.current_weather['current'].copy()
+        else:
+            self.forecast_weather['screen'] = self.forecast_weather['current'].copy()
 
     def _get_value(self, widget_type, key, value, precision=2):
         """get value"""
@@ -244,11 +260,9 @@ class OpenweatherWidget(Widget):
         if not self.initialized:
             return
         if 'current' in values:
-            self.current_weather['previous'] = self.current_weather['current']
             self.current_weather['current'] = values['current']
 
         if 'forecast' in values:
-            self.forecast_weather['previous'] = self.forecast_weather['current']
             self.forecast_weather['current'] = values['forecast']
 
     def _get_weather_icon(self, status):
