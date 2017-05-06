@@ -69,4 +69,3 @@ class RelayWidget(Widget, Clickable):
         })
         message = json.dumps(message)
         self.socket.sendto(message.encode(), self.address)
-        # self.change_values({'toggle': [index, enabled ^ 1]})
