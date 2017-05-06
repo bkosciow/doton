@@ -46,7 +46,7 @@ class RelayWidget(Widget, Clickable):
         idx = 0
         for pos_x, pos_y in coords:
             if force or self.current[idx] != self.previous[idx]:
-                lcd.draw_image(pos_x + 3, pos_y + 3, self.icon[self.current[idx]])
+                lcd.draw_image(pos_x + 13, pos_y + 13, self.icon[self.current[idx]])
             idx += 1
 
     def change_values(self, values):
