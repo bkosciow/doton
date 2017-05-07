@@ -64,9 +64,9 @@ class WindowManager(threading.Thread):
             self.widgets[holder].widget.draw_widget(
                 self.lcd, self.widgets[holder].coords
             )
-        self.lcd.background_color = (255, 255, 255)
-        self.lcd.fill_rect(75, 0, 165, 60)
-        self.lcd.fill_rect(75, 260, 165, 320)
+        # self.lcd.background_color = (255, 255, 255)
+        # self.lcd.fill_rect(75, 0, 165, 60)
+        # self.lcd.fill_rect(75, 260, 165, 320)
         self.draw_page = False
 
     def stop(self):
