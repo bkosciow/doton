@@ -54,7 +54,7 @@ window_manager.add_widget(
     RelayWidget(msg, 'my-room-light', broadcast_socket, address, 2)
 
 )
-# window_manager.set_widget_color('node-my-room', 'background', (0, 255, 255))
+window_manager.set_widget_color('node-my-room', 'background', (0, 255, 255))
 
 window_manager.start()
 

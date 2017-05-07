@@ -58,8 +58,7 @@ class WindowManager(threading.Thread):
 
     def _draw_widgets(self):
         """draw widgets"""
-        self.lcd.background_color = (0, 0, 0)
-        self.lcd.fill_rect(0, 0, self.lcd.width, self.lcd.height)
+        self.lcd.init()
         for holder in self.widgets:
             self.widgets[holder].widget.draw_widget(
                 self.lcd, self.widgets[holder].coords
@@ -75,11 +74,18 @@ class WindowManager(threading.Thread):
 
     def set_widget_color(self, name, key, value):
         """change colour"""
-        self.pages[self.active_page].widgets[name].widget.colours[key] = value
+        widget = self.get_widget(name)
+        if widget:
+            widget.colours[key] = value
 
     def get_widget(self, name):
         """get widget by name"""
-        return self.pages[self.active_page].widgets[name].widget
+        for page in self.pages:
+            widgets = page.widgets
+            if name in widgets:
+                return widgets[name].widget
+
+        return None
 
     def get_widgets(self):
         """returns widgets dictionary"""
