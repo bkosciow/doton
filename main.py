@@ -47,17 +47,29 @@ FONTS = {
 }
 
 window_manager.add_widget('node-kitchen', [(0, 0)], NodeOneWidget(FONTS['24x42']))
-window_manager.add_widget('node-my-room', [(1, 0)], NodeOneWidget(FONTS['24x42']))
 window_manager.add_widget('openweather', [(0, 1), (1, 1)], OpenweatherWidget(FONTS))
 window_manager.add_widget(
     'my-room-light', [(0, 2), (1, 2)],
     RelayWidget(msg, 'my-room-light', broadcast_socket, address, 2)
 )
+window_manager.add_widget('node-my-room-2', [(1, 0)], NodeOneWidget(FONTS['24x42']))
+
+window_manager.add_widget('node-kitchen-2', [(0, 1)], window_manager.get_widget('node-kitchen'), 1)
+window_manager.add_widget('node-my-room', [(1, 2)], NodeOneWidget(FONTS['24x42']), 1)
+
+window_manager.add_widget('more-weather', [(0, 2), (1, 2)], window_manager.get_widget('openweather'), 2)
+
 window_manager.set_widget_color('node-my-room', 'background', (0, 255, 255))
+window_manager.set_widget_color('node-my-room-2', 'background', (0, 255, 255))
 
 window_manager.start()
 
-dispatcher = HandlerDispatcher(window_manager.get_widgets())
+dispatcher = HandlerDispatcher({
+    'node-kitchen': [window_manager.get_widget('node-kitchen')],
+    'node-my-room': [window_manager.get_widget('node-my-room'), window_manager.get_widget('node-my-room-2')],
+    'openweather': [window_manager.get_widget('openweather')],
+    'my-room-light': [window_manager.get_widget('my-room-light')]
+})
 svr = Server(msg)
 svr.add_handler('dht11', DHTHandler(dispatcher))
 svr.add_handler('pir', PIRHandler(dispatcher))

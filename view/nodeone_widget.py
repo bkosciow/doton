@@ -76,13 +76,15 @@ class NodeOneWidget(Widget):
         if force or current['temperature'] != screen['temperature']:
             self.draw_number(
                 lcd, pos_x + 35, pos_y + 5, self.font,
-                current['temperature'], screen['temperature'], 27
+                current['temperature'], screen['temperature'], 27,
+                force
             )
 
         if force or current['humidity'] != screen['humidity']:
             self.draw_number(
                 lcd, pos_x + 35, pos_y + 55, self.font,
-                current['humidity'], screen['humidity'], 27
+                current['humidity'], screen['humidity'], 27,
+                force
             )
 
         if force or self.current['light'] != self.screen['light']:

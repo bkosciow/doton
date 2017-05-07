@@ -19,11 +19,11 @@ class Widget(metaclass=abc.ABCMeta):
         """change a value, values is a dict [name] = value"""
         pass
 
-    def draw_number(self, lcd, pos_x, pos_y, font, new, old, spacing=30):
+    def draw_number(self, lcd, pos_x, pos_y, font, new, old, spacing=30, force=False):
         """draw a number"""
         lcd.transparency_color = font.get_transparency()
         for idx in range(0, len(new)):
-            if old is None or new[idx] != old[idx]:
+            if force or old is None or new[idx] != old[idx]:
                 lcd.draw_image(
                     pos_x + (idx * spacing),
                     pos_y,

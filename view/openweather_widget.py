@@ -125,19 +125,22 @@ class OpenweatherWidget(Widget):
             if force or screen['temperature_current'] is None or current['temperature_current'] != screen['temperature_current']:
                 self.draw_number(
                     lcd, pos_x+50, pos_y+5, self.fonts['15x28'],
-                    current['temperature_current'], screen['temperature_current'], 20
+                    current['temperature_current'], screen['temperature_current'], 20,
+                    force
                 )
         else:
             if force or screen['temperature_max'] is None or current['temperature_max'] != screen['temperature_max']:
                 self.draw_number(
                     lcd, pos_x+50, pos_y+5, self.fonts['15x28'],
-                    current['temperature_max'], screen['temperature_max'], 20
+                    current['temperature_max'], screen['temperature_max'], 20,
+                    force
                 )
 
         if force or screen['wind_speed'] is None or current['wind_speed'] != screen['wind_speed']:
             self.draw_number(
                 lcd, pos_x+45, pos_y+39, self.fonts['15x28'],
-                current['wind_speed'], screen['wind_speed'], 20
+                current['wind_speed'], screen['wind_speed'], 20,
+                force
             )
 
         if force or screen['wind_deg'] is None or current['wind_deg'] != screen['wind_deg']:
@@ -178,7 +181,8 @@ class OpenweatherWidget(Widget):
         if force or screen['pressure'] is None or current['pressure'] != screen['pressure']:
             self.draw_number(
                 lcd, pos_x+25, pos_y+72, self.fonts['15x28'],
-                current['pressure'], screen['pressure'], 20
+                current['pressure'], screen['pressure'], 20,
+                force
             )
 
         if current['weather_id'] is not None:
