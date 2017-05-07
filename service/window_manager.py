@@ -126,7 +126,6 @@ class WindowManager(threading.Thread):
     def _page_previous(self):
         """switch to prev page"""
         if self.active_page > 0:
-            print("prev")
             self.widgets = self.pages[self.active_page-1].widgets
             self.draw_page = True
             self.active_page -= 1
@@ -134,7 +133,6 @@ class WindowManager(threading.Thread):
     def _page_next(self):
         """switch to next page"""
         if self.active_page < len(self.pages)-1:
-            print("next")
             self.widgets = self.pages[self.active_page+1].widgets
             self.draw_page = True
             self.active_page += 1
