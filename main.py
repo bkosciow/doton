@@ -33,7 +33,7 @@ FONTS = {
     '15x28': numbers_15x28.Numbers()
 }
 
-window_manager.add_widget('node-kitchen', [(0, 0)], NodeOneWidget(FONTS['24x42']))
+window_manager.add_widget('node-kitchen', [(1, 0)], NodeOneWidget(FONTS['24x42']))
 window_manager.add_widget('openweather', [(0, 1), (1, 1)], OpenweatherWidget(FONTS))
 window_manager.add_widget(
     'my-room-light', [(0, 2), (1, 2)],
