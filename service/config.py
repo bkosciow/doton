@@ -41,14 +41,18 @@ class Config(object):
         """dynamically load and init touch panel"""
         driver_name = self.config.get('touch', 'driver')
         size = self.config.get('touch', 'size').split(",")
-
+        cs = self.config.get('touch', 'cs')
+        if cs == '':
+            cs = None
+        else:
+            cs = int(self.config.get('touch', 'cs'))
         path = "gfxlcd.driver.{}.{}".format(driver_name, driver_name)
         class_ = getattr(import_module(path), driver_name.upper())
         driver = class_(
             int(size[0]), int(size[1]),
             int(self.config.get('touch', 'irq')),
             callback,
-            int(self.config.get('touch', 'cs'))
+            cs
         )
         driver.rotate = int(self.config.get('touch', 'rotate'))
         driver.init()
