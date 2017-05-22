@@ -1,3 +1,20 @@
+[lcd]
+;ili9486  ili9325
+lcd=ili9486
+size=320,480
+rotate=270
+driver=spi
+;{"CS": 8,"RST": 25,"RS": 24,"LED": ""}
+driver_pins=
+
+[touch]
+;xpt2046 ad7843
+driver=xpt2046
+size=480, 320
+rotate=0
+irq=17
+cs=7
+
 [general]
 ip=
 port=5053

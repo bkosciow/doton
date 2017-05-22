@@ -1,9 +1,11 @@
 import RPi.GPIO as GPIO
 import time
 import socket
-from gfxlcd.driver.ili9325.gpio import GPIO as ILIGPIO
-from gfxlcd.driver.ili9325.ili9325 import ILI9325
-from gfxlcd.driver.ad7843.ad7843 import AD7843
+# from gfxlcd.driver.ili9325.gpio import GPIO as ILIGPIO
+# from gfxlcd.driver.ili9325.ili9325 import ILI9325
+from gfxlcd.driver.ili9486.spi import SPI
+from gfxlcd.driver.ili9486.ili9486 import ILI9486
+from gfxlcd.driver.xpt2046.xpt2046 import XPT2046
 from view.nodeone_widget import NodeOneWidget
 from view.openweather_widget import OpenweatherWidget
 from view.relay_widget import RelayWidget
@@ -26,21 +28,24 @@ config = Config()
 
 msg = Message(config.get('node_name'))
 
-LED = 6
-GPIO.setup(LED, GPIO.OUT)
-GPIO.output(LED, 1)
+# config.lcd.draw_rect(10, 10, 100, 100)
+# exit()
+# LED = 6
+# GPIO.setup(LED, GPIO.OUT)
+# GPIO.output(LED, 1)
 
-lcd_tft = ILI9325(240, 320, ILIGPIO())
-lcd_tft.init()
+# lcd_tft = ILI9325(240, 320, ILIGPIO())
+# lcd_tft.init()
 
 broadcast_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 broadcast_socket.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
 address = (config.get('ip', '<broadcast>'), int(config.get('port')))
 
-window_manager = WindowManager(lcd_tft)
-touch_panel = AD7843(240, 320, 26, window_manager.click)
-touch_panel.init()
-
+window_manager = WindowManager(config)
+# touch_panel = XPT2046(480, 320, 17, window_manager.click, 7)
+# touch_panel.rotate = 0
+# touch_panel.init()
+# exit()
 FONTS = {
     '24x42': numbers_24x42.Numbers(),
     '15x28': numbers_15x28.Numbers()

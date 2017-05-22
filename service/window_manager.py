@@ -19,11 +19,12 @@ class Page(object):
 
 class WindowManager(threading.Thread):
     """Window Manager"""
-    def __init__(self, lcd):
+    def __init__(self, config):
         threading.Thread.__init__(self)
         self.pages = [Page()]
         self.active_page = 0
-        self.lcd = lcd
+        self.lcd = config.lcd
+        config.init_touch(self.click)
         self.work = True
         self.widgets = None
         self.draw_page = True
@@ -96,6 +97,9 @@ class WindowManager(threading.Thread):
 
     def click(self, point):
         """execute click event"""
+        print(point)
+        if point is None:
+            return
         if self._execute_internal_event(point):
             return
         pos_x, pos_y = point
