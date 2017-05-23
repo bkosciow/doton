@@ -1,6 +1,7 @@
 import json
 from service.openweather import Openweather
 from worker.worker import Worker
+import datetime
 
 
 class OpenweatherWorker(Worker):
@@ -31,10 +32,16 @@ class OpenweatherWorker(Worker):
 
     def execute(self):
         """executes worker"""
-        self.widget.change_values({
+        data = {
             'current': self.weather(),
-            'forecast': self.forecast()
-        })
+            'forecast': {}
+        }
+        date_now = datetime.datetime.now()
+        for day in range(0, 5):
+            date = date_now + datetime.timedelta(days=day)
+            data['forecast'][day] = self.forecast(None, date.strftime("%Y-%m-%d"))
+
+        self.widget.change_values(data)
 
     def _parse_cities(self, values):
         """convert key to int"""

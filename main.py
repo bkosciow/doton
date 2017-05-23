@@ -34,7 +34,7 @@ FONTS = {
 }
 
 window_manager.add_widget('node-kitchen', [(0, 0)], NodeOneWidget(FONTS['24x42']))
-window_manager.add_widget('openweather', [(0, 1), (1, 1)], OpenweatherWidget(FONTS))
+window_manager.add_widget('openweather', [(0, 1), (1, 1), (2, 1), (3, 1)], OpenweatherWidget([0, 1, 2], FONTS))
 window_manager.add_widget(
     'my-room-light', [(0, 2), (1, 2)],
     RelayWidget(msg, 'my-room-light', broadcast_socket, address, 2)
