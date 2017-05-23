@@ -20,4 +20,7 @@ cs=7
 ip=
 port=5053
 node_name=control-node
-openweather_apikey=xxx
+
+[openweather]
+apikey=xxx
+cities={"3103402": "Bielsko-Biała"}

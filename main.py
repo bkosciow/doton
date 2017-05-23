@@ -69,7 +69,7 @@ svr.add_handler('relay', RelayHandler(dispatcher))
 svr.start()
 
 workerHandler = WorkerHandler()
-workerHandler.add('openweather', OpenweatherWorker(config.get('openweather_apikey'), window_manager.get_widget('openweather')), 5)
+workerHandler.add('openweather', OpenweatherWorker(config.get_section('openweather'), window_manager.get_widget('openweather')), 5)
 workerHandler.start()
 
 try:

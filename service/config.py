@@ -18,6 +18,10 @@ class Config(object):
         """returns value for key"""
         return self.config.get('general', key) if self.config.get('general', key) else default
 
+    def get_section(self, section):
+        """return section"""
+        return dict(self.config.items(section))
+
     def init_lcd(self):
         """dynamically load and init lcd"""
         driver_name = self.config.get('lcd', 'driver')
