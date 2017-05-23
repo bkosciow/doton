@@ -21,12 +21,12 @@ class Page(object):
 
     def add_widget(self, name, widget_holder):
         """add widget holder to page"""
-        if self.is_slot_empty(widget_holder.slots):
+        if self.validate_slot(widget_holder.slots):
             self.widgets[name] = widget_holder
         else:
             raise AttributeError('one or more slots in use ', widget_holder.slots)
 
-    def is_slot_empty(self, slots):
+    def validate_slot(self, slots):
         """checks if given slots are empty"""
         for slot in slots:
             for widget in self.widgets:
@@ -35,6 +35,10 @@ class Page(object):
 
         return True
 
+    def find_slot(self):
+        pos_x, pos_y = 0, 0
+        pass
+
 
 class WindowManager(threading.Thread):
     """Window Manager"""
@@ -42,7 +46,9 @@ class WindowManager(threading.Thread):
         "widget_height": 105,
         "widget_width": 105,
         "grid_height": 0,
-        "grid_width": 0
+        "grid_width": 0,
+        "margin_height": 0,
+        "margin_width": 0,
     }
 
     def __init__(self, config):
@@ -53,7 +59,6 @@ class WindowManager(threading.Thread):
         self.pages = [
             Page((self.size['grid_width'], self.size['grid_height']))
         ]
-        # exit()
         config.init_touch(self.click)
         self.work = True
         self.widgets = None
@@ -63,10 +68,20 @@ class WindowManager(threading.Thread):
         """add widget to grid, calculate (x,y)"""
         position = []
         for coords in slots:
-            position.append((coords[0]*134, coords[1]*106))
+            if coords[0] > self.size['grid_width'] or coords[1] > self.size['grid_height']:
+                raise Exception('Widget out of screen ', name, slots)
+            position.append((
+                coords[0]*(self.size["widget_width"] + self.size['margin_width']),
+                coords[1]*(self.size["widget_height"] + self.size['margin_height'])
+            ))
+
         if page > len(self.pages)-1:
             self._add_page(page)
         self.pages[page].add_widget(name, WidgetHolder(position, slots, widget))
+
+    def auto_add_widget(self, name, widget):
+        """find free slot and add widget"""
+        pass
 
     def _add_page(self, page):
         """add new page"""
@@ -76,6 +91,11 @@ class WindowManager(threading.Thread):
         self.pages.append(
             Page((self.size['grid_width'], self.size['grid_height']))
         )
+
+    def _find_slot_page(self):
+        """find first free slot"""
+        for page in self.pages:
+            slot = page.find_slot()
 
     def run(self):
         """main loop - drawing"""
@@ -129,7 +149,6 @@ class WindowManager(threading.Thread):
 
     def click(self, point):
         """execute click event"""
-        print(point)
         if point is None:
             return
         if self._execute_internal_event(point):
@@ -151,10 +170,11 @@ class WindowManager(threading.Thread):
 
     def _execute_internal_event(self, point):
         """execute internal event"""
-        if 75 < point[0] < 165 and 0 < point[1] < 60:
+        if self.lcd.width / 2 - 45 < point[0] < self.lcd.width / 2 + 45 and 0 < point[1] < 60:
             self._page_previous()
             return True
-        if 75 < point[0] < 165 and 260 < point[1] < 320:
+        if self.lcd.width / 2 - 45 < point[0] < self.lcd.width / 2 + 45 and \
+            self.lcd.height - 60 < point[1] < self.lcd.height:
             self._page_next()
             return True
         return False
