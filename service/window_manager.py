@@ -43,8 +43,8 @@ class Page(object):
 class WindowManager(threading.Thread):
     """Window Manager"""
     size = {
-        "widget_height": 105,
-        "widget_width": 105,
+        "widget_height": 106,
+        "widget_width": 106,
         "grid_height": 0,
         "grid_width": 0,
         "margin_height": 0,
@@ -61,7 +61,7 @@ class WindowManager(threading.Thread):
         ]
         config.init_touch(self.click)
         self.work = True
-        self.widgets = None
+        self.widgets = []
         self.draw_page = True
 
     def add_widget(self, name, slots, widget, page=0):
@@ -160,7 +160,7 @@ class WindowManager(threading.Thread):
             idx = 0
             if isinstance(holders[name].widget, Clickable):
                 for coords in holders[name].coords:
-                    if coords[0] < pos_x < coords[0] + 134 and coords[1] < pos_y < coords[1] + 106:
+                    if coords[0] < pos_x < coords[0] + self.size["widget_width"] and coords[1] < pos_y < coords[1] + self.size["widget_height"]:
                         found = (name, idx, pos_x - coords[0], pos_y - coords[1])
                         break
                     idx += 1
@@ -195,8 +195,8 @@ class WindowManager(threading.Thread):
 
     def _calculate_grid(self):
         """calculate grid size"""
-        self.size['grid_width'] = self.lcd.width // self.size['widget_width']
-        self.size['grid_height'] = self.lcd.height // self.size['widget_height']
+        self.size['grid_width'] = (self.lcd.width-1) // self.size['widget_width']
+        self.size['grid_height'] = (self.lcd.height-1) // self.size['widget_height']
 
         margin_width = self.lcd.width - (self.size['grid_width'] * self.size['widget_width'])
         margin_height = self.lcd.height - (self.size['grid_height'] * self.size['widget_height'])
