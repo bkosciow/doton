@@ -4,6 +4,7 @@ import socket
 from view.nodeone_widget import NodeOneWidget
 from view.openweather_widget import OpenweatherWidget
 from view.relay_widget import RelayWidget
+from view.clock_widget import ClockWidget
 from assets.font import numbers_24x42
 from assets.font import numbers_15x28
 from message_listener.server import Server
@@ -34,6 +35,7 @@ FONTS = {
     '15x28': numbers_15x28.Numbers()
 }
 
+window_manager.add_widget('clock', [(3, 0)], ClockWidget(FONTS['15x28']))
 window_manager.add_widget('node-kitchen', [(0, 0)], NodeOneWidget(FONTS['24x42']))
 window_manager.add_widget('openweather', [(0, 1), (1, 1), (2, 1), (3, 1), (4, 1)], OpenweatherWidget([0, 1, 2], FONTS))
 window_manager.add_widget(
