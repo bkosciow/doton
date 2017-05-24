@@ -1,8 +1,12 @@
 One repo to rule them all. Doton project for Get Noticed! / Daj się poznać.
 ===
 
-Doton project is a control Node for IoT devices. It works on Raspberry Pi and uses ILI9328 compatible display to show
+Doton project is a control Node for IoT devices. It works on Raspberry Pi and uses ILI9328 or ILI9486 compatible display to show
 information in a form of widget/tile.
+
+Tiles on 320x480 4" screen:
+
+![screen](https://koscis.files.wordpress.com/2017/05/img_20170524_210024.jpg?w=400)
 
 Switches for remote node with 2 channel relay
 
