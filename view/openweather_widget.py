@@ -5,7 +5,8 @@ from PIL import Image
 
 class OpenweatherWidget(Widget):
     """Openweathermap widget"""
-    def __init__(self, fonts):
+    def __init__(self, forecast_days, fonts):
+        self.forecast_days = forecast_days
         self.fonts = fonts
         self.colours = {
             'background_current': (127, 127, 0),
@@ -27,20 +28,23 @@ class OpenweatherWidget(Widget):
             },
             'screen': None
         }
-        self.forecast_weather = {
-            'current': {
-                'pressure': 0,
-                'clouds': 0,
-                'temperature_max': 0,
-                'wind_speed': 0,
-                'wind_deg': 0,
-                'temperature_min': 0,
-                'weather_id': 0,
-                'humidity': 0,
-                'weather': ''
-            },
-            'screen': None
-        }
+        self.forecast_weather = {}
+        for day in forecast_days:
+            self.forecast_weather[day] = {
+                'current': {
+                    'pressure': 0,
+                    'clouds': 0,
+                    'temperature_max': 0,
+                    'wind_speed': 0,
+                    'wind_deg': 0,
+                    'temperature_min': 0,
+                    'weather_id': 0,
+                    'humidity': 0,
+                    'weather': ''
+                },
+                'screen': None
+            }
+
         self.icon = {
             'temperature': Image.open('assets/image/thermometer.png'),
             'compass': Image.open('assets/image/compass.png'),
@@ -65,7 +69,8 @@ class OpenweatherWidget(Widget):
     def draw_widget(self, lcd, coords):
         """draw a tiles"""
         self._draw_widget(lcd, 'current', coords[0][0], coords[0][1])
-        self._draw_widget(lcd, 'forecast', coords[1][0], coords[1][1])
+        for idx in range(0, len(coords)-1):
+            self._draw_widget(lcd, 'forecast', coords[1+idx][0], coords[1+idx][1])
         self.draw_values(lcd, coords, True)
         self.initialized = True
 
@@ -81,44 +86,45 @@ class OpenweatherWidget(Widget):
 
     def draw_values(self, lcd, coords, force=False):
         """draw values"""
-        self._draw_values(lcd, 'current', coords[0][0], coords[0][1], force)
-        self._draw_values(lcd, 'forecast', coords[1][0], coords[1][1], force)
+        self._draw_values(lcd, 'current', 0, coords[0][0], coords[0][1], force)
+        for idx in range(0, len(coords)-1):
+            self._draw_values(lcd, 'forecast', self.forecast_days[idx], coords[1+idx][0], coords[1+idx][1], force)
 
-    def _draw_values(self, lcd, widget_type, pos_x, pos_y, force=False):
+    def _draw_values(self, lcd, widget_type, day, pos_x, pos_y, force=False):
         """draw current values"""
         current = {
-            'wind_speed': self._get_value(widget_type, 'current', 'wind_speed'),
+            'wind_speed': self._get_value(widget_type, day, 'current', 'wind_speed'),
             'wind_deg': self._degree_to_direction(
-                widget_type, 'current', 'wind_deg'
+                widget_type, day, 'current', 'wind_deg'
             ),
-            'clouds': self._get_value(widget_type, 'current', 'clouds', 2),
-            'humidity': self._get_value(widget_type, 'current', 'humidity', 2),
-            'pressure': self._get_value(widget_type, 'current', 'pressure', 4),
-            'weather_id': self._get_value(widget_type, 'current', 'weather_id', 3),
+            'clouds': self._get_value(widget_type, day, 'current', 'clouds', 2),
+            'humidity': self._get_value(widget_type, day, 'current', 'humidity', 2),
+            'pressure': self._get_value(widget_type, day, 'current', 'pressure', 4),
+            'weather_id': self._get_value(widget_type, day, 'current', 'weather_id', 3),
         }
         screen = {
-            'wind_speed': self._get_value(widget_type, 'screen', 'wind_speed'),
+            'wind_speed': self._get_value(widget_type, day, 'screen', 'wind_speed'),
             'wind_deg': self._degree_to_direction(
-                widget_type, 'screen', 'wind_deg'
+                widget_type, day, 'screen', 'wind_deg'
             ),
-            'clouds': self._get_value(widget_type, 'screen', 'clouds', 2),
-            'humidity': self._get_value(widget_type, 'screen', 'humidity', 2),
-            'pressure': self._get_value(widget_type, 'screen', 'pressure', 4),
-            'weather_id': self._get_value(widget_type, 'screen', 'weather_id', 3)
+            'clouds': self._get_value(widget_type, day, 'screen', 'clouds', 2),
+            'humidity': self._get_value(widget_type, day, 'screen', 'humidity', 2),
+            'pressure': self._get_value(widget_type, day, 'screen', 'pressure', 4),
+            'weather_id': self._get_value(widget_type, day, 'screen', 'weather_id', 3)
         }
         if widget_type == 'current':
             current['temperature_current'] = self._get_value(
-                widget_type, 'current', 'temperature_current'
+                widget_type, day, 'current', 'temperature_current'
             )
             screen['temperature_current'] = self._get_value(
-                widget_type, 'screen', 'temperature_current'
+                widget_type, day, 'screen', 'temperature_current'
             )
         else:
             current['temperature_max'] = self._get_value(
-                widget_type, 'current', 'temperature_max'
+                widget_type, day, 'current', 'temperature_max'
             )
             screen['temperature_max'] = self._get_value(
-                widget_type, 'screen', 'temperature_max'
+                widget_type, day, 'screen', 'temperature_max'
             )
 
         if widget_type == 'current':
@@ -150,7 +156,7 @@ class OpenweatherWidget(Widget):
             lcd.draw_image(
                 pos_x + 84, pos_y + 44,
                 self.icon['compass'].rotate(
-                    -1 * self._wind_degree(widget_type)
+                    -1 * self._wind_degree(widget_type, day)
                 )
             )
 
@@ -198,25 +204,25 @@ class OpenweatherWidget(Widget):
         if widget_type == 'current':
             self.current_weather['screen'] = self.current_weather['current'].copy()
         else:
-            self.forecast_weather['screen'] = self.forecast_weather['current'].copy()
+            self.forecast_weather[day]['screen'] = self.forecast_weather[day]['current'].copy()
 
-    def _get_value(self, widget_type, key, value, precision=2):
+    def _get_value(self, widget_type, day, key, value, precision=2):
         """get value"""
         if widget_type == 'current':
             return None if self.current_weather[key] is None \
                 else str(round(self.current_weather[key][value])).rjust(precision, '0')
         elif widget_type == 'forecast':
-            return None if self.forecast_weather[key] is None \
-                else str(round(self.forecast_weather[key][value])).rjust(precision, '0')
+            return None if self.forecast_weather[day][key] is None \
+                else str(round(self.forecast_weather[day][key][value])).rjust(precision, '0')
 
-    def _wind_degree(self, widget_type):
+    def _wind_degree(self, widget_type, day):
         """return wind degree value"""
         if widget_type == 'current':
             return self.current_weather['current']['wind_deg']
         else:
-            return self.forecast_weather['current']['wind_deg']
+            return self.forecast_weather[day]['current']['wind_deg']
 
-    def _degree_to_direction(self, widget_type, key, value):
+    def _degree_to_direction(self, widget_type, day, key, value):
         """degree to direction"""
         degree = 0
         if widget_type == 'current':
@@ -224,8 +230,8 @@ class OpenweatherWidget(Widget):
                 else round(self.current_weather[key][value])
 
         if widget_type == 'forecast':
-            degree = 0 if self.forecast_weather[key] is None \
-                else round(self.forecast_weather[key][value])
+            degree = 0 if self.forecast_weather[day][key] is None \
+                else round(self.forecast_weather[day][key][value])
 
         if 348.75 <= degree or degree < 11.25:
             return 'N'
@@ -267,7 +273,9 @@ class OpenweatherWidget(Widget):
             self.current_weather['current'] = values['current']
 
         if 'forecast' in values:
-            self.forecast_weather['current'] = values['forecast']
+            for day in values['forecast']:
+                if day in self.forecast_days:
+                    self.forecast_weather[day]['current'] = values['forecast'][day]
 
     def _get_weather_icon(self, status):
         """load weather icon when needed"""

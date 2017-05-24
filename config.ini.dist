@@ -1,5 +1,26 @@
+[lcd]
+;ili9486  ili9325
+lcd=ili9486
+size=320,480
+rotate=270
+driver=spi
+;{"CS": 8,"RST": 25,"RS": 24,"LED": ""}
+;{"RS": 27,"W": 17,"DB8": 22,"DB9": 23,"DB10": 24,"DB11": 5,"DB12": 12,"DB13": 16,"DB14": 20,"DB15": 21,"RST": 25,"LED": 6,"CS": 18}
+driver_pins=
+
+[touch]
+;xpt2046 ad7843
+driver=xpt2046
+size=480, 320
+rotate=0
+irq=17
+cs=7
+
 [general]
 ip=
 port=5053
 node_name=control-node
-openweather_apikey=xxx
+
+[openweather]
+apikey=xxx
+cities={"3103402": "Bielsko-Biała"}

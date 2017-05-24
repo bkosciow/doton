@@ -1,15 +1,16 @@
+import json
 from service.openweather import Openweather
 from worker.worker import Worker
+import datetime
 
 
 class OpenweatherWorker(Worker):
     """Openweather worker"""
-    def __init__(self, apikey, widget):
-        self.cities = {
-            3103402: 'Bielsko-Biała'
-        }
+    def __init__(self, config, widget):
+        self.config = config
+        self.cities = self._parse_cities(json.loads(config['cities']))
         self.widget = widget
-        self.handler = Openweather(self.cities, apikey)
+        self.handler = Openweather(self.cities, config['apikey'])
 
     def start(self):
         """start worker"""
@@ -31,7 +32,18 @@ class OpenweatherWorker(Worker):
 
     def execute(self):
         """executes worker"""
-        self.widget.change_values({
+        data = {
             'current': self.weather(),
-            'forecast': self.forecast()
-        })
+            'forecast': {}
+        }
+        date_now = datetime.datetime.now()
+        for day in range(0, 5):
+            date = date_now + datetime.timedelta(days=day)
+            data['forecast'][day] = self.forecast(None, date.strftime("%Y-%m-%d"))
+
+        self.widget.change_values(data)
+
+    def _parse_cities(self, values):
+        """convert key to int"""
+        return {int(key): value for key, value in values.items()}
+

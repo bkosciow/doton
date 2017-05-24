@@ -1,9 +1,6 @@
 import RPi.GPIO as GPIO
 import time
 import socket
-from gfxlcd.driver.ili9325.gpio import GPIO as ILIGPIO
-from gfxlcd.driver.ili9325.ili9325 import ILI9325
-from gfxlcd.driver.ad7843.ad7843 import AD7843
 from view.nodeone_widget import NodeOneWidget
 from view.openweather_widget import OpenweatherWidget
 from view.relay_widget import RelayWidget
@@ -26,28 +23,19 @@ config = Config()
 
 msg = Message(config.get('node_name'))
 
-LED = 6
-GPIO.setup(LED, GPIO.OUT)
-GPIO.output(LED, 1)
-
-lcd_tft = ILI9325(240, 320, ILIGPIO())
-lcd_tft.init()
-
 broadcast_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 broadcast_socket.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
 address = (config.get('ip', '<broadcast>'), int(config.get('port')))
 
-window_manager = WindowManager(lcd_tft)
-touch_panel = AD7843(240, 320, 26, window_manager.click)
-touch_panel.init()
-
+window_manager = WindowManager(config)
+window_manager.drop_out_of_bounds = True
 FONTS = {
     '24x42': numbers_24x42.Numbers(),
     '15x28': numbers_15x28.Numbers()
 }
 
 window_manager.add_widget('node-kitchen', [(0, 0)], NodeOneWidget(FONTS['24x42']))
-window_manager.add_widget('openweather', [(0, 1), (1, 1)], OpenweatherWidget(FONTS))
+window_manager.add_widget('openweather', [(0, 1), (1, 1), (2, 1), (3, 1), (4, 1)], OpenweatherWidget([0, 1, 2], FONTS))
 window_manager.add_widget(
     'my-room-light', [(0, 2), (1, 2)],
     RelayWidget(msg, 'my-room-light', broadcast_socket, address, 2)
@@ -78,7 +66,7 @@ svr.add_handler('relay', RelayHandler(dispatcher))
 svr.start()
 
 workerHandler = WorkerHandler()
-workerHandler.add('openweather', OpenweatherWorker(config.get('openweather_apikey'), window_manager.get_widget('openweather')), 5)
+workerHandler.add('openweather', OpenweatherWorker(config.get_section('openweather'), window_manager.get_widget('openweather')), 5)
 workerHandler.start()
 
 try:
