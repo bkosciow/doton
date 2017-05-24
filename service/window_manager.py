@@ -63,21 +63,24 @@ class WindowManager(threading.Thread):
         self.work = True
         self.widgets = []
         self.draw_page = True
+        self.drop_out_of_bounds = False
 
     def add_widget(self, name, slots, widget, page=0):
         """add widget to grid, calculate (x,y)"""
         position = []
         for coords in slots:
-            if coords[0] > self.size['grid_width'] or coords[1] > self.size['grid_height']:
+            if coords[0] < self.size['grid_width'] and coords[1] < self.size['grid_height']:
+                position.append((
+                    coords[0]*(self.size["widget_width"] + self.size['margin_width']),
+                    coords[1]*(self.size["widget_height"] + self.size['margin_height'])
+                ))
+            elif not self.drop_out_of_bounds:
                 raise Exception('Widget out of screen ', name, slots)
-            position.append((
-                coords[0]*(self.size["widget_width"] + self.size['margin_width']),
-                coords[1]*(self.size["widget_height"] + self.size['margin_height'])
-            ))
 
-        if page > len(self.pages)-1:
-            self._add_page(page)
-        self.pages[page].add_widget(name, WidgetHolder(position, slots, widget))
+        if len(position) > 0:
+            if page > len(self.pages)-1:
+                self._add_page(page)
+            self.pages[page].add_widget(name, WidgetHolder(position, slots, widget))
 
     def auto_add_widget(self, name, widget):
         """find free slot and add widget"""

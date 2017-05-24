@@ -276,7 +276,6 @@ class OpenweatherWidget(Widget):
             for day in values['forecast']:
                 if day in self.forecast_days:
                     self.forecast_weather[day]['current'] = values['forecast'][day]
-            # print(self.forecast_weather)
 
     def _get_weather_icon(self, status):
         """load weather icon when needed"""
