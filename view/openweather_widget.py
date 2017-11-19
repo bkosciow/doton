@@ -129,16 +129,26 @@ class OpenweatherWidget(Widget):
 
         if widget_type == 'current':
             if force or screen['temperature_current'] is None or current['temperature_current'] != screen['temperature_current']:
+                if screen['temperature_current'] is not None and self._get_font(current['temperature_current']) != self._get_font(screen['temperature_current']):
+                    force = True
                 self.draw_number(
-                    lcd, pos_x+50, pos_y+5, self.fonts['15x28'],
-                    current['temperature_current'], screen['temperature_current'], 20,
+                    lcd, pos_x+50, pos_y+5,
+                    self._get_font(current['temperature_current']),
+                    self._get_abs_value(current['temperature_current']),
+                    screen['temperature_current'],
+                    20,
                     force
                 )
         else:
             if force or screen['temperature_max'] is None or current['temperature_max'] != screen['temperature_max']:
+                if screen['temperature_max'] is not None and self._get_font(current['temperature_max']) != self._get_font(screen['temperature_max']):
+                    force = True
                 self.draw_number(
-                    lcd, pos_x+50, pos_y+5, self.fonts['15x28'],
-                    current['temperature_max'], screen['temperature_max'], 20,
+                    lcd, pos_x+50, pos_y+5,
+                    self._get_font(current['temperature_max']),
+                    self._get_abs_value(current['temperature_max']),
+                    screen['temperature_max'],
+                    20,
                     force
                 )
 
@@ -205,6 +215,14 @@ class OpenweatherWidget(Widget):
             self.current_weather['screen'] = self.current_weather['current'].copy()
         else:
             self.forecast_weather[day]['screen'] = self.forecast_weather[day]['current'].copy()
+
+    def _get_font(self, value):
+        """return red font for value >0 or blue font for <=0 """
+        return self.fonts['15x28_red'] if int(value) > 0 else self.fonts['15x28_blue']
+
+    def _get_abs_value(self, value):
+        """return abs value from string-number"""
+        return value if value[0] != '-' else value[1:]
 
     def _get_value(self, widget_type, day, key, value, precision=2):
         """get value"""

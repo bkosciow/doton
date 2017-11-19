@@ -7,6 +7,8 @@ from view.relay_widget import RelayWidget
 from view.clock_widget import ClockWidget
 from assets.font import numbers_24x42
 from assets.font import numbers_15x28
+from assets.font import numbers_15x28_red
+from assets.font import numbers_15x28_blue
 from message_listener.server import Server
 from iot_message.message import Message
 from handler.DHTHandler import DHTHandler
@@ -32,10 +34,12 @@ window_manager = WindowManager(config)
 window_manager.drop_out_of_bounds = True
 FONTS = {
     '24x42': numbers_24x42.Numbers(),
-    '15x28': numbers_15x28.Numbers()
+    '15x28': numbers_15x28.Numbers(),
+    '15x28_red': numbers_15x28_red.Numbers(),
+    '15x28_blue': numbers_15x28_blue.Numbers(),
 }
 
-window_manager.add_widget('clock', [(3, 0)], ClockWidget(FONTS['15x28']))
+window_manager.add_widget('clock', [(3, 2)], ClockWidget(FONTS['15x28']))
 window_manager.add_widget('node-kitchen', [(0, 0)], NodeOneWidget(FONTS['24x42']))
 window_manager.add_widget('openweather', [(0, 1), (1, 1), (2, 1), (3, 1), (4, 1)], OpenweatherWidget([0, 1, 2], FONTS))
 window_manager.add_widget(
@@ -57,7 +61,7 @@ window_manager.start()
 dispatcher = HandlerDispatcher({
     'node-kitchen': [window_manager.get_widget('node-kitchen')],
     'node-my-room': [window_manager.get_widget('node-my-room'), window_manager.get_widget('node-my-room-2')],
-    'openweather': [window_manager.get_widget('openweather')],
+    #'openweather': [window_manager.get_widget('openweather')],
     'my-room-light': [window_manager.get_widget('my-room-light')]
 })
 svr = Server(msg)
