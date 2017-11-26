@@ -1,1 +1,164 @@
-ªªªίιξμοÿ¨Νιξιονϊªªªινψοϊό¨όθϊνιμιξοινψοϊό¨όιννινψοϊό¨νιόθξϊον¨ώινÿ®ÿιμονό¨ινψοϊό¨Λμιλλικμνξϊον¨ϋνϊώιλν®ÿιξμοÿίνιξιονϊίψιον¨ινψοϊό¨Ψιονξϊον¨ϋνϊώιλν®ÿιξμοÿίνιξιονϊίθομμνϊ¨ινψοϊό¨ίιμονόΘομμνϊλμιϋϋ¨ίιξμοÿΝιξιονϊ¨όθϊνιμιξο®άθϊνιμ©Ί¨¨¨¨ªªªίιξμοÿ¨Νιξιονϊªªª¨¨¨¨ϋιϊν¨½¨ϋ¨¨¨¨¨¨¨¨ªÿιμονόίθνιοθόªΊ¨ΉΈΎ¬¨¨¨¨¨¨¨¨ªÿιμονόίÿιμόθªΊ¨ΉΈΎ¬¨¨¨¨¨¨¨¨ªοϊιμίθνιοθόªΊ¨Έ¬¨¨¨¨¨¨¨¨ªοϊιμίÿιμόθªΊ¨Έ¬¨¨¨¨¨¨¨¨ªνιϊοιξίθνιοθόªΊ¨Έ¬¨¨¨¨¨¨¨¨ªνιϊοιξίÿιμόθªΊ¨Έ¬¨¨¨¨ύ¨¨¨¨μνξ¨ίίιξιόίί¨ϋνμξ¬¨λοξξιο©Ί¨¨¨¨¨¨¨¨όθϊνιμιξο®άθϊνιμ®ίίιξιόίί¨ϋνμξ©¨¨¨¨¨¨¨¨ϋνμξ®ιλόιώνίψιον¨½¨Έ¨¨¨¨¨¨¨¨ϋνμξ®μλμ¨½¨λοξξιο®μλμ¨¨¨¨¨¨¨¨ϋνμξ®ίλιμλύμιόνίοϊιμ¨©¨¨¨¨¨¨¨¨ϋνμξ®ψιονϋ¨½¨Ϋ¨¨¨¨¨¨¨¨¨¨¨¨Ψιον¨¨ϋνμξ®ϋιϊνΫ―οϊιμίÿιμόθ―έ¬¨ϋνμξ®ϋιϊνΫ―οϊιμίθνιοθό―έ©©¨¨¨¨¨¨¨¨έ¨¨¨¨¨¨¨¨λοξξιο®ιξιόίόούλθ¨ϋνμξ®λμιλλ©¨¨¨¨¨¨¨¨ϋνμξ®ÿοϊλ¨½¨άϊύν¨¨¨¨¨¨¨¨ϋνμξ®μϊιÿίψιον¨½¨άϊύν¨¨¨¨¨¨¨¨ϋνμξ®μϊοψίούόίοξίκούξμϋ¨½¨Ξιμϋν¨¨¨¨μνξ¨ιμμίÿιμονό¨ϋνμξ¬¨ξινν¬¨ϋμοόϋ¬¨ÿιμονό¬¨ψιον½Έ©Ί¨¨¨¨¨¨¨¨ªªªιμμ¨ÿιμονό¨όο¨οϊιμ¬¨λιμλύμιόν¨¨ψ¬ω©ªªª¨¨¨¨¨¨¨¨ψοϋιόιοξ¨½¨Ϋέ¨¨¨¨¨¨¨¨ξοϊ¨λοοϊμϋ¨ιξ¨ϋμοόϋΊ¨¨¨¨¨¨¨¨¨¨¨¨ιξ¨λοοϊμϋΫΈέ¨Ό¨ϋνμξ®ϋιϊνΫ―οϊιμίÿιμόθ―έ¨ιξμ¨λοοϊμϋΫΉέ¨Ό¨ϋνμξ®ϋιϊνΫ―οϊιμίθνιοθό―έΊ¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨ψοϋιόιοξ®ιψψνξμ¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨λοοϊμϋΫΈέª¨ϋνμξ®ϋιϊνΫªÿιμονόίÿιμόθªέ¨«¨ϋνμξ®ϋιϊνΫ―νιϊοιξίÿιμόθ―έ©¬¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨λοοϊμϋΫΉέª¨ϋνμξ®ϋιϊνΫªÿιμονόίθνιοθόªέ¨«¨ϋνμξ®ϋιϊνΫ―νιϊοιξίθνιοθό―έ©¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨©©¨¨¨¨¨¨¨¨¨¨¨¨νμιξ¨ξοό¨ϋνμξ®μϊοψίούόίοξίκούξμϋΊ¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨ϊιιϋν¨Νψλνψόιοξ¨―ίιμονό¨ούό¨οξ¨ϋλϊννξ¨―¬¨ξινν¬¨ϋμοόϋ©¨¨¨¨¨¨¨¨ιξ¨μνξ¨ψοϋιόιοξ©¨Ύ¨ΈΊ¨¨¨¨¨¨¨¨¨¨¨¨ιξ¨ψιον¨Ύ¨μνξ¨ϋνμξ®ψιονϋ©­ΉΊ¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨ϋνμξ®ίιμμίψιον¨ψιον©¨¨¨¨¨¨¨¨¨¨¨¨ϋνμξ®ψιονϋΫψιονέ®ιμμίÿιμονό¨ξινν¬¨ίιμονόΘομμνϊ¨ψοϋιόιοξ¬¨ϋμοόϋ¬¨ÿιμονό©©¨¨¨¨μνξ¨ίιμμίψιον¨ϋνμξ¬¨ψιον©Ί¨¨¨¨¨¨¨¨ªªªιμμ¨ξνÿ¨ψιονªªª¨¨¨¨¨¨¨¨ιξ¨μνξ¨ϋνμξ®ψιονϋ©¨Ό¨ψιονΊ¨¨¨¨¨¨¨¨¨¨¨¨ϊιιϋν¨Νψλνψόιοξ¨―Λιξξοό¨λϊνιόν¨ψιον¨―«ϋόϊ¨ψιον©©¨¨¨¨¨¨¨¨ϋνμξ®ψιονϋ®ιψψνξμ¨¨¨¨¨¨¨¨¨¨¨¨¨Ψιον¨¨ϋνμξ®ϋιϊνΫ―οϊιμίÿιμόθ―έ¬¨ϋνμξ®ϋιϊνΫ―οϊιμίθνιοθό―έ©©¨¨¨¨¨¨¨¨©¨¨¨¨μνξ¨ϊύξ¨ϋνμξ©Ί¨¨¨¨¨¨¨¨ªªªνιιξ¨μοοψ¨­¨μϊιÿιξοªªª¨¨¨¨¨¨¨¨ÿιμονόϋ¨½¨ϋνμξ®ψιονϋΫϋνμξ®ιλόιώνίψιονέ®ÿιμονόϋ¨¨¨¨¨¨¨¨ÿθιμν¨ϋνμξ®ÿοϊλΊ¨¨¨¨¨¨¨¨¨¨¨¨ιξ¨ϋνμξ®μϊιÿίψιονΊ¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨ϋνμξ®ίμϊιÿίÿιμονόϋ¨©¨¨¨¨¨¨¨¨¨¨¨¨ξοϊ¨θομμνϊ¨ιξ¨ÿιμονόϋΊ¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨ÿιμονόϋΫθομμνϊέ®ÿιμονό®μϊιÿίώιμύνϋ¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨ϋνμξ®μλμ¬¨ÿιμονόϋΫθομμνϊέ®λοοϊμϋ¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨©¨¨¨¨¨¨¨¨¨¨¨¨όινν®ϋμννψ¨Έ®ΈΊ½©¨¨¨¨μνξ¨ίμϊιÿίÿιμονόϋ¨ϋνμξ©Ί¨¨¨¨¨¨¨¨ªªªμϊιÿ¨ÿιμονόϋªªª¨¨¨¨¨¨¨¨ϋνμξ®μλμ®ιξιό¨©¨¨¨¨¨¨¨¨ÿιμονόϋ¨½¨ϋνμξ®ψιονϋΫϋνμξ®ιλόιώνίψιονέ®ÿιμονόϋ¨¨¨¨¨¨¨¨ξοϊ¨θομμνϊ¨ιξ¨ÿιμονόϋΊ¨¨¨¨¨¨¨¨¨¨¨¨ÿιμονόϋΫθομμνϊέ®ÿιμονό®μϊιÿίÿιμονό¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨ϋνμξ®μλμ¬¨ÿιμονόϋΫθομμνϊέ®λοοϊμϋ¨¨¨¨¨¨¨¨¨¨¨¨©¨¨¨¨¨¨¨¨ϋνμξ®μϊιÿίψιον¨½¨Ξιμϋν¨¨¨¨μνξ¨ϋόοψ¨ϋνμξ©Ί¨¨¨¨¨¨¨¨ªªªϋόοψϋ¨ι¨όθϊνιμªªª¨¨¨¨¨¨¨¨ϋνμξ®ÿοϊλ¨½¨Ξιμϋν¨¨¨¨μνξ¨ϋνόίÿιμονόίλομοϊ¨ϋνμξ¬¨ξινν¬¨λνω¬¨ώιμύν©Ί¨¨¨¨¨¨¨¨ªªªλθιξον¨λομούϊªªª¨¨¨¨¨¨¨¨ÿιμονό¨½¨ϋνμξ®ονόίÿιμονό¨ξινν©¨¨¨¨¨¨¨¨ιξ¨ÿιμονόΊ¨¨¨¨¨¨¨¨¨¨¨¨ÿιμονό®λομούϊϋΫλνωέ¨½¨ώιμύν¨¨¨¨μνξ¨ονόίÿιμονό¨ϋνμξ¬¨ξινν©Ί¨¨¨¨¨¨¨¨ªªªονό¨ÿιμονό¨κω¨ξιννªªª¨¨¨¨¨¨¨¨ξοϊ¨ψιον¨ιξ¨ϋνμξ®ψιονϋΊ¨¨¨¨¨¨¨¨¨¨¨¨ÿιμονόϋ¨½¨ψιον®ÿιμονόϋ¨¨¨¨¨¨¨¨¨¨¨¨ιξ¨ξινν¨ιξ¨ÿιμονόϋΊ¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨ϊνόύϊξ¨ÿιμονόϋΫξιννέ®ÿιμονό¨¨¨¨¨¨¨¨ϊνόύϊξ¨Ξοξν¨¨¨¨μνξ¨ονόίÿιμονόϋ¨ϋνμξ©Ί¨¨¨¨¨¨¨¨ªªªϊνόύϊξϋ¨ÿιμονόϋ¨μιλόιοξιϊωªªª¨¨¨¨¨¨¨¨ϊνόύϊξίÿιμονόϋ¨½¨ϋύ¨¨¨¨¨¨¨¨ξοϊ¨ψιον¨ιξ¨ϋνμξ®ψιονϋΊ¨¨¨¨¨¨¨¨¨¨¨¨ÿιμονόϋ¨½¨ψιον®ÿιμονόϋ¨¨¨¨¨¨¨¨¨¨¨¨ξοϊ¨θιξμμνϊ¨ιξ¨ÿιμονόϋΊ¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨ϊνόύϊξίÿιμονόϋΫθιξμμνϊέ¨½¨ÿιμονόϋΫθιξμμνϊέ®ÿιμονό¨¨¨¨¨¨¨¨ϊνόύϊξ¨ϊνόύϊξίÿιμονόϋ¨¨¨¨μνξ¨λμιλλ¨ϋνμξ¬¨ψοιξό©Ί¨¨¨¨¨¨¨¨ªªªνψνλύόν¨λμιλλ¨νώνξόªªª¨¨¨¨¨¨¨¨ιξ¨ψοιξό¨ιϋ¨ΞοξνΊ¨¨¨¨¨¨¨¨¨¨¨¨ϊνόύϊξ¨¨¨¨¨¨¨¨ιξ¨ϋνμξ®ίνψνλύόνίιξόνϊξιμίνώνξό¨ψοιξό©Ί¨¨¨¨¨¨¨¨¨¨¨¨ϊνόύϊξ¨¨¨¨¨¨¨¨ψοϋίψ¬¨ψοϋίω¨½¨ψοιξό¨¨¨¨¨¨¨¨θομμνϊϋ¨½¨ϋνμξ®ψιονϋΫϋνμξ®ιλόιώνίψιονέ®ÿιμονόϋ¨¨¨¨¨¨¨¨ξούξμ¨½¨¨Ξοξν¬¨Ξοξν©¨¨¨¨¨¨¨¨ξοϊ¨ξινν¨ιξ¨θομμνϊϋΊ¨¨¨¨¨¨¨¨¨¨¨¨ιμψ¨½¨Έ¨¨¨¨¨¨¨¨¨¨¨¨ιξ¨ιϋιξϋόιξλν¨θομμνϊϋΫξιννέ®ÿιμονό¬¨Λμιλλικμν©Ί¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨ξοϊ¨λοοϊμϋ¨ιξ¨θομμνϊϋΫξιννέ®λοοϊμϋΊ¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨ιξ¨λοοϊμϋΫΈέ¨Ό¨ψοϋίψ¨Ό¨λοοϊμϋΫΈέ¨«¨ϋνμξ®ϋιϊνΫªÿιμονόίÿιμόθªέ¨ιξμ¨λοοϊμϋΫΉέ¨Ό¨ψοϋίω¨Ό¨λοοϊμϋΫΉέ¨«¨ϋνμξ®ϋιϊνΫªÿιμονόίθνιοθόªέΊ¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨ξούξμ¨½¨¨ξινν¬¨ιμψ¬¨ψοϋίψ¨­¨λοοϊμϋΫΈέ¬¨ψοϋίω¨­¨λοοϊμϋΫΉέ©¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨κϊνιλ¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨ιμψ¨«½¨Ή¨¨¨¨¨¨¨¨ιξ¨ιμμ¨ώιμ¨ιϋ¨ξοό¨Ξοξν¨ξοϊ¨ώιμ¨ιξ¨ξούξμ©Ί¨¨¨¨¨¨¨¨¨¨¨¨ϋνμξ®ψιονϋΫϋνμξ®ιλόιώνίψιονέ®ÿιμονόϋΫξούξμΫΈέέ®ÿιμονό®ιλόιοξ¨ªξούξμ©¨¨¨¨μνξ¨ίνψνλύόνίιξόνϊξιμίνώνξό¨ϋνμξ¬¨ψοιξό©Ί¨¨¨¨¨¨¨¨ªªªνψνλύόν¨ιξόνϊξιμ¨νώνξόªªª¨¨¨¨¨¨¨¨ιξ¨ϋνμξ®μλμ®ÿιμόθ¨―¨Ί¨­¨Ό½¨Ό¨ψοιξόΫΈέ¨Ό¨ϋνμξ®μλμ®ÿιμόθ¨―¨Ί¨«¨Ό½¨ιξμ¨Έ¨Ό¨ψοιξόΫΉέ¨Ό¨ΎΈΊ¨¨¨¨¨¨¨¨¨¨¨¨ϋνμξ®ίψιονίψϊνώιούϋ¨©¨¨¨¨¨¨¨¨¨¨¨¨ϊνόύϊξ¨άϊύν¨¨¨¨¨¨¨¨ιξ¨ϋνμξ®μλμ®ÿιμόθ¨―¨Ί¨­¨Ό½¨Ό¨ψοιξόΫΈέ¨Ό¨ϋνμξ®μλμ®ÿιμόθ¨―¨Ί¨«¨Ό½¨ιξμ¨ά¨¨¨¨¨¨¨¨¨¨¨¨ϋνμξ®μλμ®θνιοθό¨­¨ΎΈ¨Ό¨ψοιξόΫΉέ¨Ό¨ϋνμξ®μλμ®θνιοθόΊ¨¨¨¨¨¨¨¨¨¨¨¨ϋνμξ®ίψιονίξνψό¨©¨¨¨¨¨¨¨¨¨¨¨¨ϊνόύϊξ¨άϊύν¨¨¨¨¨¨¨¨ϊνόύϊξ¨Ξιμϋν¨¨¨¨μνξ¨ίψιονίψϊνώιούϋ¨ϋνμξ©Ί¨¨¨¨¨¨¨¨ªªªϋÿιόλθ¨όο¨ψϊνώ¨ψιονªªª¨¨¨¨¨¨¨¨ιξ¨ϋνμξ®ιλόιώνίψιον¨Ύ¨ΈΊ¨¨¨¨¨¨¨¨¨¨¨¨ϋνμξ®μϊιÿίψιον¨½¨άϊύν¨¨¨¨¨¨¨¨¨¨¨¨ϋνμξ®ιλόιώνίψιον¨­½¨Ή¨¨¨¨μνξ¨ίψιονίξνψό¨ϋνμξ©Ί¨¨¨¨¨¨¨¨ªªªϋÿιόλθ¨όο¨ξνψό¨ψιονªªª¨¨¨¨¨¨¨¨ιξ¨ϋνμξ®ιλόιώνίψιον¨Ό¨μνξ¨ϋνμξ®ψιονϋ©­ΉΊ¨¨¨¨¨¨¨¨¨¨¨¨ϋνμξ®μϊιÿίψιον¨½¨άϊύν¨¨¨¨¨¨¨¨¨¨¨¨ϋνμξ®ιλόιώνίψιον¨«½¨Ή¨¨¨¨μνξ¨ίλιμλύμιόνίοϊιμ¨ϋνμξ©Ί¨¨¨¨¨¨¨¨ªªªλιμλύμιόν¨οϊιμ¨ϋιϊνªªª¨¨¨¨¨¨¨¨ϋνμξ®ϋιϊνΫ―οϊιμίÿιμόθ―έ¨½¨¨ϋνμξ®μλμ®ÿιμόθ­Ή©¨――¨ϋνμξ®ϋιϊνΫ―ÿιμονόίÿιμόθ―έ¨¨¨¨¨¨¨¨ϋνμξ®ϋιϊνΫ―οϊιμίθνιοθό―έ¨½¨¨ϋνμξ®μλμ®θνιοθό­Ή©¨――¨ϋνμξ®ϋιϊνΫ―ÿιμονόίθνιοθό―έ¨¨¨¨¨¨¨¨νιϊοιξίÿιμόθ¨½¨ϋνμξ®μλμ®ÿιμόθ¨­¨¨ϋνμξ®ϋιϊνΫ―οϊιμίÿιμόθ―έ¨ª¨ϋνμξ®ϋιϊνΫ―ÿιμονόίÿιμόθ―έ©¨¨¨¨¨¨¨¨νιϊοιξίθνιοθό¨½¨ϋνμξ®μλμ®θνιοθό¨­¨¨ϋνμξ®ϋιϊνΫ―οϊιμίθνιοθό―έ¨ª¨ϋνμξ®ϋιϊνΫ―ÿιμονόίθνιοθό―έ©¨¨¨¨¨¨¨¨ϋνμξ®ϋιϊνΫ―νιϊοιξίθνιοθό―έ¨½¨νιόθ®ξμοοϊ¨νιϊοιξίθνιοθό¨―¨¨ϋνμξ®ϋιϊνΫ―οϊιμίθνιοθό―έ¨­Ή©©¨¨¨¨¨¨¨¨ϋνμξ®ϋιϊνΫ―νιϊοιξίÿιμόθ―έ¨½¨νιόθ®ξμοοϊ¨νιϊοιξίÿιμόθ¨―¨¨ϋνμξ®ϋιϊνΫ―οϊιμίÿιμόθ―έ¨­¨Ή©©
+"""Window Manager"""
+import threading
+import time
+import math
+from view.widget import Clickable
+from service.window_manager_page import Page
+from service.window_manager_holder import WidgetHolder
+
+
+class WindowManager(threading.Thread):
+    """Window Manager"""
+    size = {
+        "widget_height": 106,
+        "widget_width": 106,
+        "grid_height": 0,
+        "grid_width": 0,
+        "margin_height": 0,
+        "margin_width": 0,
+    }
+
+    def __init__(self, config):
+        threading.Thread.__init__(self)
+        self.active_page = 0
+        self.lcd = config.lcd
+        self._calculate_grid()
+        self.pages = [
+            Page((self.size['grid_width'], self.size['grid_height']))
+        ]
+        config.init_touch(self.click)
+        self.work = True
+        self.draw_page = True
+        self.drop_out_of_bounds = False
+
+    def add_widget(self, name, slots, widget, page=0):
+        """add widget to grid, calculate (x,y)"""
+        position = []
+        for coords in slots:
+            if coords[0] < self.size['grid_width'] and coords[1] < self.size['grid_height']:
+                position.append((
+                    coords[0]*(self.size["widget_width"] + self.size['margin_width']),
+                    coords[1]*(self.size["widget_height"] + self.size['margin_height'])
+                ))
+            elif not self.drop_out_of_bounds:
+                raise Exception('Widget out of screen ', name, slots)
+
+        if len(position) > 0:
+            if page > len(self.pages)-1:
+                self._add_page(page)
+            self.pages[page].add_widget(name, WidgetHolder(position, slots, widget))
+
+    def _add_page(self, page):
+        """add new page"""
+        if len(self.pages) < page:
+            raise Exception('Cannot create page '+str(page))
+
+        self.pages.append(
+            Page((self.size['grid_width'], self.size['grid_height']))
+        )
+
+    def run(self):
+        """main loop - drawing"""
+        widgets = self.pages[self.active_page].widgets
+        while self.work:
+            if self.draw_page:
+                self._draw_widgets()
+            for holder in widgets:
+                widgets[holder].widget.draw_values(
+                    self.lcd, widgets[holder].coords
+                )
+            time.sleep(0.025)
+
+    def _draw_widgets(self):
+        """draw widgets"""
+        self.lcd.init()
+        widgets = self.pages[self.active_page].widgets
+        for holder in widgets:
+            widgets[holder].widget.draw_widget(
+                self.lcd, widgets[holder].coords
+            )
+        self.draw_page = False
+
+    def stop(self):
+        """stops a thread"""
+        self.work = False
+
+    def set_widget_color(self, name, key, value):
+        """change colour"""
+        widget = self.get_widget(name)
+        if widget:
+            widget.colours[key] = value
+
+    def get_widget(self, name):
+        """get widget by name"""
+        for page in self.pages:
+            widgets = page.widgets
+            if name in widgets:
+                return widgets[name].widget
+
+        return None
+
+    def get_widgets(self):
+        """returns widgets dictionary"""
+        return_widgets = {}
+        for page in self.pages:
+            widgets = page.widgets
+            for handler in widgets:
+                return_widgets[handler] = widgets[handler].widget
+
+        return return_widgets
+
+    def click(self, point):
+        """execute click event"""
+        if point is None:
+            return
+        if self._execute_internal_event(point):
+            return
+        pos_x, pos_y = point
+        holders = self.pages[self.active_page].widgets
+        found = (None, None)
+        for name in holders:
+            idx = 0
+            if isinstance(holders[name].widget, Clickable):
+                for coords in holders[name].coords:
+                    if coords[0] < pos_x < coords[0] + self.size["widget_width"] and coords[1] < pos_y < coords[1] + self.size["widget_height"]:
+                        found = (name, idx, pos_x - coords[0], pos_y - coords[1])
+                        break
+                    idx += 1
+
+        if all(val is not None for val in found):
+            self.pages[self.active_page].widgets[found[0]].widget.action(*found)
+
+    def _execute_internal_event(self, point):
+        """execute internal event"""
+        if self.lcd.width / 2 - 45 < point[0] < self.lcd.width / 2 + 45 and 0 < point[1] < 60:
+            self._page_previous()
+            return True
+        if self.lcd.width / 2 - 45 < point[0] < self.lcd.width / 2 + 45 and \
+            self.lcd.height - 60 < point[1] < self.lcd.height:
+            self._page_next()
+            return True
+        return False
+
+    def _page_previous(self):
+        """switch to prev page"""
+        if self.active_page > 0:
+            self.draw_page = True
+            self.active_page -= 1
+
+    def _page_next(self):
+        """switch to next page"""
+        if self.active_page < len(self.pages)-1:
+            self.draw_page = True
+            self.active_page += 1
+
+    def _calculate_grid(self):
+        """calculate grid size"""
+        self.size['grid_width'] = (self.lcd.width-1) // self.size['widget_width']
+        self.size['grid_height'] = (self.lcd.height-1) // self.size['widget_height']
+
+        margin_width = self.lcd.width - (self.size['grid_width'] * self.size['widget_width'])
+        margin_height = self.lcd.height - (self.size['grid_height'] * self.size['widget_height'])
+        self.size['margin_height'] = math.floor(margin_height / (self.size['grid_height'] -1))
+        self.size['margin_width'] = math.floor(margin_width / (self.size['grid_width'] - 1))
+
