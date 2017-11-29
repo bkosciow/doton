@@ -30,6 +30,7 @@ class WindowManager(threading.Thread):
         self.work = True
         self.draw_page = True
         self.drop_out_of_bounds = False
+        self.point = None
 
     def add_widget(self, name, slots, widget, page=0):
         """add widget to grid, calculate (x,y)"""
@@ -67,6 +68,7 @@ class WindowManager(threading.Thread):
                 widgets[holder].widget.draw_values(
                     self.lcd, widgets[holder].coords
                 )
+            self._touch_handle()
             time.sleep(0.025)
 
     def _draw_widgets(self):
@@ -109,7 +111,13 @@ class WindowManager(threading.Thread):
         return return_widgets
 
     def click(self, point):
+        """store touch point"""
+        self.point = point
+
+    def _touch_handle(self):
         """execute click event"""
+        point = self.point
+        self.point = None
         if point is None:
             return
         if self._execute_internal_event(point):

@@ -226,12 +226,22 @@ class OpenweatherWidget(Widget):
 
     def _get_value(self, widget_type, day, key, value, precision=2):
         """get value"""
+        sign = ''
         if widget_type == 'current':
-            return None if self.current_weather[key] is None \
-                else str(round(self.current_weather[key][value])).rjust(precision, '0')
-        elif widget_type == 'forecast':
-            return None if self.forecast_weather[day][key] is None \
-                else str(round(self.forecast_weather[day][key][value])).rjust(precision, '0')
+            if self.current_weather[key] is None:
+                return None
+            value = self.current_weather[key][value]
+        else:
+            if self.forecast_weather[day][key] is None:
+                return None
+            value = self.forecast_weather[day][key][value]
+
+        if value < 0:
+            sign = '-'
+            value *= -1
+        value = str(round(value)).rjust(precision, '0')
+
+        return sign + value
 
     def _wind_degree(self, widget_type, day):
         """return wind degree value"""
