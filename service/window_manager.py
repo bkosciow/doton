@@ -69,7 +69,6 @@ class WindowManager(threading.Thread):
                     self.lcd, widgets[holder].coords
                 )
             self._touch_handle()
-            time.sleep(0.025)
 
     def _draw_widgets(self):
         """draw widgets"""
