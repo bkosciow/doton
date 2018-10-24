@@ -24,20 +24,31 @@ class Config(object):
 
     def init_lcd(self):
         """dynamically load and init lcd"""
+        module_name = self.config.get('lcd', 'module')
         driver_name = self.config.get('lcd', 'driver')
         chip_name = self.config.get('lcd', 'lcd')
         size = self.config.get('lcd', 'size').split(",")
-        driver_pins = self._get_dict(self.config.get('lcd', 'driver_pins'))
 
-        path = "gfxlcd.driver.{}.{}".format(chip_name, driver_name)
-        class_ = getattr(import_module(path), driver_name.upper())
-        driver = class_()
-        if driver_pins:
-            driver.pins = driver_pins
+        if module_name == 'gfxlcd':
+            driver_pins = self._get_dict(self.config.get('lcd', 'driver_pins'))
+            path = "gfxlcd.driver.{}.{}".format(chip_name, driver_name)
+            class_ = getattr(import_module(path), driver_name.upper())
+            driver = class_()
+            if driver_pins:
+                driver.pins = driver_pins
 
-        path = "gfxlcd.driver.{}.{}".format(chip_name, chip_name)
-        class_ = getattr(import_module(path), chip_name.upper())
-        self.lcd = class_(int(size[0]), int(size[1]), driver)
+            path = "gfxlcd.driver.{}.{}".format(chip_name, chip_name)
+            class_ = getattr(import_module(path), chip_name.upper())
+            self.lcd = class_(int(size[0]), int(size[1]), driver)
+        elif module_name == 'gfxcili':
+            driver_pins = [int(pin.strip()) for pin in self.config.get('lcd', 'driver_pins').split(",")]
+            path = "cili.{}".format(chip_name)
+            class_ = getattr(import_module(path), chip_name)
+            driver_pins.insert(0, int(size[1]))
+            driver_pins.insert(0, int(size[0]))
+            self.lcd = class_(*driver_pins)
+        else:
+            raise ImportWarning('Unknown module')
         self.lcd.rotation = int(self.config.get('lcd', 'rotate'))
         self.lcd.init()
 

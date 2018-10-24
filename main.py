@@ -42,9 +42,10 @@ FONTS = {
 window_manager.add_widget('clock', [(3, 2)], ClockWidget(FONTS['15x28']))
 window_manager.add_widget('node-kitchen', [(0, 0)], NodeOneWidget(FONTS['24x42']))
 window_manager.add_widget('openweather', [(0, 1), (1, 1), (2, 1), (3, 1), (4, 1)], OpenweatherWidget([0, 1, 2], FONTS))
+#window_manager.add_widget('openweather', [(0, 1), (1, 1)], OpenweatherWidget([0, 1, 2], FONTS))
 window_manager.add_widget(
-    'my-room-light', [(0, 2), (1, 2)],
-    RelayWidget(msg, 'my-room-light', broadcast_socket, address, 2)
+     'my-room-light', [(0, 2), (1, 2)],
+     RelayWidget(msg, 'my-room-light', broadcast_socket, address, 2)
 )
 window_manager.add_widget('node-my-room-2', [(1, 0)], NodeOneWidget(FONTS['24x42']))
 
@@ -61,7 +62,7 @@ window_manager.start()
 dispatcher = HandlerDispatcher({
     'node-kitchen': [window_manager.get_widget('node-kitchen')],
     'node-my-room': [window_manager.get_widget('node-my-room'), window_manager.get_widget('node-my-room-2')],
-    #'openweather': [window_manager.get_widget('openweather')],
+    'openweather': [window_manager.get_widget('openweather')],
     'my-room-light': [window_manager.get_widget('my-room-light')]
 })
 svr = Server(msg)
