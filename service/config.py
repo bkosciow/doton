@@ -40,7 +40,7 @@ class Config(object):
             path = "gfxlcd.driver.{}.{}".format(chip_name, chip_name)
             class_ = getattr(import_module(path), chip_name.upper())
             self.lcd = class_(int(size[0]), int(size[1]), driver)
-        elif module_name == 'cili':
+        elif module_name == 'gfxcili':
             driver_pins = [int(pin.strip()) for pin in self.config.get('lcd', 'driver_pins').split(",")]
             path = "cili.{}".format(chip_name)
             class_ = getattr(import_module(path), chip_name)

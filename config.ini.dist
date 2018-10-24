@@ -1,16 +1,16 @@
 [lcd]
-;gfxlcd cili
+;gfxlcd gfxcili
 module=gfxlcd
 ;ili9486 ili9325
 lcd=ili9486
 size=320,480
 rotate=270
-;ignored for cili
+;ignored for gfxcili
 driver=spi
 ; as dictionary for gfxlcd
 ;{"CS": 8,"RST": 25,"RS": 24,"LED": ""}
 ;{"RS": 27,"W": 17,"DB8": 22,"DB9": 23,"DB10": 24,"DB11": 5,"DB12": 12,"DB13": 16,"DB14": 20,"DB15": 21,"RST": 25,"LED": 6,"CS": 18}
-; as list for cili
+; as list for gfxcili
 ; gpio = 18, 27, 17, 25, 22, 23, 24, 5, 12, 16, 20, 21
 ; SPI, SPEED, CS, RST, RS = 0, 3200000, 8, 25, 24
 driver_pins=

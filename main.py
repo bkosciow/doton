@@ -39,23 +39,23 @@ FONTS = {
     '15x28_blue': numbers_15x28_blue.Numbers(),
 }
 
-window_manager.add_widget('clock', [(1, 0)], ClockWidget(FONTS['15x28']))
+window_manager.add_widget('clock', [(3, 2)], ClockWidget(FONTS['15x28']))
 window_manager.add_widget('node-kitchen', [(0, 0)], NodeOneWidget(FONTS['24x42']))
-#window_manager.add_widget('openweather', [(0, 1), (1, 1), (2, 1), (3, 1), (4, 1)], OpenweatherWidget([0, 1, 2], FONTS))
-window_manager.add_widget('openweather', [(0, 1), (1, 1)], OpenweatherWidget([0, 1, 2], FONTS))
-# window_manager.add_widget(
-#     'my-room-light', [(0, 1), (1, 1)],
-#     RelayWidget(msg, 'my-room-light', broadcast_socket, address, 2)
-# )
-# window_manager.add_widget('node-my-room-2', [(1, 0)], NodeOneWidget(FONTS['24x42']))
+window_manager.add_widget('openweather', [(0, 1), (1, 1), (2, 1), (3, 1), (4, 1)], OpenweatherWidget([0, 1, 2], FONTS))
+#window_manager.add_widget('openweather', [(0, 1), (1, 1)], OpenweatherWidget([0, 1, 2], FONTS))
+window_manager.add_widget(
+     'my-room-light', [(0, 2), (1, 2)],
+     RelayWidget(msg, 'my-room-light', broadcast_socket, address, 2)
+)
+window_manager.add_widget('node-my-room-2', [(1, 0)], NodeOneWidget(FONTS['24x42']))
 
-# window_manager.add_widget('node-kitchen-2', [(0, 1)], window_manager.get_widget('node-kitchen'), 1)
-# window_manager.add_widget('node-my-room', [(1, 2)], NodeOneWidget(FONTS['24x42']), 1)
+window_manager.add_widget('node-kitchen-2', [(0, 1)], window_manager.get_widget('node-kitchen'), 1)
+window_manager.add_widget('node-my-room', [(1, 2)], NodeOneWidget(FONTS['24x42']), 1)
 
-# window_manager.add_widget('more-weather', [(0, 2), (1, 2)], window_manager.get_widget('openweather'), 2)
+window_manager.add_widget('more-weather', [(0, 2), (1, 2)], window_manager.get_widget('openweather'), 2)
 
-# window_manager.set_widget_color('node-my-room', 'background', (0, 255, 255))
-# window_manager.set_widget_color('node-my-room-2', 'background', (0, 255, 255))
+window_manager.set_widget_color('node-my-room', 'background', (0, 255, 255))
+window_manager.set_widget_color('node-my-room-2', 'background', (0, 255, 255))
 
 window_manager.start()
 
