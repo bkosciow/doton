@@ -54,6 +54,16 @@ File **config.ini**
     apikey=my-secret-api-key
     cities={"3103402": "Bielsko-Biała"}
 
+## Doton as a service
+
+- Copy file doton.service to /lib/systemd/system/doton.service
+
+- chmod 0644 /lib/systemd/system/doton.service
+
+- adjust drectories and names in file
+
+- start by systemctl start doton
+
 ## Attached projects:
 - GfxLCD - lib for graphical LCDs on ili9325, ssd1306 and nju6450. Made for Doton project - [repo](https://github.com/bkosciow/gfxlcd) - [Articles](https://koscis.wordpress.com/category/screens/lcd-screens/gfxlcd/)
 

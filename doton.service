@@ -1,0 +1,14 @@
+[Unit]
+Description=Doton
+After=multi-user.target
+
+[Service]
+User=pi
+Type=idle
+ExecStart=/usr/bin/python3 /home/pi/workspace/doton/main.py
+WorkingDirectory=/home/pi/workspace/doton
+
+
+[Install]
+WantedBy=multi-user.target
+
