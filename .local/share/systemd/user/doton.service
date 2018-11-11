@@ -1,0 +1,10 @@
+[Unit]
+Description=Doton
+
+[Service]
+WorkingDirectory=/home/pi/workspace/doton/
+Type=idle
+ExecStart=/usr/bin/python3 /home/pi/workspace/doton/main.py
+
+[Install]
+WantedBy=default.target

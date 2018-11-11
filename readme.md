@@ -54,7 +54,7 @@ File **config.ini**
     apikey=my-secret-api-key
     cities={"3103402": "Bielsko-Biała"}
 
-## Doton as a service
+## Doton as a service (root)
 
 - Copy file doton.service to /lib/systemd/system/doton.service
 
@@ -63,6 +63,16 @@ File **config.ini**
 - adjust drectories and names in file
 
 - start by systemctl start doton
+
+## Doton as a service (pi user)
+
+- Copy .local/share/systemd/user/doton.service to /home/pi
+
+- run sudo loginctl enable-linger pi
+
+- run systemctl --user enable doton
+
+- run systemctl --user start doton
 
 ## Attached projects:
 - GfxLCD - lib for graphical LCDs on ili9325, ssd1306 and nju6450. Made for Doton project - [repo](https://github.com/bkosciow/gfxlcd) - [Articles](https://koscis.wordpress.com/category/screens/lcd-screens/gfxlcd/)
