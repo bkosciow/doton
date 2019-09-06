@@ -6,15 +6,15 @@ from message_listener.abstract.handler_interface import \
 class LightHandler(HandlerInterface):
     def handle(self, message):
         """handle a message"""
-        if message is not None and 'event' in message:
-            if message['event'] == 'detect.light':
+        if message is not None and 'event' in message.data:
+            if message.data['event'] == 'detect.light':
                 self.worker.set_light_data(
-                    message['node'],
+                    message.data['node'],
                     True
                 )
 
-            if message['event'] == 'detect.dark':
+            if message.data['event'] == 'detect.dark':
                 self.worker.set_light_data(
-                    message['node'],
+                    message.data['node'],
                     False
                 )

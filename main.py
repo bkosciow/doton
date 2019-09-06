@@ -20,11 +20,15 @@ from service.worker_handler import Handler as WorkerHandler
 from worker.openweather import OpenweatherWorker
 from service.window_manager import WindowManager
 from service.config import Config
+from iot_message.cryptor.base64 import Cryptor as B64
+
 GPIO.setmode(GPIO.BCM)
 
 config = Config()
 
-msg = Message(config.get('node_name'))
+Message.node_name = config.get('node_name')
+Message.encoder = B64()
+Message.add_decoder(B64())
 
 broadcast_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 broadcast_socket.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
@@ -40,32 +44,34 @@ FONTS = {
 }
 
 window_manager.add_widget('clock', [(3, 2)], ClockWidget(FONTS['15x28']))
-window_manager.add_widget('node-kitchen', [(0, 0)], NodeOneWidget(FONTS['24x42']))
 window_manager.add_widget('openweather', [(0, 1), (1, 1), (2, 1), (3, 1), (4, 1)], OpenweatherWidget([0, 1, 2], FONTS))
 #window_manager.add_widget('openweather', [(0, 1), (1, 1)], OpenweatherWidget([0, 1, 2], FONTS))
 window_manager.add_widget(
-     'my-room-light', [(0, 2), (1, 2)],
-     RelayWidget(msg, 'my-room-light', broadcast_socket, address, 2)
+     'my-room-light', [(0, 2)],
+     RelayWidget('node-living', broadcast_socket, address, 1)
 )
-window_manager.add_widget('node-my-room-2', [(1, 0)], NodeOneWidget(FONTS['24x42']))
+window_manager.add_widget(
+     'north-room-light', [(1, 2)],
+     RelayWidget('node-north', broadcast_socket, address, 1)
+)
+#
+window_manager.add_widget('node-kitchen', [(0, 0)], NodeOneWidget(FONTS['24x42']))
+window_manager.add_widget('node-living', [(1, 0)], NodeOneWidget(FONTS['24x42']))
+window_manager.add_widget('node-north', [(2, 0)], NodeOneWidget(FONTS['24x42']))
 
-window_manager.add_widget('node-kitchen-2', [(0, 1)], window_manager.get_widget('node-kitchen'), 1)
-window_manager.add_widget('node-my-room', [(1, 2)], NodeOneWidget(FONTS['24x42']), 1)
-
-window_manager.add_widget('more-weather', [(0, 2), (1, 2)], window_manager.get_widget('openweather'), 2)
-
-window_manager.set_widget_color('node-my-room', 'background', (0, 255, 255))
-window_manager.set_widget_color('node-my-room-2', 'background', (0, 255, 255))
+window_manager.set_widget_color('node-living', 'background', (0, 255, 255))
+window_manager.set_widget_color('node-north', 'background', (128, 128, 255))
 
 window_manager.start()
 
 dispatcher = HandlerDispatcher({
     'node-kitchen': [window_manager.get_widget('node-kitchen')],
-    'node-my-room': [window_manager.get_widget('node-my-room'), window_manager.get_widget('node-my-room-2')],
+    'node-living': [window_manager.get_widget('node-living')], #window_manager.get_widget('my-room-light')],
+    'node-north': [window_manager.get_widget('node-north'), window_manager.get_widget('north-room-light')],
     'openweather': [window_manager.get_widget('openweather')],
     'my-room-light': [window_manager.get_widget('my-room-light')]
 })
-svr = Server(msg)
+svr = Server()
 svr.add_handler('dht11', DHTHandler(dispatcher))
 svr.add_handler('pir', PIRHandler(dispatcher))
 svr.add_handler('light', LightHandler(dispatcher))

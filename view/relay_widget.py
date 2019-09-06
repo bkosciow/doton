@@ -3,16 +3,16 @@ from view.widget import Widget
 from view.widget import Clickable
 import json
 from PIL import Image
+from iot_message.message import Message
 
 
 class RelayWidget(Widget, Clickable):
     """Class Relay Widget"""
-    def __init__(self, message, target_node, socket, address, channels):
+    def __init__(self, target_node, socket, address, channels):
         self.colours = {
             'background': (149, 56, 170),
             'border': (244, 244, 244)
         }
-        self.message = message
         self.target_node = target_node
         self.channels = channels
         self.current = [0 for _ in range(0, channels)]
@@ -54,18 +54,29 @@ class RelayWidget(Widget, Clickable):
     def change_values(self, values):
         """change values"""
         if 'states' in values:
-            for idx in values['states']:
+            for idx in range(len(values['states'])):
                 self.current[idx] = values['states'][idx]
 
     def action(self, name, index, pos_x, pos_y):
         """toggle a relay"""
         enabled = self.current[index]
-        message = self.message.prepare_message({
+        message = Message()
+        message.set({
             'event': 'channel.off' if enabled else 'channel.on',
             'parameters': {
                 'channel': index
             },
             'targets': [self.target_node]
         })
-        message = json.dumps(message)
-        self.socket.sendto(message.encode(), self.address)
+        print(message)
+        self.socket.sendto(bytes(message), self.address)
+
+        # message = self.message.prepare_message({
+        #     'event': 'channel.off' if enabled else 'channel.on',
+        #     'parameters': {
+        #         'channel': index
+        #     },
+        #     'targets': [self.target_node]
+        # })
+        # message = json.dumps(message)
+        # self.socket.sendto(message.encode(), self.address)

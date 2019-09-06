@@ -6,9 +6,9 @@ from message_listener.abstract.handler_interface import \
 class RelayHandler(HandlerInterface):
     def handle(self, message):
         """handle a message"""
-        if message is not None and 'event' in message:
-            if message['event'] == 'channel.state':
+        if message is not None and 'event' in message.data:
+            if message.data['event'] == 'channels.response':
                 self.worker.set_relay_states(
-                    message['node'],
-                    message['parameters']
+                    message.data['node'],
+                    message.data['response']
                 )
