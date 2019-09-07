@@ -6,6 +6,7 @@ from PIL import Image
 class OpenweatherWidget(Widget):
     """Openweathermap widget"""
     def __init__(self, forecast_days, fonts):
+        super().__init__()
         self.forecast_days = forecast_days
         self.fonts = fonts
         self.colours = {

@@ -5,6 +5,7 @@ import datetime
 class ClockWidget(Widget):
     """Clock widget"""
     def __init__(self, font):
+        super().__init__()
         self.font = font
         self.work = True
         self.current = {

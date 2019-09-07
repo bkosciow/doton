@@ -4,11 +4,13 @@ from view.widget import Clickable
 import json
 from PIL import Image
 from iot_message.message import Message
+# from iot_message.factory import MessageFactory
 
 
 class RelayWidget(Widget, Clickable):
     """Class Relay Widget"""
     def __init__(self, target_node, socket, address, channels):
+        super().__init__()
         self.colours = {
             'background': (149, 56, 170),
             'border': (244, 244, 244)
@@ -24,6 +26,7 @@ class RelayWidget(Widget, Clickable):
         self.socket = socket
         self.address = address
         self.initialized = False
+
 
     def draw_widget(self, lcd, coords):
         """draw a tile"""
@@ -68,15 +71,6 @@ class RelayWidget(Widget, Clickable):
             },
             'targets': [self.target_node]
         })
+        message.encoder = self.encoder_idx
         print(message)
         self.socket.sendto(bytes(message), self.address)
-
-        # message = self.message.prepare_message({
-        #     'event': 'channel.off' if enabled else 'channel.on',
-        #     'parameters': {
-        #         'channel': index
-        #     },
-        #     'targets': [self.target_node]
-        # })
-        # message = json.dumps(message)
-        # self.socket.sendto(message.encode(), self.address)

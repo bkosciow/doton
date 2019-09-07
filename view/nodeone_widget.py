@@ -6,6 +6,7 @@ from PIL import Image
 class NodeOneWidget(Widget):
     """Class NodeOneWidget"""
     def __init__(self, font):
+        super().__init__()
         self.font = font
         self.colours = {
             'background': (255, 250, 0),

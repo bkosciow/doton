@@ -21,13 +21,15 @@ from worker.openweather import OpenweatherWorker
 from service.window_manager import WindowManager
 from service.config import Config
 from iot_message.cryptor.base64 import Cryptor as B64
+from iot_message.cryptor.plain import Cryptor as Plain
 
 GPIO.setmode(GPIO.BCM)
 
 config = Config()
 
 Message.node_name = config.get('node_name')
-Message.encoder = B64()
+Message.add_encoder(B64())
+Message.add_encoder(Plain())
 Message.add_decoder(B64())
 
 broadcast_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -46,14 +48,14 @@ FONTS = {
 window_manager.add_widget('clock', [(3, 2)], ClockWidget(FONTS['15x28']))
 window_manager.add_widget('openweather', [(0, 1), (1, 1), (2, 1), (3, 1), (4, 1)], OpenweatherWidget([0, 1, 2], FONTS))
 #window_manager.add_widget('openweather', [(0, 1), (1, 1)], OpenweatherWidget([0, 1, 2], FONTS))
-window_manager.add_widget(
-     'my-room-light', [(0, 2)],
-     RelayWidget('node-living', broadcast_socket, address, 1)
-)
-window_manager.add_widget(
-     'north-room-light', [(1, 2)],
-     RelayWidget('node-north', broadcast_socket, address, 1)
-)
+
+r = RelayWidget('node-living', broadcast_socket, address, 1)
+r.encoder_idx = 1
+window_manager.add_widget('my-room-light', [(0, 2)], r)
+
+r = RelayWidget('node-north', broadcast_socket, address, 1)
+window_manager.add_widget('north-room-light', [(1, 2)], r)
+
 #
 window_manager.add_widget('node-kitchen', [(0, 0)], NodeOneWidget(FONTS['24x42']))
 window_manager.add_widget('node-living', [(1, 0)], NodeOneWidget(FONTS['24x42']))

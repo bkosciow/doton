@@ -3,6 +3,10 @@ import abc
 
 
 class Widget(metaclass=abc.ABCMeta):
+
+    def __init__(self):
+        self.encoder_idx = 0
+
     """Widget abstract"""
     @abc.abstractmethod
     def draw_widget(self, lcd, coords):
