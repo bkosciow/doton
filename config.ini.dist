@@ -31,3 +31,9 @@ node_name=control-node
 [openweather]
 apikey=xxx
 cities={"3103402": "Bielsko-Biała"}
+
+[aes]
+staticiv=abcdef2345678901
+ivkey=2345678901abcdef
+datakey=0123456789abcdef
+passphrase=mypassphrase

@@ -22,6 +22,7 @@ from service.window_manager import WindowManager
 from service.config import Config
 from iot_message.cryptor.base64 import Cryptor as B64
 from iot_message.cryptor.plain import Cryptor as Plain
+from iot_message.cryptor.aes_sha1 import Cryptor as AES
 
 GPIO.setmode(GPIO.BCM)
 
@@ -30,7 +31,15 @@ config = Config()
 Message.node_name = config.get('node_name')
 Message.add_encoder(B64())
 Message.add_encoder(Plain())
+
+cfg_aes = config.get_section('aes')
+encoder_aes = AES(
+    cfg_aes['staticiv'], cfg_aes['ivkey'], cfg_aes['datakey'], cfg_aes['passphrase']
+)
+Message.add_encoder(encoder_aes)
+
 Message.add_decoder(B64())
+Message.add_decoder(encoder_aes)
 
 broadcast_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 broadcast_socket.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
@@ -47,14 +56,9 @@ FONTS = {
 
 window_manager.add_widget('clock', [(3, 2)], ClockWidget(FONTS['15x28']))
 window_manager.add_widget('openweather', [(0, 1), (1, 1), (2, 1), (3, 1), (4, 1)], OpenweatherWidget([0, 1, 2], FONTS))
-#window_manager.add_widget('openweather', [(0, 1), (1, 1)], OpenweatherWidget([0, 1, 2], FONTS))
 
-r = RelayWidget('node-living', broadcast_socket, address, 1)
-r.encoder_idx = 1
-window_manager.add_widget('my-room-light', [(0, 2)], r)
-
-r = RelayWidget('node-north', broadcast_socket, address, 1)
-window_manager.add_widget('north-room-light', [(1, 2)], r)
+window_manager.add_widget('my-room-light', [(0, 2)], RelayWidget('node-living', broadcast_socket, address, 1))
+window_manager.add_widget('north-room-light', [(1, 2)], RelayWidget('node-north', broadcast_socket, address, 1))
 
 #
 window_manager.add_widget('node-kitchen', [(0, 0)], NodeOneWidget(FONTS['24x42']))
@@ -68,10 +72,9 @@ window_manager.start()
 
 dispatcher = HandlerDispatcher({
     'node-kitchen': [window_manager.get_widget('node-kitchen')],
-    'node-living': [window_manager.get_widget('node-living')], #window_manager.get_widget('my-room-light')],
+    'node-living': [window_manager.get_widget('node-living'), window_manager.get_widget('my-room-light')],
     'node-north': [window_manager.get_widget('node-north'), window_manager.get_widget('north-room-light')],
     'openweather': [window_manager.get_widget('openweather')],
-    'my-room-light': [window_manager.get_widget('my-room-light')]
 })
 svr = Server()
 svr.add_handler('dht11', DHTHandler(dispatcher))
