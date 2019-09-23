@@ -31,14 +31,15 @@ config = Config()
 Message.node_name = config.get('node_name')
 Message.add_encoder(B64())
 Message.add_encoder(Plain())
-Message.add_encoder(AES(
-    'abcdef2345678901', '2345678901abcdef', '0123456789abcdef', 'mypassphrase'
-))
+
+cfg_aes = config.get_section('aes')
+encoder_aes = AES(
+    cfg_aes['staticiv'], cfg_aes['ivkey'], cfg_aes['datakey'], cfg_aes['passphrase']
+)
+Message.add_encoder(encoder_aes)
 
 Message.add_decoder(B64())
-Message.add_decoder(AES(
-    'abcdef2345678901', '2345678901abcdef', '0123456789abcdef', 'mypassphrase'
-))
+Message.add_decoder(encoder_aes)
 
 broadcast_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 broadcast_socket.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
