@@ -8,7 +8,8 @@ class RelayHandler(HandlerInterface):
         """handle a message"""
         if message is not None and 'event' in message.data:
             if message.data['event'] == 'channels.response':
-                self.worker.set_relay_states(
-                    message.data['node'],
-                    message.data['response']
-                )
+                for w in self.workers:
+                    w.set_relay_states(
+                        message.data['node'],
+                        message.data['response']
+                    )

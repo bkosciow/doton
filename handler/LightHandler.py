@@ -8,13 +8,15 @@ class LightHandler(HandlerInterface):
         """handle a message"""
         if message is not None and 'event' in message.data:
             if message.data['event'] == 'detect.light':
-                self.worker.set_light_data(
-                    message.data['node'],
-                    True
-                )
+                for w in self.workers:
+                    w.set_light_data(
+                        message.data['node'],
+                        True
+                    )
 
             if message.data['event'] == 'detect.dark':
-                self.worker.set_light_data(
-                    message.data['node'],
-                    False
-                )
+                for w in self.workers:
+                    w.set_light_data(
+                        message.data['node'],
+                        False
+                    )

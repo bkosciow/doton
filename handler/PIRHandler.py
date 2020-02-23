@@ -8,13 +8,15 @@ class PIRHandler(HandlerInterface):
         """Handle a message"""
         if message is not None and 'event' in message.data:
             if message.data['event'] == 'pir.movement':
-                self.worker.set_pir_data(
-                    message.data['node'],
-                    True
-                )
+                for w in self.workers:
+                    w.set_pir_data(
+                        message.data['node'],
+                        True
+                    )
 
             if message.data['event'] == 'pir.nomovement':
-                self.worker.set_pir_data(
-                    message.data['node'],
-                    False
-                )
+                for w in self.workers:
+                    w.set_pir_data(
+                        message.data['node'],
+                        False
+                    )

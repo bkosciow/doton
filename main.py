@@ -5,10 +5,10 @@ from view.nodeone_widget import NodeOneWidget
 from view.openweather_widget import OpenweatherWidget
 from view.relay_widget import RelayWidget
 from view.clock_widget import ClockWidget
-from assets.font import numbers_24x42
-from assets.font import numbers_15x28
-from assets.font import numbers_15x28_red
-from assets.font import numbers_15x28_blue
+from gfxlcd_fonts import numbers_24x42
+from gfxlcd_fonts import numbers_15x28
+from gfxlcd_fonts import numbers_15x28_red
+from gfxlcd_fonts import numbers_15x28_blue
 from message_listener.server import Server
 from iot_message.message import Message
 from handler.DHTHandler import DHTHandler
@@ -54,11 +54,12 @@ FONTS = {
     '15x28_blue': numbers_15x28_blue.Numbers(),
 }
 
+# exit(1)
 window_manager.add_widget('clock', [(3, 2)], ClockWidget(FONTS['15x28']))
 window_manager.add_widget('openweather', [(0, 1), (1, 1), (2, 1), (3, 1), (4, 1)], OpenweatherWidget([0, 1, 2], FONTS))
 
-window_manager.add_widget('my-room-light', [(0, 2)], RelayWidget('node-living', broadcast_socket, address, 1))
-window_manager.add_widget('north-room-light', [(1, 2)], RelayWidget('node-north', broadcast_socket, address, 1))
+window_manager.add_widget('kitchen-socket', [(0, 2)], RelayWidget('node-kitchen', broadcast_socket, address, 1))
+window_manager.add_widget('north-socket', [(1, 2)], RelayWidget('node-north', broadcast_socket, address, 1))
 
 #
 window_manager.add_widget('node-kitchen', [(0, 0)], NodeOneWidget(FONTS['24x42']))
@@ -71,9 +72,9 @@ window_manager.set_widget_color('node-north', 'background', (128, 128, 255))
 window_manager.start()
 
 dispatcher = HandlerDispatcher({
-    'node-kitchen': [window_manager.get_widget('node-kitchen')],
-    'node-living': [window_manager.get_widget('node-living'), window_manager.get_widget('my-room-light')],
-    'node-north': [window_manager.get_widget('node-north'), window_manager.get_widget('north-room-light')],
+    'node-kitchen': [window_manager.get_widget('node-kitchen'), window_manager.get_widget('kitchen-socket')],
+    'node-living': [window_manager.get_widget('node-living')],
+    'node-north': [window_manager.get_widget('node-north'), window_manager.get_widget('north-socket')],
     'openweather': [window_manager.get_widget('openweather')],
 })
 svr = Server()
